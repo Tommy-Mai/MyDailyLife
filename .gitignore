@@ -33,6 +33,7 @@ config/database.yml
 
 # 自分用のメモファイルを無視する
 memo.md
+gitMemo.md
 
 # macOSが自動で生成
 .DS_Store
