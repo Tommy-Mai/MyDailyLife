@@ -48,6 +48,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # 以下、手動で追加
+  # errorをみやすくするgem
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
@@ -66,3 +71,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Slim
 gem 'slim-rails'
 gem 'html2slim'
+
+# 開発環境に「development」と書かれたリボンを表示させて、本番と間違えないようにするgem
+gem 'rack-dev-mark'
+
+# font-awesome
+gem 'font-awesome-sass'
