@@ -7,6 +7,23 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    # 手動追加の翻訳情報
+    models:
+      meal_task: 食事内容
+      meal_tag: 食事
+    attributes:
+      meal_task:
+          id: ID
+          name: タイトル
+          description: 食事内容
+          date: 日付
+          meal_tag_id: タグ
+          with_whom: 誰と
+          where: どこで
+          time: いつ
+          created_at: 登録日時
+          updated_at: 更新日時
+      # ここまで手動追加
   date:
     abbr_day_names:
     - 日
@@ -201,7 +218,8 @@ ja:
   time:
     am: 午前
     formats:
-      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      default: "%Y年%m月%d日(%a) %H時%M分"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+      hm: "%H:%M"
     pm: 午後
