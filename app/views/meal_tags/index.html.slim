@@ -12,7 +12,8 @@
             = @tag.name
         .task-index-date
           div
-            = l meal_task.date
+            = link_to "/calendar/index?start_date=#{meal_task.date.strftime('%Y-%m-%d')}" do
+              = l meal_task.date, format: :ymd
           div
             i.fa.fa-clock-o
             = l meal_task.time, format: :hm
