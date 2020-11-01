@@ -31,13 +31,8 @@
 # original
 config/database.yml
 
-# テストの必要のないモデル
-meal_tag_test.rb
-meal_tags.yml
-
 # 自分用のメモファイルを無視する
 memo.md
-gitMemo.md
 
 # macOSが自動で生成
 .DS_Store

@@ -77,6 +77,3 @@ gem 'rack-dev-mark'
 
 # font-awesome
 gem 'font-awesome-sass'
-
-# カレンダー作成gem
-gem 'simple_calendar', '~> 2.0'
