@@ -63,6 +63,10 @@
   color: white;
 }
 
+.task-index-tag div a:hover {
+  color: $theme-color-dark;
+}
+
 .task-index-date {
   float: right;
   font-size: 14px;
@@ -70,6 +74,14 @@
   position: absolute;
   bottom: 0px;
   right: 10px;
+}
+
+.task-index-date a {
+  color: $word-gray;
+}
+
+.task-index-date a:hover {
+  color: $theme-color-dark;
 }
 
 .task-index-date div {

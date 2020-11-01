@@ -1,0 +1,54 @@
+@import "color_folder";
+
+.container-calendar {
+  max-width: 780px;
+  margin: 20px auto 60px;
+  padding-left: 15px;
+  padding-right: 15px;
+  clear: both;
+  color: $word-black;
+}
+
+.task-count {
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+  color: $word-black;
+}
+
+// month_calendar.html
+
+.calendar-heading {
+  text-align: center;
+}
+
+.calendar-title a {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.calendar-title .year {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.calendar-title .month {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.calendar-heading .icon {
+  font-weight: 600;
+  display: inline-block;
+  padding: 10px;
+}
+
+.saturday {
+  color: $calendar-saturday;
+}
+
+.sunday {
+  color: $calendar-sunday;
+}
+
+// th= t('date.abbr_day_names')[day.wday]
