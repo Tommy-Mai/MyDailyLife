@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: 'home#top'
   resources :meal_tasks
 
+  get 'calendar/index'
+
   get "meal_tags/:id/index" => "meal_tags#index"
 
   get "about" => "home#about"

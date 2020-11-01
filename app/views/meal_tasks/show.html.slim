@@ -13,7 +13,7 @@
         = @meal_task.description
       .task-footer
         .date
-          = l @meal_task.date
+          = l @meal_task.date, format: :ymd
         .time
           i.fa.fa-clock-o
           = l @meal_task.time, format: :hm
