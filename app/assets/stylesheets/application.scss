@@ -16,3 +16,11 @@
 
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+// // simplecalendarのCSS読み込みだが、なぜかCSSの変更が反映されないため不使用
+// /*
+//  *= require simple_calendar 
+//  *= require_tree .
+//  *= require_self
+//  */
+// @import "simple_calendar";

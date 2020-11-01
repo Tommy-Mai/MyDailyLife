@@ -1,0 +1,18 @@
+.main.tasks-index
+  .container
+    - @meal_tasks.each do |meal_task|
+      .tasks-index-item
+
+        .task-name
+          = link_to(meal_task.name, meal_task_path(meal_task))
+
+        .task-index-tag
+          div
+            - @tag = MealTag.find_by(id: meal_task.meal_tag_id)
+            = @tag.name
+        .task-index-date
+          div
+            = l meal_task.date
+          div
+            i.fa.fa-clock-o
+            = l meal_task.time, format: :hm

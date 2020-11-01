@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  date: 2020-10-25
+  meal_tag_id: 
+  user_id: 
+  with_whom: MyString
+  where: MyString
+  when: 2020-10-25 17:44:03
+
+two:
+  name: MyString
+  description: MyText
+  date: 2020-10-25
+  meal_tag_id: 
+  user_id: 
+  with_whom: MyString
+  where: MyString
+  when: 2020-10-25 17:44:03
