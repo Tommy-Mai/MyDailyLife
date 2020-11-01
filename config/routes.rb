@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  get '/' => "home#top"
+  root to: 'home#top'
+  resources :meal_tasks
+
+  get "meal_tags/:id/index" => "meal_tags#index"
+
   get "about" => "home#about"
   get "policy" => "home#policy"
   get "contact" => "home#contact"

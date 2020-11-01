@@ -1,0 +1,7 @@
+.main.tasks-new
+  .container
+    h1.form-heading 食事タスクを投稿する
+    = render partial: 'form', locals: { meal_task: @meal_task }
+
+    .back-task-show
+      = link_to("← 戻る",meal_tasks_path)

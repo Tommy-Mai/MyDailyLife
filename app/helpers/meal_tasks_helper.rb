@@ -1,0 +1,2 @@
+module MealTasksHelper
+end
