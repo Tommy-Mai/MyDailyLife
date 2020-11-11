@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
-  root to: 'home#top'
+  root :to => 'home#top'
   resources :meal_tasks
-  
+
   resources :users, :except => :index
-  
+
   namespace :admin do
     get 'users/index'
     delete 'users/:id/destroy' => "users#destroy"
   end
-  
+
   get '/calendar/index'
   get '/calendar/show'
-  
+
   get "/meal_tags/:id/index" => "meal_tags#index"
-  
+
   get '/login' => "sessions#new"
   post '/login' => "sessions#create"
   delete 'logout' => "sessions#destroy"

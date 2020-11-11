@@ -10,34 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_064904) do
-
-  create_table "meal_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+ActiveRecord::Schema.define(:version => 2020_11_06_064904) do
+  create_table "meal_tags", :options => "ENGINE=InnoDB DEFAULT CHARSET=utf8", :force => :cascade do |t|
     t.string "name"
   end
 
-  create_table "meal_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", limit: 30, null: false
+  create_table "meal_tasks", :options => "ENGINE=InnoDB DEFAULT CHARSET=utf8", :force => :cascade do |t|
+    t.string "name", :limit => 30, :null => false
     t.text "description"
-    t.datetime "date", null: false
-    t.integer "meal_tag_id", null: false
-    t.integer "user_id", null: false
-    t.string "with_whom", limit: 30
-    t.string "where", limit: 30
+    t.datetime "date", :null => false
+    t.integer "meal_tag_id", :null => false
+    t.integer "user_id", :null => false
+    t.string "with_whom", :limit => 30
+    t.string "where", :limit => 30
     t.time "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", limit: 30, null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
+  create_table "users", :options => "ENGINE=InnoDB DEFAULT CHARSET=utf8", :force => :cascade do |t|
+    t.string "name", :limit => 30, :null => false
+    t.string "email", :null => false
+    t.string "password_digest", :null => false
     t.string "image_name"
-    t.boolean "admin", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.boolean "admin", :default => false, :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.index ["email"], :name => "index_users_on_email", :unique => true
   end
-
 end

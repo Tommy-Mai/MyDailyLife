@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class MealTasksController < ApplicationController
-  before_action :set_meal_task, only: [:show, :edit, :update, :destroy]
-  before_action :check_params_date, only: [:new]
+  before_action :set_meal_task, :only => [:show, :edit, :update, :destroy]
+  before_action :check_params_date, :only => [:new]
 
   def index
     @meal_tasks = current_user.meal_tasks.recent
   end
 
   def show
-    @tag = MealTag.find_by(id: @meal_task.meal_tag_id)
+    @tag = MealTag.find_by(:id => @meal_task.meal_tag_id)
   end
 
   def new
@@ -23,9 +25,8 @@ class MealTasksController < ApplicationController
       render("meal_tasks/new")
     end
   end
-  
-  def edit
-  end
+
+  def edit; end
 
   def update
     if @meal_task.update(meal_task_params)
@@ -35,13 +36,12 @@ class MealTasksController < ApplicationController
       render("meal_tasks/edit")
     end
   end
-  
+
   def destroy
     @meal_task.destroy
     flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」を削除"
     redirect_to meal_tasks_url
   end
-  
 
   private
 
@@ -54,18 +54,17 @@ class MealTasksController < ApplicationController
       :with_whom,
       :where,
       :time
-      ).merge(user_id: current_user.id)
+    ).merge(:user_id => current_user.id)
   end
 
   def set_meal_task
-    if current_user.meal_tasks.exists?(id: params[:id])
+    if current_user.meal_tasks.exists?(:id => params[:id])
       @meal_task = current_user.meal_tasks.find(params[:id])
     else
       flash[:notice] = "存在しないタスクです。"
       redirect_to meal_tasks_url
     end
   end
-  
 
   def check_params_date
     if params[:date]
@@ -74,5 +73,4 @@ class MealTasksController < ApplicationController
       @date = Date.current
     end
   end
-
 end

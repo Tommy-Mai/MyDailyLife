@@ -17,11 +17,11 @@
 require 'capybara/rspec'
 
 RSpec.configure do |config|
-  config.before(:each, type: :system)do
+  config.before(:each, :type => :system) do
     driven_by :selenium_chrome_headless
   end
 
-#  RSpecによる自動テストの場合、実行前に一度だけSeedFu.seedを実行するように設定
+  # RSpecによる自動テストの場合、実行前に一度だけSeedFu.seedを実行するように設定
   config.before(:suite) do
     SeedFu.seed
   end
@@ -105,6 +105,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
