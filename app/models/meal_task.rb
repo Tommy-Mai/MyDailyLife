@@ -1,5 +1,7 @@
 class MealTask < ApplicationRecord
-  belongs_to :meal_tag
+  belongs_to :user
+
+  scope :recent, -> { order(date: :desc,time: :desc) }
 
   with_options presence: true do
     validates :name

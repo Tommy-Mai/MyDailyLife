@@ -1,5 +1,7 @@
 {
   "name": "MyDailyLife",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
 }

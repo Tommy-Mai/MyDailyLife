@@ -81,7 +81,7 @@
 }
 
 .task-index-date a:hover {
-  color: $theme-color-dark;
+  color: $word-black;
 }
 
 .task-index-date div {
@@ -102,6 +102,14 @@
 
 .task-index-new a:hover {
   color: $theme-color;
+}
+
+.tasks-index .form-heading {
+  color: $word-black;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
+  margin: 10px 0 5px;
 }
 
 /*.tasks/show ================================ */
@@ -125,6 +133,16 @@
 .tasks-show-item .description {
   color: $word-black;
   min-height: 100px;
+}
+
+.tasks-show-item .description a{
+  color: $word-black;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.tasks-show-item .description a:hover {
+  color: $theme-color;
 }
 
 .tasks-show-item p {
@@ -157,8 +175,16 @@
   color: white;
   background-color: $theme-color;
   padding: 5px;
-  font-size: 16px;
   text-align: center;
+}
+
+.tag a{
+  color: white;
+  font-size: 16px;
+}
+
+.tag a:hover{
+  color: $theme-color-dark;
 }
 
 .task-footer {
@@ -171,6 +197,15 @@
   font-size: 16px;
   display: inline-block;
   text-align: left;
+}
+
+.date a {
+  color: $word-gray;
+  font-size: 16px;
+}
+
+.date a:hover{
+  color: $word-black;
 }
 
 .time , .who, .where{

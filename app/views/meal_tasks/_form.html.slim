@@ -7,17 +7,21 @@
 
       = f.label :date
       = raw sprintf(f.date_select(:date,
+            default: @date,
             use_month_numbers: true,
             start_year: 2000,
             end_year: (Time.now.year),
             date_separator:'%s'),
             '年','月')+'日'
       = f.label :meal_tag_id
-      = f.collection_select :meal_tag_id, MealTag.all, :id, :name, prompt: true
+      - if params[:meal_tag]
+        = f.collection_select :meal_tag_id, MealTag.all, :id, :name, default: params[:meal_tag]
+      - else
+        = f.collection_select :meal_tag_id, MealTag.all, :id, :name, prompt: true
       = f.label :name
-      = f.text_field :name
+      = f.text_field :name, id: 'meal_task_name'
       = f.label :description
-      = f.text_area :description
+      = f.text_area :description, id: 'meal_task_description'
       = f.label :with_whom
       = f.text_field :with_whom
       = f.label :where

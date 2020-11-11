@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -39,6 +39,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.7'
+  gem 'factory_bot_rails', '~> 4.11'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -53,6 +56,11 @@ group :development do
   # errorをみやすくするgem
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec'
 end
 
 group :test do
@@ -80,3 +88,12 @@ gem 'font-awesome-sass'
 
 # カレンダー作成gem
 gem 'simple_calendar', '~> 2.0'
+
+# 初期データ・テスト用データの投入gem
+gem 'seed-fu'
+
+# jQuery導入
+gem 'jquery-rails'
+
+# テキスト内のリンクを自動検出
+gem 'rinku'
