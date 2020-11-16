@@ -7,6 +7,6 @@ class CalendarController < ApplicationController
 
   def show
     @date = params[:start_date]
-    @meal_tasks = current_user.meal_tasks.where(:date => @date)
+    @meal_tasks = current_user.meal_tasks.where(date: @date)
   end
 end

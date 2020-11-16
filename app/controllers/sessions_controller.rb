@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  skip_before_action :login_required, :only => [:new, :create]
+  skip_before_action :login_required, only: [:new, :create]
 
   def new; end
 
   def create
-    user = User.find_by(:email => session_params[:email])
+    user = User.find_by(email: session_params[:email])
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to meal_tasks_url, :notice => 'ログインしました。'
+      redirect_to meal_tasks_url, notice: 'ログインしました。'
     else
       @error_message = "メールアドレスまたはパスワードが間違っています。"
       render :new
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to root_path, :notice => 'ログアウトしました。'
+    redirect_to root_path, notice: 'ログアウトしました。'
   end
 
   private
