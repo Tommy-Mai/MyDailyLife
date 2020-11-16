@@ -4,6 +4,8 @@ jobs:
     docker:
       - image: circleci/ruby:2.5.8-stretch-node-browsers-legacy
         environment:
+          # !!bundlerのバージョンが2.0.1以上だと、bundle installに失敗するため、ここに環境として指定。
+          - BUNDLER_VERSION: 2.1.4
           # CircleCIは仮想環境を構築するので、そのときに使うデータベースを指定。
           - RAILS_ENV: 'test'
       # Mysqlのイメージを作成。
@@ -24,7 +26,9 @@ jobs:
             - v1-dependencies-
       - run:
           name: install dependencies
+          # !!以下においてbundler2.0.1以降のものを使っているのであれば、環境変数と合わせて指定してインストールする。
           command: |
+            gem install bundler -v 2.1.4
             bundle install --jobs=4 --retry=3 --path vendor/bundle
       # bundle installのデータをキャッシュ。
       - save_cache:
