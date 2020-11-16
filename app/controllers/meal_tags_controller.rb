@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 class MealTagsController < ApplicationController
-  
   def index
-    @meal_tags = MealTag.find_by(id: params[:id])
-    @meal_tasks = MealTask.where(meal_tag_id: @meal_tags.id).order(date: :desc,time: :desc)
+    @meal_tag = MealTag.find(params[:id])
+    @meal_tasks = current_user.meal_tasks.where(:meal_tag_id => @meal_tag.id).recent
   end
-  
 end

@@ -1,18 +1,15 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
-  def top
-  end
+  skip_before_action :login_required
 
-  def about
-  end
+  def top; end
 
-  def policy
-  end
+  def about; end
 
-  def contact
-  end
-  
-  def faqs
-  end
-  
-  
+  def policy; end
+
+  def contact; end
+
+  def faqs; end
 end

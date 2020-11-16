@@ -1,0 +1,9 @@
+.user
+  img src="" /
+  h2= user.name
+  p= user.email
+  .task-menus
+    = link_to edit_user_path, params: user do
+      i.fas.fa-pencil-alt
+    = link_to user, :method => :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"} do
+      i.fas.fa-trash-alt

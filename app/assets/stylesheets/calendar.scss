@@ -1,5 +1,13 @@
 @import "color_folder";
 
+.simple-calendar a {
+  color: $word-black;
+}
+
+.simple-calendar a:hover {
+  color: $theme-color-dark;
+}
+
 .container-calendar {
   max-width: 780px;
   margin: 20px auto 60px;
@@ -9,14 +17,18 @@
   color: $word-black;
 }
 
-.task-count {
+.task-count a{
   font-size: 12px;
   font-weight: 400;
   display: block;
   color: $word-black;
 }
 
-// month_calendar.html
+.task-count a:hover{
+  color: $theme-color-dark;
+}
+
+// month_calendar.html-------
 
 .calendar-heading {
   text-align: center;
@@ -51,4 +63,9 @@
   color: $calendar-sunday;
 }
 
-// th= t('date.abbr_day_names')[day.wday]
+
+
+// show.html.slim & _calendar/hyml/slim -------
+.day-calendar .user-tabs{
+  margin-top: 0;
+}

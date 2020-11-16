@@ -1,0 +1,46 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - bin/*
+    - db/schema.rb
+    - db/migrate/*
+    - vendor/**/*
+    - config/*
+    - spec/**/*
+
+Metrics/AbcSize:
+  Max: 40
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_inside_condition
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
+Style/RedundantSelf:
+  Exclude:
+    - 'app/models/meal_task.rb'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+  
+
+Layout/LineLength:
+  Max: 150

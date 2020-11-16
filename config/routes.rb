@@ -1,14 +1,26 @@
 Rails.application.routes.draw do
-  root to: 'home#top'
+  root :to => 'home#top'
   resources :meal_tasks
 
-  get 'calendar/index'
+  resources :users, :except => :index
 
-  get "meal_tags/:id/index" => "meal_tags#index"
+  namespace :admin do
+    get 'users/index'
+    delete 'users/:id/destroy' => "users#destroy"
+  end
 
-  get "about" => "home#about"
-  get "policy" => "home#policy"
-  get "contact" => "home#contact"
-  get "faqs" => "home#faqs"
+  get '/calendar/index'
+  get '/calendar/show'
+
+  get "/meal_tags/:id/index" => "meal_tags#index"
+
+  get '/login' => "sessions#new"
+  post '/login' => "sessions#create"
+  delete 'logout' => "sessions#destroy"
+
+  get "/about" => "home#about"
+  get "/policy" => "home#policy"
+  get "/contact" => "home#contact"
+  get "/faqs" => "home#faqs"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

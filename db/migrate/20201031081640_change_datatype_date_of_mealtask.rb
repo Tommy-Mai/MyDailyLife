@@ -3,7 +3,7 @@ class ChangeDatatypeDateOfMealtask < ActiveRecord::Migration[5.2]
     change_column :meal_tasks, :date, :datetime
   end
 
-  def def down 
+  def down
     change_column :meal_tasks, :date, :date
   end
 end

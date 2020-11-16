@@ -121,3 +121,5 @@ yarn-debug.log*
 
 # End of https://www.toptal.com/developers/gitignore/api/rails
 
+# 本番用初期データ
+/db/fixtures/production
