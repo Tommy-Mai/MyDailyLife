@@ -104,10 +104,35 @@ describe '食関連タスク管理機能', :type => :system do
 
       context "新規作成画面で「タイトル」を入力したとき" do
         let(:meal_task_name) { '新規作成のテストを書く' }
-        let(:meal_task_description) { "" }
+        let(:meal_task_description) { "食事タスク新規作成テスト" }
 
         it '正常に登録される' do
           expect(page).to have_selector '.flash', :text => '新規作成のテストを書く'
+        end
+
+        it 'ユーザーAが新規作成した食関連タスクが表示される' do
+          # 全タスク一覧画面
+          expect(page).to have_content '新規作成のテストを書く'
+
+          # ユーザーAのユーザーページへ移動
+          visit user_path(user_a)
+          expect(page).to have_content '新規作成のテストを書く'
+
+          # 日別タスク一覧へ移動
+          visit "/calendar/show?start_date=#{task_a.date.strftime('%Y-%m-%d')}"
+          expect(page).to have_content '新規作成のテストを書く'
+
+          # meal_tag_id:1のタグの一覧ページへ移動
+          visit "/meal_tags/1/index"
+          expect(page).to have_content '新規作成のテストを書く'
+
+          # ユーザーAが作成したタスクの詳細画面に移動
+          visit meal_task_path(id: 2)
+          expect(page).to have_content '食事タスク新規作成テスト'
+
+          # 月別カレンダーへ移動,ユーザーAが登録した食事タスクがカウントされていることを確認
+          visit "/calendar/index?start_date=#{task_a.date.strftime('%Y-%m-%d')}"
+          expect(page).to have_content '食事タスク 2個'
         end
       end
 

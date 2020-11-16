@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class MealTasksController < ApplicationController
-  before_action :set_meal_task, :only => [:show, :edit, :update, :destroy]
-  before_action :check_params_date, :only => [:new]
+  before_action :set_meal_task, only: [:show, :edit, :update, :destroy]
+  before_action :check_params_date, only: [:new]
 
   def index
     @meal_tasks = current_user.meal_tasks.recent
   end
 
   def show
-    @tag = MealTag.find_by(:id => @meal_task.meal_tag_id)
+    @tag = MealTag.find_by(id: @meal_task.meal_tag_id)
   end
 
   def new
@@ -19,6 +19,7 @@ class MealTasksController < ApplicationController
   def create
     @meal_task = MealTask.new(meal_task_params)
     if @meal_task.save
+      @meal_task.date = @meal_task.date.strftime('%Y-%m-%d 00:00:00')
       flash[:notice] = "「#{@meal_task.name}」を登録"
       redirect_to meal_tasks_url
     else
@@ -30,6 +31,7 @@ class MealTasksController < ApplicationController
 
   def update
     if @meal_task.update(meal_task_params)
+      @meal_task.date = @meal_task.date.strftime('%Y-%m-%d 00:00:00')
       flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」の変更を保存"
       redirect_to meal_task_url
     else
@@ -54,11 +56,11 @@ class MealTasksController < ApplicationController
       :with_whom,
       :where,
       :time
-    ).merge(:user_id => current_user.id)
+    ).merge(user_id: current_user.id)
   end
 
   def set_meal_task
-    if current_user.meal_tasks.exists?(:id => params[:id])
+    if current_user.meal_tasks.exists?(id: params[:id])
       @meal_task = current_user.meal_tasks.find(params[:id])
     else
       flash[:notice] = "存在しないタスクです。"
