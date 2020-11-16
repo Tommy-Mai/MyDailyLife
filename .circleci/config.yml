@@ -64,5 +64,13 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
-          path: /tmp/capybara/
+          path: /tmp/test-results
           destination: test-results
+
+      - run:
+          name: 'Run rspec in parallel'
+          command: |
+            bundle exec rspec ＼
+              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_artifacts:
+          path: tmp/capybara/
