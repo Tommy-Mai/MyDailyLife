@@ -1,0 +1,12 @@
+.main.tasks-new
+  .container
+    h1.form-heading タスクを投稿する
+    = render partial: 'form', locals: { meal_task: @meal_task }
+
+    .back-task-show
+      - if params[:date]
+        = link_to("← 戻る","/calendar/show?start_date=#{@date}")
+      - elsif params[:meal_tag]
+        = link_to("← 戻る","/meal_tags/#{@meal_tag_id}/index")
+      - else
+        = link_to("← 戻る",meal_tasks_path)

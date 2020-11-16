@@ -1,0 +1,18 @@
+.main.users-new
+  .container
+    .form-heading ログイン
+    = form_with scope: :session, local: true do |f|
+      .form.users-form
+        .form-body
+          - if @error_message
+            .form-error
+              = @error_message
+
+          = f.label :user
+            .form-group
+              = f.label 'メールアドレス'
+              = f.email_field :email, id: 'session_email'
+            .form-group
+              = f.label 'パスワード'
+              = f.password_field :password, id: 'session_password'
+        = f.submit 'ログイン'

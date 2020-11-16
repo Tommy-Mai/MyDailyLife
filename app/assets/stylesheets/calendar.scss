@@ -1,0 +1,69 @@
+@import "color_folder";
+
+.simple-calendar a {
+  color: $word-black;
+}
+
+.simple-calendar a:hover {
+  color: $theme-color-dark;
+}
+
+.container-calendar {
+  max-width: 780px;
+  margin: 20px auto 60px;
+  padding-left: 15px;
+  padding-right: 15px;
+  clear: both;
+  color: $word-black;
+}
+
+.task-count a{
+  font-size: 12px;
+  font-weight: 400;
+  display: block;
+  color: $word-black;
+}
+
+.task-count a:hover{
+  color: $theme-color-dark;
+}
+
+// month_calendar.html-------
+
+.calendar-heading {
+  text-align: center;
+}
+
+.calendar-title a {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.calendar-title .year {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.calendar-title .month {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.calendar-heading .icon {
+  font-weight: 600;
+  display: inline-block;
+  padding: 10px;
+}
+
+.saturday {
+  color: $calendar-saturday;
+}
+
+.sunday {
+  color: $calendar-sunday;
+}
+
+// show.html.slim & _calendar/hyml/slim -------
+.day-calendar .user-tabs{
+  margin-top: 0;
+}

@@ -1,0 +1,289 @@
+// Place all the styles related to the meal_tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "color_folder";
+/*.tasks/index ================================ */
+.tasks-index-item {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  position: relative;
+  min-height: 100px;
+}
+
+// .task-left img {
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 40%;
+//   box-shadow: 0 2px 6px #c1ced7;
+//   object-fit: cover;
+// }
+
+.task-name a {
+  color: $word-black;
+  font-weight: 500;
+  font-size: 30px;
+  display: inline-block;
+  line-height: 100%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);
+}
+
+.task-name a:hover {
+  color: $theme-color;
+}
+
+
+.task-index-tag {
+  float: right;
+  background-color: $theme-color;
+  color: white;
+  display: block;
+  width: 180px;
+  height: 35px;
+  margin: -19px -30px -20px 0;
+  text-align: center;
+  letter-spacing: 5px;
+  position: relative;
+}
+
+.task-index-tag div {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform : translate(-50%,-50%);
+  transform : translate(-50%,-50%);
+}
+
+.task-index-tag div a {
+  color: white;
+}
+
+.task-index-tag div a:hover {
+  color: $theme-color-dark;
+}
+
+.task-index-date {
+  float: right;
+  font-size: 14px;
+  color: $word-gray;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+}
+
+.task-index-date a {
+  color: $word-gray;
+}
+
+.task-index-date a:hover {
+  color: $word-black;
+}
+
+.task-index-date div {
+  padding-left: 10px;
+  float: left;
+}
+
+.task-index-date i {
+  padding-right: 2px;
+}
+
+.task-index-new a {
+  font-size: 30px;
+  color: $word-gray;
+  width: 100%;
+  padding: 0 50%;
+}
+
+.task-index-new a:hover {
+  color: $theme-color;
+}
+
+.tasks-index .form-heading {
+  color: $word-black;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
+  margin: 10px 0 5px;
+}
+
+/*.tasks/show ================================ */
+.tasks-show form {
+  display: inline;
+}
+
+.tasks-show-item {
+  width: 100%;
+  padding: 30px;
+  padding-top: 10px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+}
+
+.tasks-show-item div {
+  white-space: pre-wrap;
+}
+
+.tasks-show-item .description {
+  color: $word-black;
+  min-height: 100px;
+}
+
+.tasks-show-item .description a{
+  color: $word-black;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.tasks-show-item .description a:hover {
+  color: $theme-color;
+}
+
+.tasks-show-item p {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+  width: 100%;
+  border-bottom: 1px solid #c1ced7;
+  text-align: left;
+  display: inline-block;
+  color: $word-black;
+}
+
+.task-right {
+  float: right;
+  padding: 0;
+  width: 180px;
+  margin-top: -10px;
+  margin-right: -30px;
+}
+
+.task-tag {
+  width: 180px;
+  height: 60px;
+  letter-spacing: 5px;
+  float: right;
+}
+
+.tag {
+  height: 40px;
+  color: white;
+  background-color: $theme-color;
+  padding: 5px;
+  text-align: center;
+}
+
+.tag a{
+  color: white;
+  font-size: 16px;
+}
+
+.tag a:hover{
+  color: $theme-color-dark;
+}
+
+.task-footer {
+  height: 30px;
+}
+
+.date, .time, .who, .where{
+  float: left;
+  color: $word-gray;
+  font-size: 16px;
+  display: inline-block;
+  text-align: left;
+}
+
+.date a {
+  color: $word-gray;
+  font-size: 16px;
+}
+
+.date a:hover{
+  color: $word-black;
+}
+
+.time , .who, .where{
+  padding-left: 10px;
+}
+
+.who, .where{
+  text-align: center;
+  min-width: 100px;
+  overflow: scroll;
+}
+
+.task-footer i {
+  padding-right: 5px;
+}
+
+.task-menus {
+  float: right;
+}
+
+.task-menus a {
+  margin-left: 5px;
+}
+
+.task-menus a, .task-menus input {
+  color: $word-gray;
+  font-size: 14px;
+}
+
+.task-menus i {
+  padding-left: 5px;
+}
+
+.task-menus i:hover {
+  color: $word-black;
+}
+
+.back-index a {
+  color: $word-gray;
+  padding-left: 5px;
+}
+
+/*.tasks/new ================================ */
+.tasks-new textarea {
+  font-size: 20px;
+  padding: 10px;
+  min-height: 140px;
+  border: 1px solid rgb(216, 218, 223);
+  resize: none;
+}
+
+.tasks-new textarea::-webkit-input-placeholder {
+  font-size: 24px;
+  opacity: 0.5;
+}
+
+.tasks-new label {
+  display: block;
+}
+
+.tasks-new select {
+  border: 1px solid #d8dadf;
+  padding: 10px;
+  color: $word-black;
+  font-size: 16px;
+  letter-spacing: 2px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+/*.tasks/edit ================================ */
+.back-task-show a {
+  display: block;
+  padding: 10px 0 10px 10px;
+  color: $word-gray;
+  font-size: 16px;
+}
+
+.back-task-show a:hover {
+  color: $word-black;
+}

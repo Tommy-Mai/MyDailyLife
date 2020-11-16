@@ -1,0 +1,7 @@
+.main
+  .container-calendar
+    = month_calendar events: @mealtasks do |date, mealtasks|
+      = date.day
+      .task-count
+        = link_to "/calendar/show?start_date=#{date.strftime('%Y-%m-%d')}" do
+          p 食事タスク #{mealtasks.count}個

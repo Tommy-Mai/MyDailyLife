@@ -1,0 +1,36 @@
+.main.tasks-show
+  .container
+    .back-task-show
+      - if params[:meal_tag]
+        = link_to("← 戻る","/meal_tags/#{@meal_task.meal_tag_id}/index")
+      - elsif params[:user]
+        = link_to("← 戻る","/users/#{@meal_task.user_id}")
+      - else
+        = link_to("← 戻る","/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}")
+    .tasks-show-item
+      .task-right
+        .task-tag
+          .tag
+            = link_to(@tag.name, "/meal_tags/#{@tag.id}/index")
+      p
+        = @meal_task.name
+      div.description
+        = raw Rinku.auto_link(@meal_task.description)
+      .task-footer
+        .date
+          = link_to "/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}" do
+            = l @meal_task.date, format: :ymd
+        .time
+          i.fa.fa-clock-o
+          = l @meal_task.time, format: :hm
+        .who
+          i.fa.fa-user
+          = @meal_task.with_whom
+        .where
+          i.fa.fa-map-pin 
+          = @meal_task.where
+        .task-menus
+          = link_to edit_meal_task_path(@meal_task) do
+            i.fas.fa-pencil-alt
+          = link_to @meal_task, :method => :delete, data: { confirm: "タスク「#{@meal_task.name}」を削除します。よろしいですか？"} do
+            i.fas.fa-trash-alt
