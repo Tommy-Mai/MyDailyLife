@@ -18,7 +18,7 @@ describe '食関連タスク管理機能', :type => :system do
   let(:user_b) { FactoryBot.find_or_create(:user, :name => 'ユーザーB', :email => 'b@example.com', :password => 'password', :admin => false) }
 
   # 作成者がユーザーAである食関連タスクを作成する
-  let!(:task_a) { FactoryBot.find_or_create(:meal_task, :id => 1, :name => '最初の食事タスク', :description => '食事タスクテスト投稿', :user => user_a, :meal_tag_id => 1, :date => Time.zone.now.strftime('%Y-%m-%d 00:00:00')) }
+  let!(:task_a) { FactoryBot.find_or_create(:meal_task, :id => 1, :name => '最初の食事タスク', :description => '食事タスクテスト投稿', :user => user_a, :meal_tag_id => 1, :date => Time.zone.now) }
 
   before do
     # letで定義したユーザーでログインする
