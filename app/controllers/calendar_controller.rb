@@ -7,8 +7,8 @@ class CalendarController < ApplicationController
     @meal_tasks = current_user.meal_tasks.where(
       "date >= :last_month AND date <= :next_month",
       {
-        last_month: @date.last_month.beginning_of_month,
-        next_month: @date.next_month.end_of_month
+        last_month: @date.last_month.end_of_month.beginning_of_week,
+        next_month: @date.next_month.beginning_of_month.end_of_week
       }
     )
   end

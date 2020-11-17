@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/calendar/index'
   get '/calendar/show'
 
-  get "/meal_tags/:id/index" => "meal_tags#index"
+  get "/meal_tags/:id/show" => "meal_tags#show"
 
   get '/login' => "sessions#new"
   post '/login' => "sessions#create"

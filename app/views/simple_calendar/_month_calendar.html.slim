@@ -3,7 +3,7 @@
     .icon
       = link_to t('simple_calendar.previous', default: '<'), calendar.url_for_previous_view
     span.calendar-title
-      = link_to calendar_index_path(Date.current.month) do
+      = link_to "/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}" do
         .year #{start_date.year}年
         .month
           = t('date.month_names')[start_date.month]

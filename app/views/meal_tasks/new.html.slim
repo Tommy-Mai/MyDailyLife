@@ -7,6 +7,6 @@
       - if params[:date]
         = link_to("← 戻る","/calendar/show?start_date=#{@date}")
       - elsif params[:meal_tag]
-        = link_to("← 戻る","/meal_tags/#{@meal_tag_id}/index")
+        = link_to("← 戻る","/meal_tags/#{@meal_tag_id}/show")
       - else
         = link_to("← 戻る",meal_tasks_path)
