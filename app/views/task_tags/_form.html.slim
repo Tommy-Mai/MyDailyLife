@@ -1,0 +1,13 @@
+= form_with model: task_tag,local: true do |f|
+  .form
+    .form-body
+      - task_tag.errors.full_messages.each do |message|
+        .form-error
+          = message
+
+      = f.label :name
+      = f.text_field :name, id: 'task_name'
+    = f.submit nil
+
+  .back-task-show
+    = link_to("← その他タグ一覧に戻る",task_tags_path)

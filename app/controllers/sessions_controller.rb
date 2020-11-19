@@ -2,6 +2,7 @@
 
 class SessionsController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
+  before_action :forbid_login_user, only: [:new, :create]
 
   def new; end
 
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      redirect_to meal_tasks_url, notice: 'ログインしました。'
+      redirect_to user_url(user), notice: 'ログインしました。'
     else
       @error_message = "メールアドレスまたはパスワードが間違っています。"
       render :new

@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :meal_tasks, foreign_key: "user_id"
+  has_many :tasks, foreign_key: "user_id"
+  has_many :task_tags, foreign_key: "user_id"
 
   with_options presence: true do
     validates :name

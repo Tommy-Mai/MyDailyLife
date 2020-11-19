@@ -1,0 +1,30 @@
+.main.tasks-index
+  #pop_up
+    div
+      p.arrow_box 新規タグ作成ページへ
+  .container
+    .back-task-show.task_tag_back
+      - if params[:start_date]
+        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{params[:start_date]}")
+      - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
+        - tag_name = current_user.task_tags.find(params[:task_tag])
+        = link_to("← 「#{tag_name.name}」一覧に戻る", task_tag_path(params[:task_tag]))
+      - else
+        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
+    .task-index-new
+      #pop_trigger= link_to new_task_tag_path do
+        i.fas.fa-plus
+
+    .tag-tabs タグ一覧
+
+    - @task_tags.each do |tag|
+      .tasks-index-item
+
+        .task-name
+          = link_to(tag.name, task_tag_path(tag))
+
+        .task-menus.tag-index-menu
+          = link_to edit_task_tag_path(tag) do
+            i.fas.fa-pencil-alt
+          = link_to tag, :method => :delete, data: { confirm: "タグ「#{tag.name}」を削除します。よろしいですか？"} do
+            i.fas.fa-trash-alt

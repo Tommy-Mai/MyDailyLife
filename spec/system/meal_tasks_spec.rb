@@ -34,11 +34,7 @@ describe '食関連タスク管理機能', :type => :system do
       let(:login_user) { user_a }
 
       it 'ユーザーAが作成した食関連タスクが表示される' do
-        # 全タスク一覧画面
-        expect(page).to have_content '最初の食事タスク'
-
-        # ユーザーAのユーザーページへ移動
-        visit user_path(user_a)
+        # ユーザーAのユーザーページ
         expect(page).to have_content '最初の食事タスク'
 
         # 日別タスク一覧へ移動
@@ -46,16 +42,16 @@ describe '食関連タスク管理機能', :type => :system do
         expect(page).to have_content '最初の食事タスク'
 
         # meal_tag_id:1のタグの一覧ページへ移動
-        visit "/meal_tags/1/index"
+        visit "/meal_tags/1"
         expect(page).to have_content '最初の食事タスク'
-
-        # ユーザーAが作成したタスクの詳細画面に移動
-        visit meal_task_path(task_a)
-        expect(page).to have_content '食事タスクテスト投稿'
 
         # 月別カレンダーへ移動,ユーザーAが登録した食事タスクがカウントされていることを確認
         visit "/calendar/index?start_date=#{task_a.date.strftime('%Y-%m-%d')}"
         expect(page).to have_content '食事タスク 1個'
+
+        # ユーザーAが作成したタスクの詳細画面に移動
+        visit meal_task_path(task_a)
+        expect(page).to have_content '食事タスクテスト投稿'
       end
     end
 
@@ -63,15 +59,11 @@ describe '食関連タスク管理機能', :type => :system do
       let(:login_user) { user_b }
 
       it "ユーザーAが作成したタスクが表示されない" do
-        # 全タスク一覧画面
-        expect(page).not_to have_content '最初の食事タスク'
-
-        # ユーザーBのユーザーページへ移動
-        visit user_path(user_b)
+        # ユーザーBのユーザーページ
         expect(page).not_to have_content '最初の食事タスク'
 
         # meal_tag_id:1のタグの一覧ページへ移動
-        visit "/meal_tags/1/index"
+        visit "/meal_tags/1"
         expect(page).not_to have_content '最初の食事タスク'
 
         # 日別タスク一覧へ移動
@@ -84,7 +76,9 @@ describe '食関連タスク管理機能', :type => :system do
 
         # ユーザーAが作成したタスクの詳細画面に移動
         visit meal_task_path(task_a)
-        expect(page).to have_content '存在しないタスクです。'
+        within '.flash' do
+          expect(page).to have_content '存在しないタスクです。'
+        end
       end
     end
 
@@ -123,7 +117,7 @@ describe '食関連タスク管理機能', :type => :system do
           expect(page).to have_content '新規作成のテストを書く'
 
           # meal_tag_id:1のタグの一覧ページへ移動
-          visit "/meal_tags/1/index"
+          visit "/meal_tags/1"
           expect(page).to have_content '新規作成のテストを書く'
 
           # ユーザーAが作成したタスクの詳細画面に移動
@@ -147,13 +141,13 @@ describe '食関連タスク管理機能', :type => :system do
         end
       end
 
-      context "新規作成画面で「食事内容」が字数オーバーのとき" do
-        let(:meal_task_name) { '食事内容が字数オーバー' }
+      context "新規作成画面で「詳細」が字数オーバーのとき" do
+        let(:meal_task_name) { '詳細が字数オーバー' }
         let(:meal_task_description) { "オーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバーオーバー" }
 
         it 'エラーとなる' do
           within '.form-error' do
-            expect(page).to have_content '食事内容は140文字以内で入力してください'
+            expect(page).to have_content '詳細は140文字以内で入力してください'
           end
         end
       end
@@ -174,7 +168,7 @@ describe '食関連タスク管理機能', :type => :system do
 
       it 'エラーとなる' do
         within '.form-error' do
-          expect(page).to have_content 'タグを入力してください'
+          expect(page).to have_content 'タグを選択してください'
         end
       end
     end

@@ -2,7 +2,7 @@
   .calendar-heading
     .icon
       = link_to t('simple_calendar.previous', default: '<'), calendar.url_for_previous_view
-    span.calendar-title
+    span.calendar-title#pop_trigger
       = link_to "/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}" do
         .year #{start_date.year}年
         .month

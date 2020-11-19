@@ -1,0 +1,50 @@
+.main.user-show
+  - if current_user.task_tags.exists?
+    #pop_up
+      div
+        p.arrow_box 新規タスク作成ページへ
+  - else
+    #pop_up
+      div
+        p.arrow_box 新規タグ作成ページへ
+
+  .container
+    .task-index-new
+      - if current_user.task_tags.exists?
+        #pop_trigger= link_to new_task_path(date: @date) do
+          i.fas.fa-plus
+      - else
+        #pop_trigger= link_to new_task_tag_path do
+          i.fas.fa-plus
+
+      #other_pop_up
+        div
+          p.arrow_box.other_arrow_box その他タグ一覧ページへ
+
+    .day-calendar
+      .day
+        = calendar number_of_days: 1 do |date|
+
+    .calendar_show_today
+      = link_to("今日", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
+
+    ul#calendar-tabs.user-tabs
+      li= link_to("食事関連", "/calendar/show?start_date=#{@date.strftime('%Y-%m-%d')}")
+      li.active#other_pop_trigger= link_to("その他", "/task_tags?start_date=#{@date.strftime('%Y-%m-%d')}")
+
+    - @tasks.each do |task|
+      .tasks-index-item
+        .task-name
+          = link_to(task.name, task_path(task))
+
+        .task-index-tag
+          div
+            - @tag = current_user.task_tags.find_by(id: task.task_tag_id)
+            = link_to(@tag.name, "/task_tags/#{@tag.id}")
+        .task-index-date
+          div
+            = link_to "/calendar/index?start_date=#{task.date.strftime('%Y-%m-%d')}" do
+              = l task.date, format: :ymd
+          div
+            i.fa.fa-clock-o
+            = l task.time, format: :hm

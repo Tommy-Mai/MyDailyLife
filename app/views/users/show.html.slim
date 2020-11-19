@@ -1,11 +1,11 @@
 .main.user-show
   .container
-    = render partial: 'common_show', locals: { user: @user}
+    = render partial: 'common_show', locals: {user: @user}
 
     ul.user-tabs
-      li.active= link_to("食事関連", "/")
-      li= link_to("その他", "/")
-      li= link_to("プロフィールメモ", "/")
+      li.active= link_to("食事関連", "/users/#{@user.id}")
+      li= link_to("その他", "/users/#{@user.id}/other_tasks")
+      li= link_to("メモ", "/")
 
     - @user.meal_tasks.each do |task|
       .tasks-index-item
@@ -16,10 +16,10 @@
         .task-index-tag
           div
             - @tag = MealTag.find_by(id: task.meal_tag_id)
-            = link_to(@tag.name, "/meal_tags/#{@tag.id}/show")
+            = link_to(@tag.name, "/meal_tags/#{@tag.id}")
         .task-index-date
           div
-            = link_to "/calendar/show?start_date=#{task.date.strftime('%Y-%m-%d')}" do
+            = link_to "/calendar/show/?start_date=#{task.date.strftime('%Y-%m-%d')}" do
               = l task.date, format: :ymd
           div
             i.fa.fa-clock-o

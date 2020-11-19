@@ -12,6 +12,9 @@ AllCops:
 Metrics/AbcSize:
   Max: 40
 
+Metrics/MethodLength:
+  Max: 20
+
 Style/AsciiComments:
   Enabled: false
 
@@ -25,11 +28,15 @@ Style/ClassAndModuleChildren:
 Style/ConditionalAssignment:
   EnforcedStyle: assign_inside_condition
 
+Style/Documentation:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: true
 
-Style/Documentation:
-  Enabled: false
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/application_controller.rb'
 
 Style/HashSyntax:
   EnforcedStyle: ruby19
@@ -37,6 +44,7 @@ Style/HashSyntax:
 Style/RedundantSelf:
   Exclude:
     - 'app/models/meal_task.rb'
+    - 'app/models/task.rb'
 
 Style/StringLiterals:
   Enabled: false

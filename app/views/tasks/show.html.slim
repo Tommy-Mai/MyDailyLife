@@ -1,0 +1,43 @@
+.main.tasks-show
+  .container
+    .back-task-show
+      - if params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
+        = link_to("← タグ一覧に戻る","/task_tags/#{@task.task_tag_id}")
+      - elsif params[:user]
+        = link_to("← ユーザーページに戻る","/users/#{@task.user_id}")
+      - else
+        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{@task.date.strftime('%Y-%m-%d')}")
+    .tasks-show-item
+      .task-right
+        .task-tag
+          .tag
+            = link_to(@tag.name, task_tag_path(@tag))
+      p
+        = @task.name
+      div.description
+        = raw Rinku.auto_link(@task.description)
+      .task-footer
+        .date
+          = link_to "/calendar/show/other_tasks?start_date=#{@task.date.strftime('%Y-%m-%d')}" do
+            = l @task.date, format: :ymd
+        .time
+          i.fa.fa-clock-o
+          = l @task.time, format: :hm
+        .who
+          i.fa.fa-user
+          = @task.with_whom
+        .where
+          i.fa.fa-map-pin 
+          = @task.where
+        .task-menus
+          - if params[:date]
+            = link_to "/tasks/#{@task.id}/edit?date=#{params[:date]}" do
+              i.fas.fa-pencil-alt
+          - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
+            = link_to "/tasks/#{@task.id}/edit?task_tag=#{params[:task_tag]}" do
+              i.fas.fa-pencil-alt
+          - else
+            = link_to edit_task_path(@task) do
+              i.fas.fa-pencil-alt
+          = link_to @task, :method => :delete, data: { confirm: "タスク「#{@task.name}」を削除します。よろしいですか？"} do
+            i.fas.fa-trash-alt

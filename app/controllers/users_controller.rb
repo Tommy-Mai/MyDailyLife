@@ -3,6 +3,7 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   before_action :ensure_correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :forbid_login_user, only: [:new, :create]
 
   def new
     @user = User.new
@@ -20,6 +21,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
+  end
+
+  def other_tasks
     @user = current_user
   end
 

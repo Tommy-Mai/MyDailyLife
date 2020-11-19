@@ -8,9 +8,9 @@ class MealTask < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :date
-    validates :meal_tag_id
     validates :user_id
   end
+  validates :meal_tag_id, presence: { message: 'を選択してください' }
 
   with_options length: { maximum: 30 } do
     validates :name

@@ -2,16 +2,17 @@
   .container
     .back-task-show
       - if params[:meal_tag]
-        = link_to("← 戻る","/meal_tags/#{@meal_task.meal_tag_id}/index")
+        - tag_name = MealTag.find(params[:meal_tag])
+        = link_to("← 「#{tag_name.name}」一覧に戻る", "/meal_tags/#{@meal_task.meal_tag_id}")
       - elsif params[:user]
-        = link_to("← 戻る","/users/#{@meal_task.user_id}")
+        = link_to("← ユーザーページに戻る", "/users/#{@meal_task.user_id}")
       - else
-        = link_to("← 戻る","/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}")
+        = link_to("← 日別一覧に戻る", "/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}")
     .tasks-show-item
       .task-right
         .task-tag
           .tag
-            = link_to(@tag.name, "/meal_tags/#{@tag.id}/show")
+            = link_to(@tag.name, "/meal_tags/#{@tag.id}")
       p
         = @meal_task.name
       div.description

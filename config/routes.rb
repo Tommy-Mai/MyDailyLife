@@ -2,8 +2,11 @@ Rails.application.routes.draw do
 
   root :to => 'home#top'
   resources :meal_tasks
+  resources :tasks
+  resources :task_tags
 
   resources :users, :except => :index
+  get "users/:id/other_tasks" => "users#other_tasks"
 
   namespace :admin do
     get 'users/index'
@@ -12,8 +15,9 @@ Rails.application.routes.draw do
 
   get '/calendar/index'
   get '/calendar/show'
+  get '/calendar/show/other_tasks' => "calendar#other_tasks"
 
-  get "/meal_tags/:id/show" => "meal_tags#show"
+  get "/meal_tags/:id" => "meal_tags#show"
 
   get '/login' => "sessions#new"
   post '/login' => "sessions#create"

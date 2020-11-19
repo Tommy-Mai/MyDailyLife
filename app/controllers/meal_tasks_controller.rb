@@ -19,9 +19,8 @@ class MealTasksController < ApplicationController
   def create
     @meal_task = MealTask.new(meal_task_params)
     if @meal_task.save
-      @meal_task.date = @meal_task.date.strftime('%Y-%m-%d 00:00:00')
       flash[:notice] = "「#{@meal_task.name}」を登録"
-      redirect_to meal_tasks_url
+      redirect_to meal_task_url(@meal_task)
     else
       render("meal_tasks/new")
     end
@@ -31,7 +30,6 @@ class MealTasksController < ApplicationController
 
   def update
     if @meal_task.update(meal_task_params)
-      @meal_task.date = @meal_task.date.strftime('%Y-%m-%d 00:00:00')
       flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」の変更を保存"
       redirect_to meal_task_url
     else

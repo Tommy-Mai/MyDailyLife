@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
   def login_required
     redirect_to login_url, notice: "ログインしてください。" unless current_user
   end
+
+  def forbid_login_user
+    if session[:user_id]
+      flash[:notice] = "すでにログインしています"
+      redirect_to user_path(session[:user_id])
+    end
+  end
 end

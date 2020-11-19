@@ -16,12 +16,28 @@ ja:
       meal_task:
         id: ID
         name: タイトル
-        description: 食事内容
+        description: 詳細
         date: 日付
         meal_tag_id: タグ
         with_whom: 誰と
         where: どこで
         time: いつ
+        created_at: 登録日時
+        updated_at: 更新日時
+      task:
+        id: ID
+        name: タイトル
+        description: 詳細
+        date: 日付
+        task_tag_id: タグ
+        with_whom: 誰と
+        where: どこで
+        time: いつ
+        created_at: 登録日時
+        updated_at: 更新日時
+      task_tag:
+        id: ID
+        name: タグ名
         created_at: 登録日時
         updated_at: 更新日時
       user:
