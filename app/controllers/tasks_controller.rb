@@ -4,10 +4,6 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :check_params_date, only: [:new]
 
-  def index
-    @tasks = current_user.tasks.recent
-  end
-
   def show
     @tag = TaskTag.find_by(id: @task.task_tag_id)
   end
@@ -62,7 +58,7 @@ class TasksController < ApplicationController
       @task = current_user.tasks.find(params[:id])
     else
       flash[:notice] = "存在しないタスクです。"
-      redirect_to tasks_url
+      redirect_to "/users/#{current_user.id}/other_tasks"
     end
   end
 

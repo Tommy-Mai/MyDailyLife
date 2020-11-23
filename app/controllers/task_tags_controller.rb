@@ -1,52 +1,57 @@
 # frozen_string_literal: true
 
 class TaskTagsController < ApplicationController
-  before_action :set_task_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_task_tag, only: [:show, :update, :destroy]
   before_action :check_params_date, only: [:new]
 
   def index
-    @task_tags = current_user.task_tags.all
+    @task_tag = TaskTag.new
+    @q = current_user.task_tags.ransack(params[:q])
+    @tags = @q.result(distinct: true).page(params[:page]).per(5).recent
+  end
+
+  def meal_tags
+    @q = MealTag.ransack(params[:q])
+    @tags = @q.result(distinct: true)
   end
 
   def show
-    @tasks = current_user.tasks.where(task_tag_id: @task_tag.id).recent
-  end
-
-  def new
-    @task_tag = TaskTag.new
+    @tasks = current_user.tasks.where(task_tag_id: @task_tag.id).page(params[:page]).per(10).recent
   end
 
   def create
     @task_tag = TaskTag.new(task_tag_params)
     if @task_tag.save
-      flash[:notice] = "新規タグ「#{@task_tag.name}」を登録"
-      redirect_to task_tags_url
+      respond_to do |format|
+        format.html { redirect_to task_tags_path }
+        format.json
+      end
     else
+      flash[:notice] = "エラー：タグを更新できませんでした。\n・空白のタグは作成できません。\n・同じ名前のタグは登録できません。"
       render("/task_tags/new")
     end
   end
 
-  def edit; end
-
   def update
     if @task_tag.update(task_tag_params)
-      flash[:notice] = "タグ「#{@task_tag.name}」の変更を保存"
-      redirect_to task_tags_url
+      respond_to do |format|
+        format.html { redirect_to task_tags_path }
+        format.json
+      end
     else
+      flash[:notice] = "エラー：タグを更新できませんでした。\n・空白のタグは作成できません。\n・同じ名前のタグは登録できません。"
       render("/task_tags/edit")
     end
   end
 
   def destroy
     @task_tag.destroy
-    flash[:notice] = "「#{@task_tag.name}」を削除"
-    redirect_to task_tags_url
   end
 
   private
 
   def task_tag_params
-    params.require(:task_tag).permit(
+    params.permit(
       :name
     ).merge(user_id: current_user.id)
   end

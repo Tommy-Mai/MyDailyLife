@@ -1,0 +1,57 @@
+@import "color_folder";
+
+.mb-3 {
+  width: 100%;
+  text-align: center;
+  color: $word-gray;
+  height: 120%;
+}
+
+.pagination {
+  margin-top: -35px;
+  padding-bottom: 5px;
+}
+
+.pagination span {
+  padding: 5px;
+  line-height: 30px;
+}
+
+.pagination span a {
+  color: $word-gray;
+  vertical-align: middle;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.pagination span i {
+  color: $word-gray;
+}
+
+.pagination span a:hover {
+  color: $theme-color-dark;
+}
+
+#current {
+  color: white;
+  background-color: $theme-color;
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  padding: 1px 5px 5px 6px;
+}
+
+.total_count {
+  position: relative;
+  float: right;
+  font-size: 16px;
+  right: 10px;
+  bottom: -25px;
+  color: $word-gray;
+  font-weight: 400;
+}
+

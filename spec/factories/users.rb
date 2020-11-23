@@ -5,7 +5,7 @@ FactoryBot.define do
     password_digest { "password" }
     password { "password" }
     password_confirmation { "password" }
-    image_name { "" }
+    image_name { nil }
     admin { false }
   end
 end

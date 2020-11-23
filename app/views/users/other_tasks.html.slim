@@ -2,21 +2,60 @@
   .container
     = render partial: 'common_show', locals: { user: @user}
 
-    ul.user-tabs
+    ul.user-tabs.search_tabs
       li= link_to("食事関連", "/users/#{@user.id}")
       li.active= link_to("その他", "/users/#{@user.id}/other_tasks")
       li= link_to("メモ", "/")
+      i.fas.fa-search-plus#searchtoggle_button
 
-    - @user.tasks.each do |task|
+    #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|
+      .form.search_form
+        .search_heading その他タスク検索
+        .form-body.search_form_body
+          = f.label :date_gteq, '日付'
+          .date_select
+            = raw sprintf(f.date_select(:date_gteq,
+              default: false,
+              include_blank: true,
+              use_month_numbers: true,
+              start_year: 2000,
+              end_year: (Time.now.year+10),
+              date_separator:'%s'),
+              '年','月')+'日から'
+            = raw sprintf(f.date_select(:date_lteq,
+              default: false,
+              include_blank: true,
+              use_month_numbers: true,
+              start_year: 2000,
+              end_year: (Time.now.year+10),
+              date_separator:'%s'),
+              '年','月')+'まで'
+          = f.label :task_tag_id_eq, 'タグ'
+          = f.collection_select :task_tag_id_eq, current_user.task_tags.all, :id, :name, prompt: true
+          = f.label :name_cont, 'タイトル'
+          = f.search_field :name_cont
+          = f.label :description_cont, '詳細'
+          = f.search_field :description_cont
+          .where_whom_select
+            .whom_select
+              = f.label :with_whom_cont, '誰と'
+              = f.search_field :with_whom_cont
+            .where_select
+              = f.label :where_cont, "どこで"
+              = f.search_field :where_cont
+          = f.submit
+
+    - @tasks.each do |task|
       .tasks-index-item
 
         .task-name
           = link_to(task.name, "/tasks/#{task.id}?user=#{task.user_id}")
 
-        .task-index-tag
-          div
-            - @tag = @user.task_tags.find_by(id: task.task_tag_id)
-            = link_to(@tag.name, "/task_tags/#{@tag.id}")
+        .tagindex_target
+          .task-index-tag
+            div
+              - @tag = @user.task_tags.find_by(id: task.task_tag_id)
+              = link_to(@tag.name, "/task_tags/#{@tag.id}")
         .task-index-date
           div
             = link_to "/calendar/show/other_tasks?start_date=#{task.date.strftime('%Y-%m-%d')}" do
@@ -24,3 +63,6 @@
           div
             i.fa.fa-clock-o
             = l task.time, format: :hm
+
+  .mb-3
+    = paginate @tasks

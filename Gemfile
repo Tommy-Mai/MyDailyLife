@@ -117,3 +117,9 @@ gem 'jquery-rails'
 
 # テキスト内のリンクを自動検出
 gem 'rinku'
+
+# 検索機能のためのgem
+gem 'ransack'
+
+# ページネーションのためのgem
+gem 'kaminari'

@@ -15,7 +15,7 @@
             '年','月')+'日'
       = f.label :meal_tag_id
       - if params[:meal_tag]
-        = f.collection_select :meal_tag_id, MealTag.all, :id, :name, default: params[:meal_tag]
+        = f.collection_select :meal_tag_id, MealTag.all, :id, :name, selected: params[:meal_tag]
       - else
         = f.collection_select :meal_tag_id, MealTag.all, :id, :name, prompt: true
       = f.label :name

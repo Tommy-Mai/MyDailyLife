@@ -1,6 +1,6 @@
 .main.tasks-show
   .container
-    .back-task-show
+    .back-task-show.task_show_margin
       - if params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
         = link_to("← タグ一覧に戻る","/task_tags/#{@task.task_tag_id}")
       - elsif params[:user]
@@ -10,7 +10,7 @@
     .tasks-show-item
       .task-right
         .task-tag
-          .tag
+          .tag#tagshow_target
             = link_to(@tag.name, task_tag_path(@tag))
       p
         = @task.name

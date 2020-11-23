@@ -4,10 +4,6 @@ class MealTasksController < ApplicationController
   before_action :set_meal_task, only: [:show, :edit, :update, :destroy]
   before_action :check_params_date, only: [:new]
 
-  def index
-    @meal_tasks = current_user.meal_tasks.recent
-  end
-
   def show
     @tag = MealTag.find_by(id: @meal_task.meal_tag_id)
   end
@@ -62,7 +58,7 @@ class MealTasksController < ApplicationController
       @meal_task = current_user.meal_tasks.find(params[:id])
     else
       flash[:notice] = "存在しないタスクです。"
-      redirect_to meal_tasks_url
+      redirect_to user_path(current_user)
     end
   end
 

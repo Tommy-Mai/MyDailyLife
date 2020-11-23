@@ -25,7 +25,8 @@ html
       ul.header-menus
         - if current_user
           li= link_to current_user.name, user_path(current_user)
-          li= link_to 'タスク検索',""
+          li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+          li= link_to "タグ一覧", "/meal_tags"
           - if current_user.admin == true
             li= link_to "ユーザー管理", admin_users_index_path
           li= link_to 'ログアウト', logout_path, method: :delete
@@ -36,7 +37,7 @@ html
 
 
     - if flash[:notice]
-      .flash
+      .flash.time-limit
         = flash[:notice]
 
     = yield

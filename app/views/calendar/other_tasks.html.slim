@@ -6,15 +6,15 @@
   - else
     #pop_up
       div
-        p.arrow_box 新規タグ作成ページへ
+        p.arrow_box その他タグ一覧ページへ
 
   .container
-    .task-index-new
+    .task-index-new#calendar_show
       - if current_user.task_tags.exists?
         #pop_trigger= link_to new_task_path(date: @date) do
           i.fas.fa-plus
       - else
-        #pop_trigger= link_to new_task_tag_path do
+        #pop_trigger= link_to task_tags_path do
           i.fas.fa-plus
 
       #other_pop_up
@@ -37,10 +37,11 @@
         .task-name
           = link_to(task.name, task_path(task))
 
-        .task-index-tag
-          div
-            - @tag = current_user.task_tags.find_by(id: task.task_tag_id)
-            = link_to(@tag.name, "/task_tags/#{@tag.id}")
+        .tagindex_target
+          .task-index-tag
+            div
+              - @tag = current_user.task_tags.find_by(id: task.task_tag_id)
+              = link_to(@tag.name, "/task_tags/#{@tag.id}")
         .task-index-date
           div
             = link_to "/calendar/index?start_date=#{task.date.strftime('%Y-%m-%d')}" do
@@ -48,3 +49,6 @@
           div
             i.fa.fa-clock-o
             = l task.time, format: :hm
+
+  .mb-3
+    = paginate @tasks

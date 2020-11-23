@@ -47,7 +47,7 @@ describe '食関連タスク管理機能', :type => :system do
 
         # 月別カレンダーへ移動,ユーザーAが登録した食事タスクがカウントされていることを確認
         visit "/calendar/index?start_date=#{task_a.date.strftime('%Y-%m-%d')}"
-        expect(page).to have_content '食事タスク 1個'
+        expect(page).to have_content '食事タスク 1'
 
         # ユーザーAが作成したタスクの詳細画面に移動
         visit meal_task_path(task_a)
@@ -72,7 +72,7 @@ describe '食関連タスク管理機能', :type => :system do
 
         # 月別カレンダーへ移動,ユーザーAが登録した食事タスクがカウントされていないことを確認
         visit "/calendar/index?start_date=#{task_a.date.strftime('%Y-%m-%d')}"
-        expect(page).not_to have_content '食事タスク 1個'
+        expect(page).not_to have_content '食事タスク 1'
 
         # ユーザーAが作成したタスクの詳細画面に移動
         visit meal_task_path(task_a)
@@ -126,7 +126,7 @@ describe '食関連タスク管理機能', :type => :system do
 
           # 月別カレンダーへ移動,ユーザーAが登録した食事タスクがカウントされていることを確認
           visit "/calendar/index?start_date=#{task_a.date.strftime('%Y-%m-%d')}"
-          expect(page).to have_content '食事タスク 2個'
+          expect(page).to have_content '食事タスク 2'
         end
       end
 

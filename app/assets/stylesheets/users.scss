@@ -56,16 +56,25 @@
 }
 
 .user {
-  margin-top: 40px;
+  text-align: left;
+  margin-top: 12px;
+  padding: 0 30% 0;
 }
 
 .user img {
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   border-radius: 40%;
   box-shadow: 0 2px 6px #c1ced7;
-  margin: 20px 0 10px;
   object-fit: cover;
+  position: relative;
+  float: left;
+}
+
+.user_info {
+  display: inline-block;
+  margin-top: 5px;
+  margin-left: 20px;
 }
 
 .user h2 {
@@ -75,14 +84,14 @@
 }
 
 .user p {
-  font-size: 13px;
-  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .user a {
   color: #8899a6;
   text-decoration: underline;
   font-weight: 200;
+  font-size: 13px;
 }
 
 .user span {
@@ -92,7 +101,7 @@
 }
 
 .user-tabs {
-  margin-top: 25px;
+  margin-top: 5px;
   background-color: white;
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
@@ -113,12 +122,17 @@
 .user-tabs a {
   display: inline-block;
   padding: 16px 30px;
-  color: #afb6bf;
+  color: $word-light-gray;
+}
+
+.user-tabs a:hover {
+  color: $word-black;
 }
 
 .user .task-menus {
   float: none;
-  text-align: center;
+  margin-left: 85px;
+  width: 60px;
 }
 
 /* users/new, users/edit ================================ */

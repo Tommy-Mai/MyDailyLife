@@ -34,19 +34,7 @@ describe "その他タグ管理機能", :type => :system  do
 
           # ユーザーAが作成したその他タグ一覧ページに移動
           visit task_tags_path
-          expect(page).to have_content 'タグ一覧'
           expect(page).to have_content '映画'
-          expect(page).not_to have_content '← 戻る'
-        end
-
-        it '正しく戻るボタンが表示される' do
-          # その他タグ一覧ページにクエリパラメータ付きで移動
-          # task_tagのidが渡された場合
-          visit "/task_tags?task_tag=1"
-          expect(page).to have_content '← 「映画」一覧に戻る'
-          # state_dateが渡された場合
-          visit "/task_tags?start_date=2020-11-19"
-          expect(page).to have_content '← 日別一覧に戻る'
         end
       end
 
@@ -62,10 +50,8 @@ describe "その他タグ管理機能", :type => :system  do
 
           # ユーザーbが作成したその他タグ一覧ページに移動
           visit task_tags_path
-          expect(page).to have_content 'タグ一覧'
           expect(page).to have_content 'ドラマ'
           expect(page).not_to have_content '映画'
-          expect(page).not_to have_content '← 戻る'
         end
       end
       

@@ -45,6 +45,7 @@ ja:
         admin: 管理者権限
         name: ユーザー名
         email: メールアドレス
+        image_name: 画像
         password: パスワード
         password_confirmation: パスワード(確認)
         created_at: 登録日時

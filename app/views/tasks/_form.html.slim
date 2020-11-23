@@ -15,7 +15,7 @@
             '年','月')+'日'
       = f.label :task_tag_id
       - if params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
-        = f.collection_select :task_tag_id, current_user.task_tags.all, :id, :name, default: params[:task_tag]
+        = f.collection_select :task_tag_id, current_user.task_tags.all, :id, :name, selected: params[:task_tag]
       - else
         = f.collection_select :task_tag_id, current_user.task_tags.all, :id, :name, prompt: true
       = f.label :name

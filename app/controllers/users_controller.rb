@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
       session[:user_id] = @user.id
       redirect_to user_url(@user), notice: "ユーザー「#{@user.name}」を登録しました。"
@@ -22,10 +21,14 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @q = current_user.meal_tasks.ransack(params[:q])
+    @meal_tasks = @q.result(distinct: true).page(params[:page]).per(5).recent
   end
 
   def other_tasks
     @user = current_user
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).page(params[:page]).per(5).recent
   end
 
   def edit
@@ -34,8 +37,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-
-    if @user.id == 1 || @user.id == 2
+    if @user.id == 1
       redirect_to user_url(@user), notice: "このアカウントは編集できません。"
     elsif @user.update(user_params)
       redirect_to user_url(@user), notice: "「#{@user.name}」の情報を更新しました。"
@@ -60,7 +62,7 @@ class UsersController < ApplicationController
       :admin,
       :password,
       :password_confirmation
-    ).merge(admin: false)
+    ).merge(admin: false, image_name: nil)
   end
 
   def ensure_correct_user

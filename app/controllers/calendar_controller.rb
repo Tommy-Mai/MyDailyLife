@@ -32,7 +32,7 @@ class CalendarController < ApplicationController
     else
       @date = Date.current
     end
-    @meal_tasks = current_user.meal_tasks.where(date: @date.all_day)
+    @meal_tasks = current_user.meal_tasks.where(date: @date.all_day).page(params[:page]).per(5)
   end
 
   def other_tasks
@@ -41,7 +41,8 @@ class CalendarController < ApplicationController
     else
       @date = Date.current
     end
-    @tasks = current_user.tasks.where(date: @date.all_day)
+    @tasks = current_user.tasks.where(date: @date.all_day).page(params[:page]).per(5)
+
     if current_user.task_tags.exists?(id: params[:id])
       @task_tag = true
     else

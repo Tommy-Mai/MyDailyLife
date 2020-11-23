@@ -1,9 +1,56 @@
+.tag_changed
 .main.tasks-index
   #pop_up
     div
-      p.arrow_box 新規タグ作成ページへ
+      p.arrow_box 新規タグ作成
+
+  .modal.js-modal_new
+    .modal__bg.js-modal-close_new
+    .modal__content
+      #modal_close_btn.back-task-show.js-modal-close_new
+        = link_to("×","")
+      h1 新規タグを作成する
+      #tasktag_input= form_with model: @task_tag, local: true do |f|
+        .form
+          #modal_body_new.form-body
+            - @task_tag.errors.full_messages.each do |message|
+              .form-error
+                = message
+
+            = f.label :name
+            = f.text_field :name, id: 'task_name'
+            .tasktag_form_btn= f.submit nil
+
+  .modal.js-modal_edit
+    .modal__bg.js-modal-close_edit
+    .modal__content
+      #modal_close_btn_edit.back-task-show.js-modal-close_edit
+        = link_to("×","")
+      h1 タグを編集する
+      #tasktag_input_edit= form_with model: @task_tag, local: true do |f|
+        .form
+          #modal_body_edit.form-body
+            - @task_tag.errors.full_messages.each do |message|
+              .form-error
+                = message
+
+            = f.label :name
+            .edit_label= f.text_field :name, id: 'task_name_edit'
+            .tasktag_form_btn= f.submit '更新する'
+
   .container
+    .task-index-new#tags_index
+
+      #pop_trigger.js-modal-open_new= link_to "" do
+        i.fas.fa-plus
+
+      #search_reset
+        #other_pop_up
+            div
+              p.arrow_box.other_arrow_box 検索結果をリセット
+
     .back-task-show.task_tag_back
+
       - if params[:start_date]
         = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{params[:start_date]}")
       - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
@@ -11,20 +58,38 @@
         = link_to("← 「#{tag_name.name}」一覧に戻る", task_tag_path(params[:task_tag]))
       - else
         = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
-    .task-index-new
-      #pop_trigger= link_to new_task_tag_path do
-        i.fas.fa-plus
 
-    .tag-tabs タグ一覧
+    ul#index_tabs.user-tabs.search_tabs
+      li= link_to("食事関連", "/meal_tags")
+      li.active#other_pop_trigger= link_to("その他", task_tags_path)
+      li= link_to("メモ", "/")
+      i.fas.fa-search-plus#searchtoggle_button
 
-    - @task_tags.each do |tag|
-      .tasks-index-item
+    #searchtoggle_menu= search_form_for @q do |f|
+      .form.search_form
+        .search_heading その他タグ検索
+        .form-body.search_form_body
+          = f.label :name_cont, 'タグ名'
+          = f.search_field :name_eq, placeholder: '完全一致'
+          = f.search_field :name_cont, placeholder: '部分一致'
+          = f.submit
 
-        .task-name
-          = link_to(tag.name, task_tag_path(tag))
+    .task_tags_index
+      - @tags.each do |tag|
+        .edit_point
+          .tasks-index-item id="tag#{tag.id}" data-id="#{tag.id}" data-name="#{tag.name}" data-tag-count="#{current_user.tasks.where(task_tag_id: tag.id).count}"
 
-        .task-menus.tag-index-menu
-          = link_to edit_task_tag_path(tag) do
-            i.fas.fa-pencil-alt
-          = link_to tag, :method => :delete, data: { confirm: "タグ「#{tag.name}」を削除します。よろしいですか？"} do
-            i.fas.fa-trash-alt
+            .task-name
+              = link_to(tag.name, task_tag_path(tag))
+
+            .tag_count
+              = "タスク #{current_user.tasks.where(task_tag_id: tag.id).count}件"
+
+            .task-menus.tag-index-menu
+              p.js-modal-open_edit= link_to "" do
+                i.fas.fa-pencil-alt
+              = link_to tag, :method => :delete, :remote => true, data: { confirm: "タグ「#{tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？"} do
+                i.fas.fa-trash-alt
+
+  .mb-3
+    = paginate @tags

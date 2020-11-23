@@ -1,6 +1,6 @@
 .main.tasks-show
   .container
-    .back-task-show
+    .back-task-show.task_show_margin
       - if params[:meal_tag]
         - tag_name = MealTag.find(params[:meal_tag])
         = link_to("← 「#{tag_name.name}」一覧に戻る", "/meal_tags/#{@meal_task.meal_tag_id}")

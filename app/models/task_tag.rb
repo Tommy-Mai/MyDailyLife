@@ -4,11 +4,7 @@ class TaskTag < ApplicationRecord
   belongs_to :user
   has_many :tasks, foreign_key: "task_tag_id", dependent: :destroy
 
-  with_options presence: true do
-    validates :name
-  end
+  scope :recent, -> { order(created_at: :desc) }
 
-  with_options length: { maximum: 30 } do
-    validates :name
-  end
+  validates :name, uniqueness: { scope: :user }, presence: true, length: { maximum: 30 }
 end

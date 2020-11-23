@@ -8,7 +8,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.integer :user_id, :null => false
       t.string :with_whom, :limit => 30
       t.string :where, :limit => 30
-      t.time :time
+      t.time :time, :null => false
 
       t.timestamps
     end

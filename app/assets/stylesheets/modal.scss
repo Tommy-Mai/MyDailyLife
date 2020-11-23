@@ -1,0 +1,57 @@
+@import "color_folder";
+
+.modal{
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+.modal__bg{
+  background: $word-gray-background;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+}
+.modal__content{
+  background: white;
+  left: 50%;
+  padding: 40px;
+  position: absolute;
+  margin-top: 290px;
+  transform: translate(-50%,-50%);
+  width: 570px;
+}
+.modal__content .form {
+  box-shadow: none;
+}
+
+.modal__content h1 {
+  float: left;
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 20px;
+  color: $word-gray;
+  width: 100%;
+}
+
+#modal_body_new, #modal_body_edit {
+  padding: 0;
+}
+
+#modal_close_btn, #modal_close_btn_edit {
+  position: absolute;
+  display: inline-block;
+  left: 510px;
+  line-height: 100%;
+}
+
+#modal_close_btn a, #modal_close_btn_edit a {
+  font-size: 30px;
+  float: right;
+  padding: 0;
+}

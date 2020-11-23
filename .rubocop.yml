@@ -45,13 +45,13 @@ Style/RedundantSelf:
   Exclude:
     - 'app/models/meal_task.rb'
     - 'app/models/task.rb'
+    - 'app/models/user.rb'
 
 Style/StringLiterals:
   Enabled: false
 
 Style/SymbolArray:
   Enabled: false
-  
 
 Layout/LineLength:
-  Max: 150
+  Max: 200
