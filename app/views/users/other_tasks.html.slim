@@ -4,7 +4,11 @@
 
     ul.user-tabs.search_tabs
       li= link_to("食事関連", "/users/#{@user.id}")
-      li.active= link_to("その他", "/users/#{@user.id}/other_tasks")
+      li.active
+        - if @user.task_tags.empty? || @user.tasks.exists?
+          = link_to("その他", task_tags_path)
+        - else
+          = link_to("その他", new_task_path)
       li= link_to("メモ", "/")
       i.fas.fa-search-plus#searchtoggle_button
 

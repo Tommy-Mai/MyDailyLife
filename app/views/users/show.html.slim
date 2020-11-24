@@ -3,7 +3,11 @@
     = render partial: 'common_show', locals: {user: @user}
 
     ul.user-tabs.search_tabs
-      li.active= link_to("食事関連", "/users/#{@user.id}")
+      li.active
+        - unless @user.meal_tasks.exists?
+          = link_to("食事関連", new_meal_task_path)
+        - else
+          = link_to("食事関連", meal_tags_path)
       li= link_to("その他", "/users/#{@user.id}/other_tasks")
       li= link_to("メモ", "/")
       i.fas.fa-search-plus#searchtoggle_button

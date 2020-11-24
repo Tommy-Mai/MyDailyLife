@@ -1,10 +1,11 @@
 .user
-  tr= image_tag user.image_name if user.image_name.attached?
-  .user_info
-    h2= user.name
-    p= user.email
-  .task-menus
-    = link_to edit_user_path(user) do
-      i.fas.fa-pencil-alt
-    = link_to user, :method => :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"} do
-      i.fas.fa-trash-alt
+  .user-center
+    tr= image_tag user.image_name if user.image_name.attached?
+    .user_info
+      h2= user.name
+      p= user.email
+      .task-menus
+        = link_to edit_user_path(user) do
+          i.fas.fa-pencil-alt
+        = link_to user, :method => :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"} do
+          i.fas.fa-trash-alt
