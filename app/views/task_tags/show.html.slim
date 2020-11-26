@@ -1,0 +1,35 @@
+.main.tasks-index
+  #pop_up
+    div
+      p.arrow_box 新規「#{@task_tag.name}」タスク作成ページへ
+  .container
+    .task-index-new#tags_show
+      #pop_trigger= link_to "/tasks/new?task_tag=#{@task_tag.id}" do
+        i.fas.fa-plus
+
+    .mb-3
+      = paginate @tasks
+
+    .tag-tabs
+      = "「#{@task_tag.name}」一覧"
+      .total_count
+        = "全#{@tasks.total_count}件"
+    
+    - @tasks.each do |task|
+      .tasks-index-item
+
+        .task-name
+          = link_to(task.name, "/tasks/#{task.id}?task_tag=#{task.task_tag_id}")
+
+        .tagindex_target
+          .task-index-tag
+            div
+              - @tag = current_user.task_tags.find_by(id: task.task_tag_id)
+              = link_to(@tag.name, "/task_tags?task_tag=#{@tag.id}")
+        .task-index-date
+          div
+            = link_to "/calendar/show/other_tasks?start_date=#{task.date.strftime('%Y-%m-%d')}" do
+              = l task.date, format: :ymd
+          div
+            i.fa.fa-clock-o
+            = l task.time, format: :hm

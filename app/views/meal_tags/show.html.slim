@@ -1,9 +1,19 @@
 .main.tasks-index
+  #pop_up
+    div
+      p.arrow_box 新規「#{@meal_tag.name}」タスク作成ページへ
   .container
-    .task-index-new
-      = link_to "/meal_tasks/new?meal_tag=#{@meal_tag.id}" do
+    .task-index-new.tags_show
+      #pop_trigger= link_to "/meal_tasks/new?meal_tag=#{@meal_tag.id}" do
         i.fas.fa-plus
-    .form-heading 「#{@meal_tag.name}」一覧
+
+    .mb-3
+      = paginate @meal_tasks
+
+    .tag-tabs
+      = "「#{@meal_tag.name}」一覧"
+      .total_count
+        = "全#{@meal_tasks.total_count}件"
     
     - @meal_tasks.each do |task|
       .tasks-index-item
@@ -14,7 +24,7 @@
         .task-index-tag
           div
             - @tag = MealTag.find_by(id: task.meal_tag_id)
-            = link_to(@tag.name, "/meal_tags/#{@tag.id}/index")
+            = link_to(@tag.name, "/meal_tags?meal_tag=#{@tag.id}")
         .task-index-date
           div
             = link_to "/calendar/show?start_date=#{task.date.strftime('%Y-%m-%d')}" do

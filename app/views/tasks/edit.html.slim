@@ -1,0 +1,7 @@
+.main.tasks-new
+  .container
+    h1.form-heading タスクを編集する
+    = render partial: 'form', locals: { task: @task }
+
+    .back-task-show
+      = link_to("← その他タスク一覧に戻る", task_path(@task))

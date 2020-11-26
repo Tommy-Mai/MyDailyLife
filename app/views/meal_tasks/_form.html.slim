@@ -10,12 +10,12 @@
             default: @date,
             use_month_numbers: true,
             start_year: 2000,
-            end_year: (Time.now.year),
+            end_year: (Time.now.year+10),
             date_separator:'%s'),
             '年','月')+'日'
       = f.label :meal_tag_id
       - if params[:meal_tag]
-        = f.collection_select :meal_tag_id, MealTag.all, :id, :name, default: params[:meal_tag]
+        = f.collection_select :meal_tag_id, MealTag.all, :id, :name, selected: params[:meal_tag]
       - else
         = f.collection_select :meal_tag_id, MealTag.all, :id, :name, prompt: true
       = f.label :name
@@ -28,4 +28,4 @@
       = f.text_field :where
       = f.label :time
       = f.time_select :time
-    = f.submit nil
+    .form_submit= f.submit nil

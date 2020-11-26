@@ -1,0 +1,13 @@
+.main.tasks-new
+  .container
+    h1.form-heading タスクを投稿する
+    = render partial: 'form', locals: { task: @task }
+
+    .back-task-show
+      - if params[:date]
+        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{@date}")
+      - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
+        - tag_name = current_user.task_tags.find(params[:task_tag])
+        = link_to("← 「#{tag_name.name}」一覧に戻る", task_tag_path(params[:task_tag]))
+      - else
+        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")

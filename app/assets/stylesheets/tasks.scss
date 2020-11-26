@@ -10,61 +10,69 @@
   box-shadow: 0 2px 6px #c1ced7;
   position: relative;
   min-height: 100px;
+  z-index: 5;
 }
 
-// .task-left img {
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 40%;
-//   box-shadow: 0 2px 6px #c1ced7;
-//   object-fit: cover;
-// }
+.edit_box {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba($color: #ffe9e9, $alpha: 0.5);
+}
+
+.edit_box .tasks-index-item {
+  padding: 0;
+  box-shadow: none;
+}
+
+.edit_box .form {
+  box-shadow: none;
+  margin: 0;
+  width: 570px;
+}
 
 .task-name a {
   color: $word-black;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 26px;
   display: inline-block;
-  line-height: 100%;
-  position: absolute;
-  top: 50%;
-  -webkit-transform : translateY(-50%);
-  transform : translateY(-50%);
+  position: relative;
+  max-width: 365px;
+  word-break: break-all;
 }
 
 .task-name a:hover {
   color: $theme-color;
 }
 
-
 .task-index-tag {
-  float: right;
   background-color: $theme-color;
   color: white;
-  display: block;
+  display: inline-block;
   width: 180px;
-  height: 35px;
-  margin: -19px -30px -20px 0;
+  min-height: 37px;
   text-align: center;
   letter-spacing: 5px;
-  position: relative;
-}
-
-.task-index-tag div {
-  width: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform : translate(-50%,-50%);
-  transform : translate(-50%,-50%);
+  top: 0px;
+  right: 0px;
+  z-index: 10;
 }
 
 .task-index-tag div a {
   color: white;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  width: 180px;
+  padding: 2px 2px;
+  word-break: break-all;
+  text-align: center;
 }
 
-.task-index-tag div a:hover {
+.task-index-tag a:hover {
   color: $theme-color-dark;
+  overflow: visible;
+  background-color: $theme-color;
 }
 
 .task-index-date {
@@ -96,8 +104,10 @@
 .task-index-new a {
   font-size: 30px;
   color: $word-gray;
+  display: inline-block;
   width: 100%;
-  padding: 0 50%;
+  line-height: 100%;
+  text-align: center;
 }
 
 .task-index-new a:hover {
@@ -110,6 +120,20 @@
   text-align: center;
   font-weight: 500;
   margin: 10px 0 5px;
+}
+
+#tags_index {
+  margin-top: 30px;
+  margin-bottom: 6px;
+}
+
+#tags_show {
+  margin-top: 30px;
+  margin-bottom: 33px;
+}
+
+#calendar_show {
+  margin-top: 27px;
 }
 
 /*.tasks/show ================================ */
@@ -171,11 +195,12 @@
 }
 
 .tag {
-  height: 40px;
   color: white;
   background-color: $theme-color;
-  padding: 5px;
+  padding: 5px 10px;
   text-align: center;
+  line-height: 150%;
+  position: relative;
 }
 
 .tag a{
@@ -185,6 +210,8 @@
 
 .tag a:hover{
   color: $theme-color-dark;
+  overflow: visible;
+  background-color: $theme-color;
 }
 
 .task-footer {
@@ -226,8 +253,16 @@
   float: right;
 }
 
-.task-menus a {
+.task-menus a{
   margin-left: 5px;
+}
+
+.task-menus p {
+  display: inline;
+  margin-block-start: none;
+  margin-block-end: none;
+  margin-inline-start: none;
+  margin-inline-end: none;
 }
 
 .task-menus a, .task-menus input {
@@ -248,6 +283,14 @@
   padding-left: 5px;
 }
 
+.tags_show {
+  margin: 28px 0 35px;
+}
+
+.task_show_margin {
+  margin-top: 70px;
+}
+
 /*.tasks/new ================================ */
 .tasks-new textarea {
   font-size: 20px;
@@ -262,11 +305,11 @@
   opacity: 0.5;
 }
 
-.tasks-new label {
+.tasks-new label, .tasks-index label {
   display: block;
 }
 
-.tasks-new select {
+.tasks-new select, .tasks-index select {
   border: 1px solid #d8dadf;
   padding: 10px;
   color: $word-black;
@@ -274,16 +317,152 @@
   letter-spacing: 2px;
   border-radius: 2px;
   margin-bottom: 10px;
+  max-width: 100%;
 }
 
 /*.tasks/edit ================================ */
 .back-task-show a {
   display: block;
-  padding: 10px 0 10px 10px;
+  padding-left: 10px;
   color: $word-gray;
   font-size: 16px;
+  width: 800px;
 }
 
 .back-task-show a:hover {
   color: $word-black;
+}
+
+#mealtag_back {
+  margin-top: 71px;
+}
+
+#mealtag_tabs {
+  margin-top: 0px;
+}
+
+/*.tag/index ================================ */
+.tag-index-menu {
+  position: absolute;
+  bottom: 7px;
+  right: 30px;
+}
+
+.tag-tabs {
+  width: 100%;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  float: left;
+  border-bottom: 3px solid $theme-color;
+  display: inline-block;
+  text-align: center;
+  color: #57575f;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 15px 0;
+  word-break: keep-all;
+}
+
+.tag_count{
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  float: right;
+  font-size: 20px;
+  font-weight: 300;
+  color: $word-black;
+}
+
+.tag_count a {
+  color: $word-black;
+  font-size: 18px;
+}
+
+.tag_count a:hover {
+  color: $theme-color;
+}
+
+/*.search ================================ */
+.search_form select {
+  border: 1px solid #d8dadf;
+  padding: 10px;
+  color: #333333;
+  font-size: 16px;
+  letter-spacing: 2px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+#searchtoggle_menu {
+  display: none;
+}
+
+.user-show .search_form_body {
+  text-align: left;
+  display: block;
+}
+
+.user-show .search_form_body label {
+  display: block;
+}
+
+.search_form {
+  margin-bottom: 30px;
+  background-color: $search-background;
+  border-top: 1px solid $search-border;
+}
+
+.search_heading {
+  font-weight: 300;
+  width: 100%;
+  font-size: 24px;
+  color: $word-gray;
+  text-align: left;
+  padding: 15px 0 0 30px;
+  display: inline-block;
+}
+
+.search_form_body {
+  padding-top: 15px;
+}
+
+.search_form_body input, .search_form_body select {
+  background-color: white;
+}
+
+.search_tabs i {
+  float: right;
+  display: inline-block;
+  padding: 16px 30px;
+  line-height: 24px;
+  color: $word-light-gray;
+}
+
+#index_tabs{
+  margin-top: 0px;
+}
+
+.search_tabs i:hover {
+  color: $word-black;
+}
+
+.search_form_body .date_select{
+  font-size: 12px;
+}
+.search_form_body .date_select select {
+  padding: 5px;
+}
+
+.where_whom_select input {
+  float: left;
+}
+
+.whom_select, .where_select {
+display: inline-block;
+max-width: 45%;
+}
+
+.where_select {
+  padding-left: 20px;
 }

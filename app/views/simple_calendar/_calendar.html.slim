@@ -3,8 +3,7 @@
     .icon
       = link_to t('simple_calendar.previous', default: '<'), calendar.url_for_previous_view
     span.calendar-title
-      = link_to "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}" do
-        = @date
+      = @date
     .icon
       = link_to t('simple_calendar.next', default: '>'), calendar.url_for_next_view
 

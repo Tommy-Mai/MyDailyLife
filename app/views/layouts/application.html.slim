@@ -5,24 +5,28 @@ html
       | MyDailyLife
     = csrf_meta_tags
     = csp_meta_tag
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" /
-    script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
 
   body
     header
       .header-logo
         - if current_user
-          a href="/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}" MyDailyLife
+          #header_pop
+            div
+              p.arrow_box_buttom 月別カレンダーへ移動
+          a#header_pop_trigger href="/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}" MyDailyLife
         - else
           a href="/" MyDailyLife
-        
+
       ul.header-menus
         - if current_user
           li= link_to current_user.name, user_path(current_user)
-          li= link_to 'タスク検索',""
+          li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+          li= link_to "タグ一覧", "/meal_tags"
           - if current_user.admin == true
             li= link_to "ユーザー管理", admin_users_index_path
           li= link_to 'ログアウト', logout_path, method: :delete
@@ -33,7 +37,7 @@ html
 
 
     - if flash[:notice]
-      .flash
+      .flash.time-limit
         = flash[:notice]
 
     = yield

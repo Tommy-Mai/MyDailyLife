@@ -3,10 +3,10 @@ FactoryBot.define do
     name { 'テスト投稿' }
     date { Time.zone.now }
     time { Time.zone.now }
-    meal_tag_id { 1 }
     description { "test" }
     with_whom { "with" }
     where { "where" }
-    user
+    meal_tag_id { 1 }
+    user_id { 1 }
   end
 end

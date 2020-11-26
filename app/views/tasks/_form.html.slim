@@ -1,0 +1,31 @@
+= form_with model: task,local: true do |f|
+  .form
+    .form-body
+      - task.errors.full_messages.each do |message|
+        .form-error
+          = message
+
+      = f.label :date
+      = raw sprintf(f.date_select(:date,
+            default: @date,
+            use_month_numbers: true,
+            start_year: 2000,
+            end_year: (Time.now.year+10),
+            date_separator:'%s'),
+            '年','月')+'日'
+      = f.label :task_tag_id
+      - if params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
+        = f.collection_select :task_tag_id, current_user.task_tags.all, :id, :name, selected: params[:task_tag]
+      - else
+        = f.collection_select :task_tag_id, current_user.task_tags.all, :id, :name, prompt: true
+      = f.label :name
+      = f.text_field :name, id: 'task_name'
+      = f.label :description
+      = f.text_area :description, id: 'task_description'
+      = f.label :with_whom
+      = f.text_field :with_whom
+      = f.label :where
+      = f.text_field :where
+      = f.label :time
+      = f.time_select :time
+    = f.submit nil

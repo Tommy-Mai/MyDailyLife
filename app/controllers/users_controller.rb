@@ -2,7 +2,9 @@
 
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :time_out, only: [:new, :create, :destroy]
   before_action :ensure_correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :forbid_login_user, only: [:new, :create]
 
   def new
     @user = User.new
@@ -10,9 +12,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     if @user.save
       session[:user_id] = @user.id
+      user_last_login_at
+      session_last_activity_at
       redirect_to user_url(@user), notice: "ユーザー「#{@user.name}」を登録しました。"
     else
       render :new
@@ -21,6 +24,14 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @q = current_user.meal_tasks.ransack(params[:q])
+    @meal_tasks = @q.result(distinct: true).page(params[:page]).per(5).recent
+  end
+
+  def other_tasks
+    @user = current_user
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).page(params[:page]).per(5).recent
   end
 
   def edit
@@ -29,8 +40,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-
-    if @user.id == 1 || @user.id == 2
+    if @user.id == 1
       redirect_to user_url(@user), notice: "このアカウントは編集できません。"
     elsif @user.update(user_params)
       redirect_to user_url(@user), notice: "「#{@user.name}」の情報を更新しました。"
@@ -40,9 +50,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    user_last_logout_at
     @user = current_user
     @user.destroy
-    session[:user_id].clear
+    reset_session
     redirect_to :new, notice: "ユーザー「#{@user.id}」を削除しました。"
   end
 
@@ -55,7 +66,7 @@ class UsersController < ApplicationController
       :admin,
       :password,
       :password_confirmation
-    ).merge(admin: false)
+    ).merge(admin: false, image_name: nil)
   end
 
   def ensure_correct_user

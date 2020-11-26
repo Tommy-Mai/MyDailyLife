@@ -5,19 +5,20 @@
     -webkit-border-horizontal-spacing: 0px;
     -webkit-border-vertical-spacing: 0px;
     background-color: rgba(0, 0, 0, 0);
-    border: 1px solid #dddddd;
+    border: 1px solid $calendar-border;
     border-collapse: collapse;
     box-sizing: border-box;
     max-width: 100%;
     width: 100%;
+    margin-top: 10px;
   }
 
   th{
     padding: 6px;
-    border-bottom: 2px solid #dddddd;
+    border-bottom: 2px solid $theme-color;
     border-collapse: collapse;
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
+    border-left: 1px solid $calendar-border;
+    border-right: 1px solid $calendar-border;
     border-top: 0px none #333333;
     box-sizing: border-box;
     text-align: center;
@@ -28,17 +29,17 @@
     padding: 6px;
     vertical-align: top;
     width: 14%;
-    border: 1px solid #ddd;
-    border-top-color: #dddddd;
+    border: 1px solid $calendar-border;
+    border-top-color: $calendar-border;
     border-top-style: solid;
     border-top-width: 1px;
-    border-right-color: #dddddd;
+    border-right-color:$calendar-border;
     border-right-style: solid;
     border-right-width: 1px;
-    border-bottom-color: #dddddd;
+    border-bottom-color: $calendar-border;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-left-color: #dddddd;
+    border-left-color: $calendar-border;
     border-left-style: solid;
     border-left-width: 1px;
   }

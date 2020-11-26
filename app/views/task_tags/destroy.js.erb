@@ -1,0 +1,12 @@
+document.querySelector('#tag<%= @task_tag.id %>').style.display = 'none';
+
+var message = document.createElement('div');
+message.className = 'flash tag_created';
+message.innerText = 'タグ「<%= @task_tag.name %>」を削除しました。'
+document.querySelector('.tag_changed').insertAdjacentElement('afterbegin', message);
+setTimeout(function(){
+  $('.tag_created').fadeOut('slow')
+} ,2000);
+setTimeout(function(){
+  $(".tag_created").remove();
+}, 4000);

@@ -2,8 +2,11 @@
 
 class HomeController < ApplicationController
   skip_before_action :login_required
+  skip_before_action :time_out, only: [:top]
 
-  def top; end
+  def top
+    redirect_to user_path(session[:user_id]) if session[:user_id]
+  end
 
   def about; end
 
