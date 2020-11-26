@@ -93,7 +93,7 @@ class ApplicationController < ActionController::Base
   def othertask_create
     usage_histories.update(othertask_create_count: usage_histories.othertask_create_count + 1)
   end
-  
+
   def tag_create
     usage_histories.update(tag_create_count: usage_histories.tag_create_count + 1)
   end
