@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_062248) do
+ActiveRecord::Schema.define(version: 2020_11_26_020712) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -70,6 +70,22 @@ ActiveRecord::Schema.define(version: 2020_11_23_062248) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "usage_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "login_at"
+    t.datetime "logout_at"
+    t.string "utilization_time"
+    t.datetime "last_activity_at"
+    t.boolean "timeout", default: false
+    t.datetime "timeout_time"
+    t.integer "action_count", default: 0
+    t.integer "mealtask_create_count", default: 0
+    t.integer "othertask_create_count", default: 0
+    t.integer "tag_create_count", default: 0
+    t.integer "comment_create_count", default: 0
+    t.integer "memo_create_count", default: 0
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.string "email", null: false
@@ -78,6 +94,9 @@ ActiveRecord::Schema.define(version: 2020_11_23_062248) do
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_login_at"
+    t.datetime "last_logout_at"
+    t.integer "login_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

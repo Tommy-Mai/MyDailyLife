@@ -27,9 +27,11 @@ $(document).on('turbolinks:load', function(){
   function createHTML(tag) {
     let html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count="0">
                   <div class="task-name">
-                    <a href="/task_tags/${tag.id}">${tag.name}</a>
+                    <a href="/tasks/new?task_tag=${tag.id}">${tag.name}</a>
                   </div>
-                  <div class="tag_count">タスク 0個</div>
+                  <div class="tag_count">
+                    <a href="/task_tags/${tag.id}">タスク 0件</a>
+                  </div>
                   <div class="task-menus tag-index-menu">
                     <a href="">
                       <i class="fas fa-pencil-alt"></i>
@@ -106,9 +108,11 @@ $(document).on('turbolinks:load', function(){
     function reBuild(tag, values) {
       var html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count=${values.count}"> 
                       <div class="task-name">
-                        <a href="/task_tags/${tag.id}">${tag.name}</a>
+                        <a href="/tasks/new?task_tag=${tag.id}">${tag.name}</a>
                       </div>
-                      <div class="tag_count">タスク ${values.count}個</div>
+                      <div class="tag_count">
+                        <a href="/task_tags/${tag.id}">タスク ${values.count}件</a>
+                      </div>
                       <div class="task-menus tag-index-menu">
                         <a href="">
                           <i class="fas fa-pencil-alt"></i>

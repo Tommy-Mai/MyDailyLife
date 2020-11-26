@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :time_out, only: [:new, :create, :destroy]
   before_action :ensure_correct_user, only: [:show, :edit, :update, :destroy]
   before_action :forbid_login_user, only: [:new, :create]
 
@@ -13,6 +14,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      user_last_login_at
+      session_last_activity_at
       redirect_to user_url(@user), notice: "ユーザー「#{@user.name}」を登録しました。"
     else
       render :new
@@ -47,9 +50,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    user_last_logout_at
     @user = current_user
     @user.destroy
-    session[:user_id].clear
+    reset_session
     redirect_to :new, notice: "ユーザー「#{@user.id}」を削除しました。"
   end
 

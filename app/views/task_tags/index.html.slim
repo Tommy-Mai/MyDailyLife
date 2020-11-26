@@ -80,10 +80,10 @@
           .tasks-index-item id="tag#{tag.id}" data-id="#{tag.id}" data-name="#{tag.name}" data-tag-count="#{current_user.tasks.where(task_tag_id: tag.id).count}"
 
             .task-name
-              = link_to(tag.name, task_tag_path(tag))
+              = link_to(tag.name, "/tasks/new?task_tag=#{tag.id}")
 
             .tag_count
-              = "タスク #{current_user.tasks.where(task_tag_id: tag.id).count}件"
+              = link_to("タスク #{current_user.tasks.where(task_tag_id: tag.id).count}件", task_tag_path(tag))
 
             .task-menus.tag-index-menu
               p.js-modal-open_edit= link_to "" do

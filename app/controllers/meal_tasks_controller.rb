@@ -15,6 +15,7 @@ class MealTasksController < ApplicationController
   def create
     @meal_task = MealTask.new(meal_task_params)
     if @meal_task.save
+      mealtask_create
       flash[:notice] = "「#{@meal_task.name}」を登録"
       redirect_to meal_task_url(@meal_task)
     else

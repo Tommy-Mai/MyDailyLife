@@ -15,6 +15,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
+      othertask_create
       flash[:notice] = "「#{@task.name}」を登録"
       redirect_to task_url(@task)
     else

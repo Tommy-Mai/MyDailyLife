@@ -21,6 +21,6 @@
     - @tags.each do |tag|
       .tasks-index-item
         .task-name
-          = link_to(tag.name, "/meal_tags/#{tag.id}")
+          = link_to(tag.name, "/meal_tasks/new?meal_tag=#{tag.id}")
         .tag_count
-          = "タスク #{current_user.meal_tasks.where(meal_tag_id: tag.id).count}件"
+          = link_to("タスク #{current_user.meal_tasks.where(meal_tag_id: tag.id).count}件", "/meal_tags/#{tag.id}")

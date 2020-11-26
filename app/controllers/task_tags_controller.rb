@@ -22,6 +22,7 @@ class TaskTagsController < ApplicationController
   def create
     @task_tag = TaskTag.new(task_tag_params)
     if @task_tag.save
+      tag_create
       respond_to do |format|
         format.html { redirect_to task_tags_path }
         format.json
