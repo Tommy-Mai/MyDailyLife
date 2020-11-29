@@ -1,3 +1,4 @@
+.tag_changed
 .main.tasks-show
   .container
     .back-task-show.task_show_margin
@@ -16,7 +17,7 @@
       p
         = @meal_task.name
       div.description
-        = raw Rinku.auto_link(@meal_task.description)
+        = raw Rinku.auto_link(@meal_task.description, :all, 'target="_blank"')
       .task-footer
         .date
           = link_to "/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}" do
@@ -35,3 +36,42 @@
             i.fas.fa-pencil-alt
           = link_to @meal_task, :method => :delete, data: { confirm: "タスク「#{@meal_task.name}」を削除します。よろしいですか？"} do
             i.fas.fa-trash-alt
+
+    .comment-container
+      - @meal_comments.each do |content|
+        - if content.comment
+          .right_block_parent
+            .right_block id="comment#{content.id}"
+              .right_comment_block
+                .right_balloon.baloon_comment
+                  - content_comment = safe_join(content.comment.split("\n"),tag(:br))
+                  = raw Rinku.auto_link(content_comment, :all, 'target="_blank"')
+              .right_item_block
+                .comment_destroy_right
+                  = link_to "/meal_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "コメントを削除します。"} do
+                    i.fas.fa-trash-alt
+                .comment_time_right
+                  = l content.created_at, format: :hm
+
+        - if content.image.attached?
+          .left_block
+            .left_balloon.image_ballon
+              = image_tag content.image if content.image.attached?
+            .left_item_block
+                .comment_time_left
+                  = l content.created_at, format: :hm
+                .comment_destroy_left
+                  = link_to "/meal_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "コメントを削除します。"} do
+                    i.fas.fa-trash-alt
+
+    .comment_new-container
+      = form_with model: @meal_comment, local: true, enctype: "multipart/form-data", id: "comment-form" do |f|
+        .comment_image_form
+          i.fas.fa-image
+          = f.file_field :image, id: 'comment_image'
+            .comment_hidden= f.file_field :image
+        = f.text_area :comment, id: 'comment_text', placeholder: 'Aa', maxlength: 140
+        .comment_form_btn= f.button :type => "submit" do
+          i.fas.fa-paper-plane
+
+        = f.text_field :meal_task_id, name: "current_user_name", type:"hidden", value: @meal_task.id, id: 'current_task_id'

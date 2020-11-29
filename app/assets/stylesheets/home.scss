@@ -222,7 +222,7 @@ header {
 }
 
 .form input[type="submit"] {
-  background-color:$theme-color;
+  background-color: $theme-color;
   color: white;
   cursor: pointer;
   font-weight: 300;
@@ -239,11 +239,11 @@ header {
   clear: both;
 }
 
-.form input::placeholder {
+.form input::placeholder, .comment_new-container textarea::placeholder {
   color: $word-light-gray;
 }
 
-.form input:focus::placeholder {
+.form input:focus::placeholder, .comment_new-container textarea:focus::placeholder {
   color: transparent;
 }
 

@@ -5,7 +5,9 @@ class MealTasksController < ApplicationController
   before_action :check_params_date, only: [:new]
 
   def show
+    @user = current_user
     @tag = MealTag.find_by(id: @meal_task.meal_tag_id)
+    @meal_comments = MealComment.where(task_id: params[:id])
   end
 
   def new

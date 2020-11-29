@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :meal_tasks, :except => :index
   resources :tasks, :except => :index
   resources :task_tags, :except => [:new, :edit]
+  resources :meal_comments, :only => [:create, :destroy]
 
   resources :users, :except => :index
   get "users/:id/other_tasks" => "users#other_tasks"
@@ -21,6 +22,8 @@ Rails.application.routes.draw do
 
   get "/meal_tags/:id" => "meal_tags#show"
   get "/meal_tags" => "task_tags#meal_tags"
+
+  post "/meal_comments/upload_image" => "meal_comments#upload_image"
 
   resources :meal_tasks do
     collection do

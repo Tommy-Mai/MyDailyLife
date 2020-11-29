@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :tasks, foreign_key: "user_id", dependent: :destroy
   has_many :task_tags, foreign_key: "user_id", dependent: :destroy
   has_many :usage_histories, foreign_key: "user_id"
+  has_many :meal_comments, foreign_key: "user_id", dependent: :destroy
 
   has_one_attached :image_name
   before_create :default_image

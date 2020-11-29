@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.id == 1
       redirect_to user_url(@user), notice: "このアカウントは編集できません。"
-    elsif @user.update(user_params)
+    elsif @user.update(user_params_update)
       redirect_to user_url(@user), notice: "「#{@user.name}」の情報を更新しました。"
     else
       render :edit
@@ -52,6 +52,9 @@ class UsersController < ApplicationController
   def destroy
     user_last_logout_at
     @user = current_user
+    if @user.image_name.attached?
+      @user.image_name.purge
+    end
     @user.destroy
     reset_session
     redirect_to :new, notice: "ユーザー「#{@user.id}」を削除しました。"
@@ -63,10 +66,25 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :name,
       :email,
-      :admin,
       :password,
-      :password_confirmation
-    ).merge(admin: false, image_name: nil)
+      :password_confirmation,
+      :image_name
+    ).merge(admin: false)
+  end
+
+  def user_params_update
+    if image = params[:user][:image_name]
+      if @user.image_name.attached?
+        @user.image_name.purge
+      end
+    end
+    params.require(:user).permit(
+      :name,
+      :email,
+      :password,
+      :password_confirmation,
+      :image_name
+    )
   end
 
   def ensure_correct_user

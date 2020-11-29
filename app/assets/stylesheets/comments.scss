@@ -1,0 +1,251 @@
+// Place all the styles related to the meal_comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "color_folder";
+
+.comment-container {
+  padding: 20px 30px;
+  background-color: $theme-color-light;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  position: relative;
+  min-height: 100px;
+  height: 450px;
+  max-height: 350px;
+  z-index: 5;
+  line-height: 20px;
+  border-top:  2px solid $theme-color;
+  overflow: scroll;
+}
+
+.baloon_comment {
+  display: block;
+  color: white;
+}
+
+// コメント入力欄
+
+.comment_new-container {
+  padding: 10px;
+  background-color: $theme-color;
+  box-shadow: 0 2px 6px #c1ced7;
+  position: relative;
+  min-height: 80px;
+  z-index: 5;
+  line-height: 20px;
+  display: inline-block;
+  width: 570px;
+}
+
+.comment_image_form {
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#comment_image {
+  display: none;
+}
+
+.comment_new-container textarea {
+  float: left;
+  width: 460px;
+  border: 1px solid $theme-color;
+  background-color: white;
+  padding: 10px;
+  color: #57575f;
+  font-size: 16px;
+  letter-spacing: 2px;
+  border-radius: 15px;
+  min-height: 44px;
+  max-height: 150px;
+  resize: none;
+  overflow: scroll;
+}
+
+.comment_new-container button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+.comment_new-container i {
+  cursor: pointer;
+  line-height: 40px;
+  font-size: 24px;
+  color: white;
+  margin-left: 10px;
+}
+
+.comment_new-container i:hover {
+  color: $theme-color-dark;
+}
+
+// 右側からのコメント
+.right_block_parent {
+  display: grid;
+}
+
+.right_block {
+  margin-bottom: 10px;
+  display: inline-block;
+  float: right;
+  clear: both;
+}
+
+.right_comment_block {
+  display: block;
+  // height: 100%;
+}
+
+.right_comment_block a {
+  color: white;
+  text-decoration: underline white;
+}
+
+.right_comment_block a:hover {
+  color: $theme-color-dark;
+  text-decoration: underline $theme-color-dark;
+}
+
+.right_item_block {
+  clear: both;
+}
+
+.comment_time_right {
+  font-size: 12px;
+  color: $word-gray;
+  float: right;
+}
+
+.comment_destroy_right a {
+  font-size: 12px;
+  color: $word-gray;
+  float: right;
+  margin-left: 10px;
+}
+
+.comment_destroy_right a:hover {
+  color: $word-black;
+}
+
+.right_balloon {
+  position: relative;
+  background:$theme-color;
+  border: 1px solid  $theme-color;
+  padding: 6px 10px;
+  border-radius: 15px;
+  clear: both;
+  max-width: 500px;
+  float: right;
+}
+
+.right_balloon:after,
+.right_balloon:before {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.right_balloon:after {
+  border-color: rgba(200, 200, 200, 0);
+  border-left-color: $theme-color;
+  border-width: 6px;
+  margin-top: -6px;
+}
+
+.right_balloon:before {
+  border-color: rgba(200, 200, 200, 0);
+  border-left-color: $theme-color;
+  border-width: 6px;
+  margin-top: -6px;
+}
+
+.comment_hidden , #current_task_id {
+  display: none;
+}
+
+// 左側のコメント
+.left_block {
+  width: 100%;
+  display: grid;
+  margin-bottom: 10px;
+}
+
+.image_ballon img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  background-color: $theme-color;
+  border: 2px solid transparent;
+  border-radius: 15px;
+}
+
+.show_comment_image img {
+  height: 100px;
+  width: 100px;
+}
+
+.left_balloon {
+  position: relative;
+  border: 1px solid  transparent;
+  border-radius: 15px;
+  clear: both;
+  float: left;
+}
+
+// .left_balloon:after,
+// .left_balloon:before {
+//   right: 100%;
+//   top: 50%;
+//   border: solid transparent;
+//   content: " ";
+//   height: 0;
+//   width: 0;
+//   position: absolute;
+//   pointer-events: none;
+// }
+
+// .left_balloon:after {
+//   border-color: rgba(255, 255, 255, 0);
+//   border-right-color: $theme-color;
+//   border-width: 6px;
+//   margin-top: -6px;
+// }
+
+// .left_balloon:before {
+//   border-color: rgba(255, 255, 255, 0);
+//   border-right-color: $theme-color;
+//   border-width: 6px;
+//   margin-top: -6px;
+// }
+
+.left_item_block {
+  clear: both;
+}
+
+.comment_time_left {
+  font-size: 12px;
+  color: $word-gray;
+  float: left;
+  margin-left: 5px;
+}
+
+.comment_destroy_left a {
+  font-size: 12px;
+  color: $word-gray;
+  float: left;
+  margin-left: 10px;
+}
+
+.comment_destroy_left a:hover {
+  color: $word-black;
+}

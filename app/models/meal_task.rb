@@ -3,6 +3,7 @@
 class MealTask < ApplicationRecord
   belongs_to :user
   belongs_to :meal_tag, optional: true
+  has_many :meal_comments, foreign_key: "task_id", dependent: :destroy
 
   scope :recent, -> { order(date: :desc, time: :desc) }
 
