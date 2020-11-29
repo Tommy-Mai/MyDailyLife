@@ -69,14 +69,19 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :image_name
-    ).merge(admin: false)
+    ).merge(admin: false, image_exist: true)
   end
 
   def user_params_update
-    if image = params[:user][:image_name]
+    if params[:user][:image_name]
       if @user.image_name.attached?
         @user.image_name.purge
       end
+      params[:image_exist] = true
+    elsif @user.image_name.attached?
+      params[:image_exist] = true
+    else
+      params[:image_exist] = false
     end
     params.require(:user).permit(
       :name,
@@ -84,7 +89,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
       :image_name
-    )
+    ).merge(image_exist: params[:image_exist])
   end
 
   def ensure_correct_user

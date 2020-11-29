@@ -4,18 +4,18 @@ class MealCommentsController < ApplicationController
     if @meal_comment.save
       comment_create
       respond_to do |format|
-        format.html { redirect_to meal_task_path(@meal_comment.task_id) }
+        format.html { redirect_to meal_task_path(:id => @meal_comment.task_id) }
         format.json
       end
     else
-      render meal_task_path(@meal_comment.task_id)
+      render template: 'meal_tasks/show'
     end
   end
 
   def destroy
     @meal_comment = MealComment.find_by(id: params[:id])
     if @meal_comment.image.attached?
-      @meal_comment.image.purge
+      @meal_comment.image.purge_later
     end
     @meal_comment.destroy
   end
@@ -26,7 +26,8 @@ class MealCommentsController < ApplicationController
     params.permit(
       :comment,
       :task_id,
-      :image
+      :image,
+      :image_exist
     ).merge(user_id: current_user.id)
   end
 end

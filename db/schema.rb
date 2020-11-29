@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_11_26_075256) do
 
   create_table "meal_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "comment", limit: 140
-    t.string "image"
+    t.boolean "image_exist", default: false, null: false
     t.integer "user_id", null: false
     t.integer "task_id", null: false
     t.datetime "created_at", null: false
@@ -100,8 +100,8 @@ ActiveRecord::Schema.define(version: 2020_11_26_075256) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.string "email", null: false
+    t.boolean "image_exist", default: false, null: false
     t.string "password_digest", null: false
-    t.string "image_name"
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

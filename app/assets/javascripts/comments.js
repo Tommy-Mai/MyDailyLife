@@ -79,18 +79,20 @@ $(document).on('turbolinks:load', function(){
     e.preventDefault();
     let inputId = $('#current_task_id').val();
     let inputText = $('#comment_text').val();
-    console.log(inputText)
-
+    
     if (inputText) {
       console.log("text post");
+      var formText = new FormData();
+      formText.append('task_id', inputId);
+      formText.append('comment', inputText);
+      formText.append('image_exist', false);
       $.ajax({
         url: "/meal_comments",
         type: "POST",
-        data: {
-          comment: inputText,
-          task_id: inputId
-        },
-        dataType: "json"
+        data: formText,
+        dataType: "json",
+        processData: false,
+        contentType: false
       })
       .done(function(data) {
         $('#comment_text').val("");
@@ -105,6 +107,8 @@ $(document).on('turbolinks:load', function(){
         alert("エラー：コメントを登録できませんでした。\n・空白のコメントは登録できません。\n・141文字以上のタグは登録できません。");
       })
       .always(function() {
+        selectFile = [];
+        console.log(selectFile);
         $(".comment_form_btn input").prop('disabled', false);
       });
     };
@@ -125,6 +129,7 @@ $(document).on('turbolinks:load', function(){
       var formData = new FormData();
       formData.append('task_id', inputId);
       formData.append('image', blob);
+      formData.append('image_exist', true);
       $.ajax({
         url: "/meal_comments",
         type: "POST",
@@ -136,7 +141,6 @@ $(document).on('turbolinks:load', function(){
       .done(function(data) {
         let imageBallon = createImage(data);
         $(".comment-container").append(imageBallon);
-        selectFile = [];
         console.log(selectFile);
         $(".comment-container").scrollTop($(".comment-container")[0].scrollHeight);
       })
@@ -147,6 +151,8 @@ $(document).on('turbolinks:load', function(){
         alert("エラー：コメントを登録できませんでした。\n・空白のコメントは登録できません。\n・141文字以上のタグは登録できません。");
       })
       .always(function() {
+        selectFile = [];
+        console.log(selectFile);
         $(".comment_form_btn input").prop('disabled', false);
       });
     };
