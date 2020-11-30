@@ -49,7 +49,7 @@
           .right_block_parent
             .right_block id="comment#{content.id}"
               .right_comment_block
-                .right_balloon.baloon_comment
+                .right_balloon.balloon_comment
                   - content_comment = safe_join(content.comment.split("\n"),tag(:br))
                   = raw Rinku.auto_link(content_comment, :all, 'target="_blank"')
               .right_item_block

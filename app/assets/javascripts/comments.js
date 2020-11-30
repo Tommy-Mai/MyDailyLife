@@ -34,13 +34,13 @@ $(document).on('turbolinks:load', function(){
 
     let html = `<div class="right_block" id="comment${content.id}">
                   <div class="right_comment_block">
-                    <div class="right_balloon baloon_comment">
+                    <div class="right_balloon balloon_comment">
                       ${text}
                     </div>
                   </div>
                   <div class="right_item_block">
                     <div class="comment_destroy_right">
-                      <a data-confirm="コメントを削除します。" data-remote="true" rel="nofollow" data-method="delete" href="/meal_comments/${content.id}">
+                      <a data-confirm="コメントを削除します。" data-remote="true" rel="nofollow" data-method="delete" href="${whichComment}/${content.id}">
                         <i class="fas fa-trash-alt"></i>
                       </a>
                     </div>
@@ -65,7 +65,7 @@ $(document).on('turbolinks:load', function(){
                       </div>
                       <div class="right_item_block">
                         <div class="comment_destroy_right">
-                          <a data-confirm="画像を削除します。" data-remote="true" rel="nofollow" data-method="delete" href="/meal_comments/${content.id}">
+                          <a data-confirm="画像を削除します。" data-remote="true" rel="nofollow" data-method="delete" href="${whichComment}/${content.id}">
                             <i class="fas fa-trash-alt"></i>
                           </a>
                         </div>
@@ -112,9 +112,19 @@ $(document).on('turbolinks:load', function(){
     }
   });
 
+  var whichComment; // どのモデルのコメントか判断するための変数
+
   // 送信ボタンが押された時の処理
   $('#comment-form').on("submit", function(e) {
     e.preventDefault();
+
+    // どのコメントのイベントか判断する処理
+    if (location.pathname.includes('meal_tasks')) {
+      whichComment = "/meal_comments"
+    } else {
+      whichComment = "/task_comments"
+    };
+
     // コメントを追加するタスクのidを取得
     let inputId = $('#current_task_id').val();
     // 入力されたコメントを取得
@@ -137,7 +147,7 @@ $(document).on('turbolinks:load', function(){
       formText.append('comment', inputText);
       formText.append('image_exist', false);
       $.ajax({
-        url: "/meal_comments",
+        url: whichComment,
         type: "POST",
         data: formText,
         dataType: "json",
@@ -177,7 +187,7 @@ $(document).on('turbolinks:load', function(){
       formData.append('image', blob);
       formData.append('image_exist', true);
       $.ajax({
-        url: "/meal_comments",
+        url: whichComment,
         type: "POST",
         data: formData,
         dataType: "json",

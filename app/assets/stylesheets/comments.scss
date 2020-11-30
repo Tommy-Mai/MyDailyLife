@@ -18,7 +18,7 @@
   overflow: scroll;
 }
 
-.baloon_comment {
+.balloon_comment {
   display: block;
   color: white;
 }
@@ -49,7 +49,7 @@
 }
 
 .comment_image_form {
-  display: inline-block;
+  display: block;
   float: left;
   margin-right: 10px;
   cursor: pointer;
@@ -126,7 +126,7 @@
 
 .right_block {
   margin-bottom: 10px;
-  display: inline-block;
+  display: block;
   float: right;
   clear: both;
 }

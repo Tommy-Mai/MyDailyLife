@@ -1,6 +1,6 @@
-class MealComment < ApplicationRecord
+class TasksComment < ApplicationRecord
   has_one :user
-  has_one :meal_task
+  has_one :task
 
   has_one_attached :image, dependent: :destroy
 
