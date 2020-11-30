@@ -247,6 +247,10 @@ header {
   color: transparent;
 }
 
+:focus {
+  outline: none;
+}
+
 /* フラッシュ ================================ */
 .flash {
   padding: 10px 0;

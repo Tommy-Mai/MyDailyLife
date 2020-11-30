@@ -2,7 +2,7 @@ document.querySelector('#comment<%= @meal_comment.id %>').style.display = 'none'
 
 var message = document.createElement('div');
 message.className = 'flash tag_created';
-message.innerText = 'コメントを削除しました。'
+message.innerText = '削除しました。'
 document.querySelector('.tag_changed').insertAdjacentElement('afterbegin', message);
 setTimeout(function(){
   $('.tag_created').fadeOut('slow')

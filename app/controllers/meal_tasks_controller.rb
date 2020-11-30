@@ -7,7 +7,11 @@ class MealTasksController < ApplicationController
   def show
     @user = current_user
     @tag = MealTag.find_by(id: @meal_task.meal_tag_id)
-    @meal_comments = MealComment.where(task_id: params[:id])
+    @meal_comments = MealComment.where(task_id: params[:id]).order("id")
+    unless @meal_comments.nil?
+      @date_x = @meal_comments.first
+      @date_x = @date_x.created_at.to_date unless @date_x.nil?
+    end
   end
 
   def new

@@ -7,8 +7,8 @@
         = link_to("← 「#{tag_name.name}」一覧に戻る", "/meal_tags/#{@meal_task.meal_tag_id}")
       - elsif params[:user]
         = link_to("← ユーザーページに戻る", "/users/#{@meal_task.user_id}")
-      / - else
-      /   = link_to("← 日別一覧に戻る", "/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}")
+      - else
+        = link_to("← 日別一覧に戻る", "/calendar/show?start_date=#{@meal_task.date.strftime('%Y-%m-%d')}")
     .tasks-show-item
       .task-right
         .task-tag
@@ -38,7 +38,13 @@
             i.fas.fa-trash-alt
 
     .comment-container
+      - unless @date_x.nil?
+        .comment_date id="comment_date#{@date_x}"= @date_x
       - @meal_comments.each do |content|
+        - unless content.created_at.to_date == @date_x
+          - @date_x = content.created_at.to_date
+          .comment_date id="comment_date#{@date_x}"= @date_x
+
         - if content.comment
           .right_block_parent
             .right_block id="comment#{content.id}"
@@ -54,17 +60,19 @@
                   = l content.created_at, format: :hm
 
         - if content.image.attached?
-          .left_block
-            .left_balloon.image_ballon
-              = image_tag content.image if content.image.attached?
-            .left_item_block
-                .comment_time_left
-                  = l content.created_at, format: :hm
-                .comment_destroy_left
-                  = link_to "/meal_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "コメントを削除します。"} do
-                    i.fas.fa-trash-alt
+          .right_block_parent
+            .right_block id="comment#{content.id}"
+              .right_balloon#image_ballon
+                = image_tag content.image if content.image.attached?
+              .right_item_block
+                  .comment_destroy_right
+                    = link_to "/meal_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "画像を削除します。"} do
+                      i.fas.fa-trash-alt
+                  .comment_time_right
+                    = l content.created_at, format: :hm
 
     .comment_new-container
+      / .text-area_disabled 画像選択中
       = form_with model: @meal_comment, local: true, enctype: "multipart/form-data", id: "comment-form" do |f|
         .comment_image_form
           i.fas.fa-image
