@@ -1,7 +1,8 @@
-class CreateTaskTags < ActiveRecord::Migration[5.2]
+class CreateUserMemos < ActiveRecord::Migration[5.2]
   def change
-    create_table :task_tags do |t|
+    create_table :user_memos do |t|
       t.string :name, :null => false, :limit => 30
+      t.text :description
       t.integer :user_id, :null => false
       t.boolean :protected, :null => false, :default => false
 

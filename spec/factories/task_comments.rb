@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :tasks_comment do
+  factory :task_comment do
     comment { "MyString" }
     image_exist { false }
     user_id { 1 }

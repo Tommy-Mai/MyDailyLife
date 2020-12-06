@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_071833) do
+ActiveRecord::Schema.define(version: 2020_11_30_082733) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_071833) do
     t.boolean "image_exist", default: false, null: false
     t.integer "user_id", null: false
     t.integer "task_id", null: false
+    t.boolean "protected", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_meal_comments_on_task_id"
@@ -57,13 +58,27 @@ ActiveRecord::Schema.define(version: 2020_11_30_071833) do
     t.string "with_whom", limit: 30
     t.string "where", limit: 30
     t.time "time", null: false
+    t.boolean "protected", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "task_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "comment", limit: 140
+    t.boolean "image_exist", default: false, null: false
+    t.integer "user_id", null: false
+    t.integer "task_id", null: false
+    t.boolean "protected", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_comments_on_task_id"
+    t.index ["user_id"], name: "index_task_comments_on_user_id"
   end
 
   create_table "task_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.integer "user_id", null: false
+    t.boolean "protected", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,19 +92,9 @@ ActiveRecord::Schema.define(version: 2020_11_30_071833) do
     t.string "with_whom", limit: 30
     t.string "where", limit: 30
     t.time "time", null: false
+    t.boolean "protected", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "tasks_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "comment", limit: 140
-    t.boolean "image_exist", default: false, null: false
-    t.integer "user_id", null: false
-    t.integer "task_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_tasks_comments_on_task_id"
-    t.index ["user_id"], name: "index_tasks_comments_on_user_id"
   end
 
   create_table "usage_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -108,12 +113,22 @@ ActiveRecord::Schema.define(version: 2020_11_30_071833) do
     t.integer "memo_create_count", default: 0
   end
 
+  create_table "user_memos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", limit: 30, null: false
+    t.text "description"
+    t.integer "user_id", null: false
+    t.boolean "protected", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.string "email", null: false
     t.boolean "image_exist", default: false, null: false
     t.string "password_digest", null: false
     t.boolean "admin", default: false, null: false
+    t.boolean "protected", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_login_at"

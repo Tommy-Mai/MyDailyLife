@@ -1,5 +1,3 @@
-// const { data } = require("jquery");
-
 $(document).on('turbolinks:load', function(){
   // ここから日付をYYYY-MM-DDの書式で返すメソッド
   function formatDate(dt) {

@@ -28,7 +28,6 @@ class TaskTagsController < ApplicationController
         format.json
       end
     else
-      flash[:notice] = "エラー：タグを更新できませんでした。\n・空白のタグは作成できません。\n・同じ名前のタグは登録できません。"
       render("/task_tags/new")
     end
   end
@@ -40,7 +39,6 @@ class TaskTagsController < ApplicationController
         format.json
       end
     else
-      flash[:notice] = "エラー：タグを更新できませんでした。\n・空白のタグは作成できません。\n・同じ名前のタグは登録できません。"
       render("/task_tags/edit")
     end
   end

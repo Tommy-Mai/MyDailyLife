@@ -40,6 +40,12 @@ ja:
         name: タグ名
         created_at: 登録日時
         updated_at: 更新日時
+      user_memo:
+        id: ID
+        name: タイトル
+        description: 詳細
+        created_at: 登録日時
+        updated_at: 更新日時
       user:
         id: ID
         admin: 管理者権限

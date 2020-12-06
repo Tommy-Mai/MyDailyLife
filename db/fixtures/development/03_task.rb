@@ -11,6 +11,7 @@ MealTask.seed_once(
     with_whom: "任意で記入",
     where: "任意で記入",
     time: Date.current,
-    date: Date.current
+    date: Date.current,
+    protected: true
   }
 )

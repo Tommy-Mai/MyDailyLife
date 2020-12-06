@@ -9,7 +9,7 @@
           = link_to("その他", task_tags_path)
         - else
           = link_to("その他", new_task_path)
-      li= link_to("メモ", "/")
+      li= link_to("メモ", "/users/#{@user.id}/memos")
       i.fas.fa-search-plus#searchtoggle_button
 
     #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|

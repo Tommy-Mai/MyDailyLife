@@ -9,6 +9,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :with_whom, :limit => 30
       t.string :where, :limit => 30
       t.time :time, :null => false
+      t.boolean :protected, :null => false, :default => false
 
       t.timestamps
     end

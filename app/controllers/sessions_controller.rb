@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     user_last_logout_at
+    test_user_logout
     reset_session
     redirect_to root_path, notice: 'ログアウトしました。'
   end
@@ -30,6 +31,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:email, :password)
+    params.permit(:email, :password)
   end
 end

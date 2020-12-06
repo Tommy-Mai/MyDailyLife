@@ -1,0 +1,77 @@
+.tag_changed
+.main.user-show
+  .memo_parent
+    .modal.js-modal_new
+      .modal__bg.js-modal-close_memo-new
+      .modal__content
+        #modal_close_btn_memo-new.back-task-show.js-modal-close_memo-new
+          = link_to("×","")
+        h1 新規メモを作成する
+        #memo_input= form_with model: @user_memo, local: true do |f|
+          .form
+            #modal_body_memo-new.form-body
+              = f.label :name, "タイトル"
+              = f.text_field :name, id: 'memo_name'
+              = f.label :description, "詳細"
+              = f.text_area :description, id: 'memo_description'
+              .tasktag_form_btn= f.submit nil
+
+    .modal.js-modal_edit
+      .modal__bg.js-modal-close_memo-edit
+      .modal__content
+        #modal_close_btn_memo-edit.back-task-show.js-modal-close_memo-edit
+          = link_to("×","")
+        h1 メモを編集する
+        #memo_input_memo-edit= form_with model: @user_memo, local: true do |f|
+          .form
+            #modal_body_memo-edit.form-body
+              = f.label :name, "タイトル"
+              .edit_label= f.text_field :name, id: 'memo_name_edit'
+              = f.label :description, "詳細"
+              .edit_label_description= f.text_area :description, id: 'memo_description_edit'
+              .tasktag_form_btn= f.submit "更新する"
+
+  .container
+    = render partial: 'common_show', locals: { user: @user}
+
+    ul.user-tabs.search_tabs
+      li= link_to("食事関連", "/users/#{@user.id}")
+      li= link_to("その他", "/users/#{@user.id}/other_tasks")
+      li.active= link_to("メモ", "/users/#{@user.id}/memos")
+      li#new_memo_trigger= link_to("新規メモ +", "")
+      i.fas.fa-search-plus#searchtoggle_button
+
+    #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|
+      .form.search_form
+        .search_heading メモ検索
+        .form-body.search_form_body
+          = f.label :name_cont, 'タイトル'
+          = f.search_field :name_cont
+          = f.label :description_cont, '詳細'
+          = f.search_field :description_cont
+          = f.submit
+
+    .memo_append-point
+      - @memos.each do |memo|
+        .edit_point
+          .memo_container id="memoItem#{memo.id}" data-id="#{memo.id}" data-name="#{memo.name}" data-description="#{memo.description}"
+            .memo-index-item
+
+              .memo-name
+                = memo.name
+              .memo_description-trigger id="#{memo.id}"
+                i.fas.fa-bars
+            
+            .memo-description-item id="memo#{memo.id}"
+              .memo-description
+                - memo_description = safe_join(memo.description.split("\n"),tag(:br))
+                = raw Rinku.auto_link(memo_description, :all, 'target="_blank"')
+              .memo_trash
+                p.js-modal-open_memo-edit= link_to "" do
+                  i.fas.fa-pencil-alt
+                = link_to "/user_memos/#{memo.id}", :method => :delete, :remote => true, data: { confirm: "メモを削除してよろしいですか？"} do
+                  i.fas.fa-trash-alt
+
+  .mb-3
+    #paginate_memo= paginate @memos
+    .total_memos= "全#{@memos.total_count}件"

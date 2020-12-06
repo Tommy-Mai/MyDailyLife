@@ -21,9 +21,10 @@
   left: 50%;
   padding: 40px;
   position: absolute;
-  margin-top: 290px;
+  margin-top: 406px;
   transform: translate(-50%,-50%);
   width: 570px;
+  border-radius: 4px;
 }
 .modal__content .form {
   box-shadow: none;
@@ -39,18 +40,18 @@
   width: 100%;
 }
 
-#modal_body_new, #modal_body_edit {
+#modal_body_new, #modal_body_edit, #modal_body_memo-new, #modal_body_memo-edit {
   padding: 0;
 }
 
-#modal_close_btn, #modal_close_btn_edit {
+#modal_close_btn, #modal_close_btn_edit, #modal_close_btn_memo-new, #modal_close_btn_memo-edit {
   position: absolute;
   display: inline-block;
   left: 510px;
   line-height: 100%;
 }
 
-#modal_close_btn a, #modal_close_btn_edit a {
+#modal_close_btn a, #modal_close_btn_edit a, #modal_close_btn_memo-new a, #modal_close_btn_memo-edit a {
   font-size: 30px;
   float: right;
   padding: 0;

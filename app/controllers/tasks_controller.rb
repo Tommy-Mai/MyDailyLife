@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   def show
     @tag = TaskTag.find_by(id: @task.task_tag_id)
-    @task_comments = TasksComment.where(task_id: params[:id]).order("id")
+    @task_comments = TaskComment.where(task_id: params[:id]).order("id")
     unless @task_comments.nil?
       @date_x = @task_comments.first
       @date_x = @date_x.created_at.to_date unless @date_x.nil?

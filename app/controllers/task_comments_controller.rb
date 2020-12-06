@@ -1,6 +1,6 @@
 class TaskCommentsController < ApplicationController
   def create
-    @task_comment = TasksComment.new(task_comment_params)
+    @task_comment = TaskComment.new(task_comment_params)
     if @task_comment.save
       comment_create
       respond_to do |format|
@@ -13,7 +13,7 @@ class TaskCommentsController < ApplicationController
   end
 
   def destroy
-    @task_comment = TasksComment.find_by(id: params[:id])
+    @task_comment = TaskComment.find_by(id: params[:id])
     if @task_comment.image.attached?
       @task_comment.image.purge_later
     end

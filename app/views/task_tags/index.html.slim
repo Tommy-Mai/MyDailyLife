@@ -62,7 +62,6 @@
     ul#index_tabs.user-tabs.search_tabs
       li= link_to("食事関連", "/meal_tags")
       li.active#other_pop_trigger= link_to("その他", task_tags_path)
-      li= link_to("メモ", "/")
       i.fas.fa-search-plus#searchtoggle_button
 
     #searchtoggle_menu= search_form_for @q do |f|

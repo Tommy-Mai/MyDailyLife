@@ -6,12 +6,20 @@ Rails.application.routes.draw do
   resources :task_tags, :except => [:new, :edit]
   resources :meal_comments, :only => [:create, :destroy]
   resources :task_comments, :only => [:create, :destroy]
+  resources :user_memos, :only => [:create, :update, :destroy]
 
   resources :users, :except => :index
   get "users/:id/other_tasks" => "users#other_tasks"
+  get "users/:id/memos" => "users#memos"
+
+  # 存在しないビューの代わりに表示するページを指定
   get "/meal_tasks" => "users#show"
   get "/tasks" => "users#other_tasks"
-
+  get "/user_memos" => "users#memos"
+  get "/user_memos/:id" => "users#memos"
+  get "/memos" => "users#memos"
+  get "/memos/:id" => "users#memos"
+  
   namespace :admin do
     get 'users/index'
     delete 'users/:id/destroy' => "users#destroy"
@@ -23,8 +31,6 @@ Rails.application.routes.draw do
 
   get "/meal_tags/:id" => "meal_tags#show"
   get "/meal_tags" => "task_tags#meal_tags"
-
-  # post "/meal_comments/upload_image" => "meal_comments#upload_image"
 
   resources :meal_tasks do
     collection do

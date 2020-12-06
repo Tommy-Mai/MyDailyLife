@@ -1,17 +1,4 @@
 $(document).on('turbolinks:load', function(){
-  // ここから検索窓トグル
-  $('#searchtoggle_button').on("click",function() {
-    $('#searchtoggle_menu').slideToggle();
-    if($(this).hasClass('fas fa-search-plus')){
-      $(this).removeClass('fas fa-search-plus')
-      $(this).addClass('fas fa-search-minus')
-    } else {
-      $(this).removeClass('fas fa-search-minus')
-      $(this).addClass('fas fa-search-plus')
-    };
-  });
-  // ここまで検索窓トグル
-
   // ここからタグ新規作成モーダル
   $('.js-modal-open_new').on('click',function(){
     $('.js-modal_new').fadeIn();
@@ -45,8 +32,8 @@ $(document).on('turbolinks:load', function(){
   };
 
   function buildHTML(tag) {
-    let html2 =`<div class="flash tag_created"> 新規タグ「${tag.name}」を登録しました。</div>`
-    return html2;
+    let flash =`<div class="flash tag_created"> 新規タグ「${tag.name}」を登録しました。</div>`
+    return flash;
   };
 
   $("#tasktag_input").on("submit", function(e) {
@@ -62,9 +49,9 @@ $(document).on('turbolinks:load', function(){
       $("#task_name").val("");
       $('.js-modal_new').fadeOut();
       let html = createHTML(data);
-      let html2 = buildHTML(data);
+      let flash = buildHTML(data);
       $(".task_tags_index").prepend(html);
-      $(".tag_changed").append(html2);
+      $(".tag_changed").append(flash);
       setTimeout(function(){
         $('.tag_created').fadeOut('slow')
       } ,2000);
@@ -94,16 +81,16 @@ $(document).on('turbolinks:load', function(){
 
   // ここからタグ編集Ajax
   $('.js-modal-open_edit').on("click", function() {
-    $(this).parents(".tasks-index-item").addClass('InlineEdit-active')
+    $(this).parents(".tasks-index-item").addClass('InlineEdit-active');
     let tagId = $(this).parents(".tasks-index-item").data('id');
     const getValues = document.getElementById(`tag${tagId}`);
     var values = {
       id:  getValues.dataset.id,
       name: getValues.dataset.name,
       count: getValues.dataset.tagCount
-    }
+    };
 
-    $('.edit_label input').attr('placeholder', `${values.name}`)
+    $('.edit_label input').var(`${values.name}`);
 
     function reBuild(tag, values) {
       var html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count=${values.count}"> 
@@ -123,11 +110,11 @@ $(document).on('turbolinks:load', function(){
                       </div>
                     </div>`
       return html
-    }
+    };
 
     function updateHTML(tag) {
-      let html2 =`<div class="flash tag_created"> タグ「${tag.name}」を更新しました。</div>`
-      return html2;
+      let flash =`<div class="flash tag_created"> タグ「${tag.name}」を更新しました。</div>`
+      return flash;
     };
 
     $("#tasktag_input_edit").on("submit", function(e) {
@@ -136,9 +123,9 @@ $(document).on('turbolinks:load', function(){
       $.ajax({
         url: `/task_tags/${values.id}`,
         type: "PUT",
-        data:{
+        data: {
           id: values.id,
-          name: inputText,
+          name: inputText
         },
         dataType: "json"
       })
@@ -146,14 +133,14 @@ $(document).on('turbolinks:load', function(){
         $("#task_name_edit").val("");
         $('.js-modal_edit').fadeOut();
         let html = reBuild(data, values);
-        let html2 = updateHTML(data);
+        let flash = updateHTML(data);
         $('.InlineEdit-active').parent('.edit_point').addClass('mark');
         $('.mark').empty();
         $('.mark').prepend(html);
         $(".edit_point").removeClass('mark');
 
         // タグ更新のflash表示
-        $(".tag_changed").append(html2);
+        $(".tag_changed").append(flash);
         setTimeout(function(){
           $('.tag_created').fadeOut('slow')
         } ,2000);

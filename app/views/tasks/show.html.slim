@@ -79,7 +79,6 @@
                     = l content.created_at, format: :hm
 
     .comment_new-container
-      / .text-area_disabled 画像選択中
       = form_with model: @task_comment, local: true, enctype: "multipart/form-data", id: "comment-form" do |f|
         .comment_image_form
           i.fas.fa-image

@@ -34,6 +34,12 @@ class UsersController < ApplicationController
     @tasks = @q.result(distinct: true).page(params[:page]).per(5).recent
   end
 
+  def memos
+    @user = current_user
+    @q = current_user.user_memos.ransack(params[:q])
+    @memos = @q.result(distinct: true).page(params[:page]).per(10).recent
+  end
+
   def edit
     @user = current_user
   end
@@ -51,13 +57,19 @@ class UsersController < ApplicationController
 
   def destroy
     user_last_logout_at
+    test_user_logout
     @user = current_user
-    if @user.image_name.attached?
-      @user.image_name.purge
+    if @user.id == 1
+      reset_session
+      redirect_to root_path, notice: "ログアウトしました。"
+    else
+      if @user.image_name.attached?
+        @user.image_name.purge
+      end
+      @user.destroy
+      reset_session
+      redirect_to root_path, notice: "ユーザー「#{@user.name}」を削除しました。"
     end
-    @user.destroy
-    reset_session
-    redirect_to :new, notice: "ユーザー「#{@user.id}」を削除しました。"
   end
 
   private
