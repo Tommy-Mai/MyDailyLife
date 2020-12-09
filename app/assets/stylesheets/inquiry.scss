@@ -1,0 +1,41 @@
+@import "color_folder";
+
+.modal__content .contact_h1 h1 {
+  color: $word-black;
+  font-weight: 600;
+}
+
+#contact_btn {
+  background-color: $contact_btn;
+  border-radius: 3px 3px 0 0;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  min-width: 120px;
+  height: 38px;
+  line-height: 38px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  z-index: 15;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  cursor: pointer;
+}
+
+#contact_btn span {
+  font-weight: 500;
+}
+
+.inquiry_information {
+  color: $word-gray;
+  margin-bottom: 20px;
+}
+
+.inquiry_information a {
+  color: $theme-color-dark;
+  font-weight: 500;
+}
+
+.inquiry_information a:hover{
+  color: $theme-color;
+}

@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
 
   before_action :login_required
   before_action :time_out
+  before_action :set_inquiry
 
   private
 
@@ -32,6 +33,11 @@ class ApplicationController < ActionController::Base
       redirect_to user_path(session[:user_id])
     end
   end
+
+  def set_inquiry
+    @inquiry = Inquiry.new
+  end
+  
 
   # 以下、Activity logging
 

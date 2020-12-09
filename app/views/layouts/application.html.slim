@@ -42,4 +42,5 @@ html
         = flash[:notice]
 
     = yield
+    = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
     script src="https://unpkg.com/swiper/swiper-bundle.min.js"

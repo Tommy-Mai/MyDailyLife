@@ -46,5 +46,7 @@ Rails.application.routes.draw do
   get "/policy" => "home#policy"
   get "/contact" => "home#contact"
   get "/faqs" => "home#faqs"
+  post "/inquiry" => "home#send_inquiry"
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

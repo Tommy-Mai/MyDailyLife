@@ -1,0 +1,17 @@
+| お問い合わせがありました。
+
+ul
+  li
+    | 名前: 
+    = @name
+  - unless @email.nil?
+    li
+      | メールアドレス: 
+      = @email
+  - unless @user_id.nil?
+    li
+      | ユーザー ID:
+      = @user_id
+  li
+    | お問い合わせ内容
+    = simple_format(@contents)

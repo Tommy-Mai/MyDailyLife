@@ -106,6 +106,10 @@ gem 'rack-dev-mark'
 # font-awesome
 gem 'font-awesome-sass'
 
+# デバック用gem
+gem 'pry-rails'
+gem 'pry-byebug'
+
 # カレンダー作成gem
 gem 'simple_calendar', '~> 2.0'
 
@@ -123,3 +127,6 @@ gem 'ransack'
 
 # ページネーションのためのgem
 gem 'kaminari'
+
+# 環境変数管理gem
+gem 'dotenv-rails'
