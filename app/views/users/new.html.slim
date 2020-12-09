@@ -1,10 +1,10 @@
-.main.users-new
+.users-new
   .container
     .form-heading 新規ユーザー登録
     = render partial: 'form', locals: { user: @user}
 
     .test-user-login_btn
-      = form_with url: login_path, local:true do |f|
+      = form_with url: login_path, scope: :session, local:true do |f|
         .test-user_form
           = f.hidden_field :email, value: 'sample@example.com'
           = f.hidden_field :password, value: 'test'

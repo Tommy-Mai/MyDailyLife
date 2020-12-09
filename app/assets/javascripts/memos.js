@@ -21,6 +21,7 @@ $(document).on('turbolinks:load', function(){
   // ここまでメモ新規作成モーダル
 
   // ここから詳細表示トグル
+  $('.memo-description-item').hide();
   $(document).on("click", '.memo_description-trigger', function() {
     var showID = $(this).attr("id");
     if($(this).children("i").hasClass('fas fa-bars')){
@@ -46,10 +47,10 @@ $(document).on('turbolinks:load', function(){
                       ${memo.name}
                     </div>
                     <div class="memo_description-trigger" id="${memo.id}">
-                      <i class="fas fa-minus"></i>
+                      <i class="fas fa-bars"></i>
                     </div>
                   </div>
-                  <div class="memo-description-item" id="memo${memo.id}" style="display: block;">
+                  <div class="memo-description-item" id="memo${memo.id}" style="display: none;">
                     <div class="memo-description">
                       ${text}
                     </div>

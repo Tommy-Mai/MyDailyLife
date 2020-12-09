@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
   get "/about" => "home#about"
   get "/policy" => "home#policy"
-  get "/contact" => "home#contact"
+  get "/privacy_policy" => "home#privacy_policy"
   get "/faqs" => "home#faqs"
   post "/inquiry" => "home#send_inquiry"
   

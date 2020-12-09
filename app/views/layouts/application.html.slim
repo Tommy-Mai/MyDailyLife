@@ -36,11 +36,22 @@ html
           li= link_to '新規登録', new_user_path
           li= link_to 'ログイン', login_path
 
-
     - if flash[:notice]
       .flash.time-limit
         = flash[:notice]
+    .tag_changed
 
-    = yield
-    = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
-    script src="https://unpkg.com/swiper/swiper-bundle.min.js"
+    .main
+      = yield
+      = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
+      script src="https://unpkg.com/swiper/swiper-bundle.min.js"
+
+      #footer
+        .footer-container
+          .footer-block
+            h3 ご利用ガイド 
+            a href="/faqs" よくある質問
+          .footer-block
+            h3 サイト情報
+            a href="/policy" 利用規約
+            a href="/privacy_policy" プライバシーポリシー

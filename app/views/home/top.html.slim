@@ -1,36 +1,35 @@
-.main
-  .swiper-container
-    .swiper-wrapper
-      .swiper-slide
-        = image_tag 'top01c.jpg'
-      .swiper-slide
-        = image_tag 'top02c.jpg'
-      .swiper-slide
-        = image_tag 'top03c.jpg'
-      .swiper-slide
-        = image_tag 'top04c.jpg'
-      .swiper-slide
-        = image_tag 'top05c.jpg'
-  / .top-message
-  /   h2 MyDailyLife
-  /   p MyDailyLifeであなたの毎日を記録。
-  .top-about_MDL
-    h3 MyDailyLifeとは?
-    p 毎日の食事や達成した出来事などを
-    p タスクとして記録できるアプリです。
-    p タグや日付別にタスクを一覧で見る事ができる他、
-    p キーワードでの検索も可能なので、タスクを探すのも簡単！
-    .top-about_btn= link_to "もっと詳しく見る", "/about"
+.swiper-container
+  .swiper-wrapper
+    .swiper-slide
+      = image_tag 'top01c.jpg'
+    .swiper-slide
+      = image_tag 'top02c.jpg'
+    .swiper-slide
+      = image_tag 'top03c.jpg'
+    .swiper-slide
+      = image_tag 'top04c.jpg'
+    .swiper-slide
+      = image_tag 'top05c.jpg'
+/ .top-message
+/   h2 MyDailyLife
+/   p MyDailyLifeであなたの毎日を記録。
+.top-about_MDL
+  h3 MyDailyLifeとは?
+  p 毎日の食事や達成した出来事などを
+  p タスクとして記録できるアプリです。
+  p タグや日付別にタスクを一覧で見る事ができる他、
+  p キーワードでの検索も可能なので、タスクを探すのも簡単！
+  .top-about_btn= link_to "もっと詳しく見る", "/about"
 
-  .test-user_login
-    p.test-login_guide アカウント作成不要、ワンクリックでお試し可能！
-    #test-login_btn= form_with url: login_path, local:true do |f|
-      .form.test-user_form
-        = f.hidden_field :email, value: 'sample@example.com'
-        = f.hidden_field :password, value: 'test'
-        = f.submit 'テストユーザーとしてログイン'
-    .test-login_notice
-      p ＊テストユーザーでログイン中に作成したタスクなどはログアウト時に削除されます。
-      p ＊テストユーザーの編集・削除はできません。
+.test-user_login
+  p.test-login_guide アカウント作成不要、ワンクリックでお試し可能！
+  #test-login_btn= form_with url: login_path, scope: :session, local:true do |f|
+    .form.test-user_form
+      = f.hidden_field :email, value: 'sample@example.com'
+      = f.hidden_field :password, value: 'test'
+      = f.submit 'テストユーザーとしてログイン'
+  .test-login_notice
+    p ＊テストユーザーでログイン中に作成したタスクなどはログアウト時に削除されます。
+    p ＊テストユーザーの編集・削除はできません。
 
 / oncontextmenu="return false;" onselectstart="return false;"
