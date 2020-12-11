@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       user_last_login_at
       session_last_activity_at
+      user_loggedin_true
       redirect_to user_url(@user), notice: "ユーザー「#{@user.name}」を登録しました。"
     else
       render :new

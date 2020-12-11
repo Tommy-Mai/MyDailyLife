@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   helper_method :usage_histories
   # テストユーザーがログアウトする時にデフォルトのタグ・投稿以外を削除するメソッド
   helper_method :test_user_reset
+  # 多重ログイン防止用真偽値の変更用メソッド
+  helper_method :user_loggedin_false
+  helper_method :user_loggedin_true
 
   before_action :login_required
   before_action :time_out
@@ -74,6 +77,25 @@ class ApplicationController < ActionController::Base
     session[:last_activity_at] = Time.current
   end
 
+  def user_loggedin_false
+    if current_user
+      current_user.update(
+        last_activity_at: Time.current,
+        logged_in: false
+      )
+    end
+  end
+
+  def user_loggedin_true
+    if current_user
+      current_user.update(
+        last_activity_at: Time.current,
+        logged_in: true
+      )
+    end
+  end
+  
+
   def time_out
     if current_user
       if session[:last_activity_at].to_time.since(30.minutes) > Time.current
@@ -81,6 +103,9 @@ class ApplicationController < ActionController::Base
         # アクセス履歴のアクション回数とその日時を更新
         usage_histories.update(
           action_count: usage_histories.action_count + 1,
+          last_activity_at: Time.current
+        )
+        current_user.update(
           last_activity_at: Time.current
         )
       else
@@ -118,10 +143,12 @@ class ApplicationController < ActionController::Base
   end
 
   def test_user_reset
-    if current_user.id == 1
-      current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
-      current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
-      current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
+    if current_user
+      if current_user.id == 1
+        current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
+        current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
+        current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
+      end
     end
   end
 end
