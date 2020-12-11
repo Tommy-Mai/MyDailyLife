@@ -14,7 +14,12 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    if current_user.task_tags.exists?
+      @task = Task.new
+    else
+      flash[:notice] = "その他タグを作成してください。"
+      redirect_to task_tags_url
+    end
   end
 
   def create

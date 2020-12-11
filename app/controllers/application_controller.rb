@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   # 現在記録中のアクセス履歴呼び出しメソッド
   helper_method :usage_histories
   # テストユーザーがログアウトする時にデフォルトのタグ・投稿以外を削除するメソッド
-  helper_method :test_user_logout
+  helper_method :test_user_reset
 
   before_action :login_required
   before_action :time_out
@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
           timeout: true,
           timeout_time: Time.current
         )
-        test_user_logout
+        test_user_reset
         reset_session
         flash[:notice] = "一定時間操作がなかったため、ログアウトしました。"
         redirect_to :login
@@ -117,7 +117,7 @@ class ApplicationController < ActionController::Base
     usage_histories.update(memo_create_count: usage_histories.memo_create_count + 1)
   end
 
-  def test_user_logout
+  def test_user_reset
     if current_user.id == 1
       current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
       current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?

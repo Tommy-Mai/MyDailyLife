@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
+      test_user_reset
       user_last_login_at
       session_last_activity_at
       redirect_to user_url(user), notice: 'ログインしました。'
@@ -23,7 +24,7 @@ class SessionsController < ApplicationController
 
   def destroy
     user_last_logout_at
-    test_user_logout
+    test_user_reset
     reset_session
     redirect_to root_path, notice: 'ログアウトしました。'
   end

@@ -57,10 +57,10 @@ class UsersController < ApplicationController
 
   def destroy
     user_last_logout_at
-    test_user_logout
     @user = current_user
     if @user.id == 1
       reset_session
+      test_user_reset
       redirect_to root_path, notice: "ログアウトしました。"
     else
       if @user.image_name.attached?

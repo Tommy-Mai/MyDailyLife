@@ -67,6 +67,16 @@ img {
   pointer-events: none;
 }
 
+#page-top_btn {
+  color: $page-top_btn;
+  font-size: 45px;
+  z-index: 15;
+  position: fixed;
+  bottom: -50px;
+  right: 5px;
+  cursor: pointer;
+}
+
 /* ヘッダー ================================ */
 header {
   height: 64px;
@@ -210,17 +220,18 @@ header {
   margin-top: 20px;
   display: inline-block;
   height: 40px;
+  line-height: 24px;
   font-size: 16px;
   padding: 10px 20px;
   border-radius: 2px;
   background-color: $theme-color;
   color: white;
-  box-shadow: 0 3px 0 $theme-color-dark;
+  box-shadow: 0 4px 0 $theme-color-dark;
 }
 
 .top-about_btn a:hover {
   box-shadow: none;
-  transform: translate3d(0, 3px, 0);
+  transform: translate3d(0, 4px, 0);
 }
 
 .test-user_login {
@@ -233,13 +244,13 @@ header {
 }
 
 #test-login_btn .form {
-  box-shadow: 0 3px 0 $theme-color-dark-shadow;
+  box-shadow: 0 4px 0 $theme-color-dark-shadow;
   background: transparent;
 }
 
 #test-login_btn .form input:hover {
   box-shadow: none;
-  transform: translate3d(0, 3px, 0);
+  transform: translate3d(0, 4px, 0);
 }
 
 #test-login_btn form {
@@ -264,6 +275,7 @@ header {
 }
 
 .test-login_notice {
+  width: 60%;
   margin: 20px auto 0 ;
   display: inline-block;
 }
@@ -295,25 +307,115 @@ header {
   background-color: $theme-color-dark;
 }
 
-/* about ================================ */
-.about-main {
-  padding: 180px 8% 0;
-  color: white;
+/* about =============================== */
+.about-container {
+  width: 100%;
+  margin: 0 auto;
 }
 
-.about-main h2 {
-  font-size: 64px;
+.about-header {
+  padding: 20px 10%;
+  color: $theme-color-light;
+  background-color: $theme-color-dark;
+}
+
+.about-container h1 {
+  text-align: center;
   font-weight: 500;
-  line-height: 1.4;
+  font-size: 48px;
+  line-height: 52px;
+  padding: 35px 0 25px;
+  text-shadow: 1px 2px 2px $theme-color-dark-shadow;
 }
 
-.about-main p {
-  font-weight: 200;
+.about-container h2 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 35px;
+  margin-bottom: 10px;
+}
+
+.about-container h5 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 30px;
+  color: $word-black;
+}
+
+.about-content-block {
+  background-color: white;
+  padding: 20px 10%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.about-content {
+  margin-bottom: 50px;
+}
+
+.about-content-block h3 {
+  font-weight: 400;
   font-size: 20px;
+  line-height: 32px;
+  color: $word-black;
+  margin-bottom: 15px;
 }
 
-.about-img {
-  width: 84%;
+.about-content-block h4 {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 55px;
+  color: $word-black;
+  margin-bottom: 15px;
+}
+
+.about-content-block p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $word-gray;
+  margin-bottom: 10px;
+}
+
+.about-image_container img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.about-test-login {
+  text-align: center;
+}
+
+.about-test-login #test-login_btn input[type="submit"] {
+  height: 44px;
+  margin: 0 auto;
+}
+
+.about-test-login #test-login_btn input[type="submit"]:hover {
+  background-color: $theme-color;
+}
+
+/* FAQ================================ */
+.faqs-container h1 {
+  color: $word-gray;
+  margin: 30px 0 10px 30px;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 41px;
+}
+
+.faqs-container h3 {
+  color: $word-black;
+  font-weight: 600;
+}
+
+.faqs-container p {
+  color: $word-gray;
+  margin-top: 10px;
 }
 
 /* フォーム================================ */
@@ -454,4 +556,56 @@ header {
   padding: 5px;
   width: 170px;
   margin-left: 30px;
+}
+
+/* 利用規約================================ */
+.policy-container {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.policy-content {
+  margin-top: 40px;
+}
+
+.policy-content h1 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 54px;
+  color: $word-black;
+  margin-bottom: 20px;
+}
+
+.policy-content h2, .policy-content h4 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: $word-gray;
+  margin-bottom: 40px;
+}
+
+.policy-content h3 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  color: $word-black;
+  margin-bottom: 15px;
+}
+
+.policy-content p {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  color: $word-gray;
+  margin-bottom: 10px;
+}
+
+.policy-content a {
+  font-size: 16px;
+  color: $theme-color;
+}
+
+.policy-content a:hover {
+  color: $theme-color-dark;
 }
