@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
       user_login
     elsif user.logged_in == true && user.last_activity_at.to_time.since(31.minutes) < Time.current
       test_user_reset
-      user_loggedin_false
       user_login
     else
       redirect_back(fallback_location: root_path)

@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
   skip_before_action :time_out, only: [:new, :create, :destroy]
-  before_action :ensure_correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:show, :other_tasks, :memos, :edit, :update, :destroy]
   before_action :forbid_login_user, only: [:new, :create]
 
   def new
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.id == 1
+    if @user.protected == true
       redirect_to user_url(@user), notice: "このアカウントは編集できません。"
     elsif @user.update(user_params_update)
       redirect_to user_url(@user), notice: "「#{@user.name}」の情報を更新しました。"
@@ -59,10 +59,8 @@ class UsersController < ApplicationController
   def destroy
     user_last_logout_at
     @user = current_user
-    if @user.id == 1
-      reset_session
-      test_user_reset
-      redirect_to root_path, notice: "ログアウトしました。"
+    if @user.protected == true
+      redirect_to logout_path, :method => :delete
     else
       if @user.image_name.attached?
         @user.image_name.purge
@@ -107,8 +105,6 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     return unless current_user.id != params[:id].to_i
-
-    flash[:notice] = "存在しないページです。"
-    redirect_to("/calendar/index")
+    render("errors/error404")
   end
 end

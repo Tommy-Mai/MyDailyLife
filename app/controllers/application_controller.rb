@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   # 多重ログイン防止用真偽値の変更用メソッド
   helper_method :user_loggedin_false
   helper_method :user_loggedin_true
+  # ユーザーがアップロードできるファイル数を制限するためのメソッド
+  helper_method :images_count
 
   before_action :login_required
   before_action :time_out
@@ -94,7 +96,6 @@ class ApplicationController < ActionController::Base
       )
     end
   end
-  
 
   def time_out
     if current_user
@@ -150,5 +151,9 @@ class ApplicationController < ActionController::Base
         current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
       end
     end
+  end
+
+  def images_count
+    @images_count = TaskComment.where(user_id: current_user.id, image_exist: true).count + MealComment.where(user_id: current_user.id, image_exist: true).count
   end
 end

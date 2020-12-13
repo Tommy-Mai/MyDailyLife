@@ -36,9 +36,14 @@
     ul.user-tabs.search_tabs
       li= link_to("食事関連", "/users/#{@user.id}")
       li= link_to("その他", "/users/#{@user.id}/other_tasks")
-      li.active= link_to("メモ", "/users/#{@user.id}/memos")
+      li.active#other_pop_trigger= link_to("メモ", "/users/#{@user.id}/memos")
       li#new_memo_trigger= link_to("新規メモ +", "")
       i.fas.fa-search-plus#searchtoggle_button
+
+    #user_memo 
+      #other_pop_up
+          div
+            p.arrow_box.other_arrow_box 検索結果をリセット
 
     #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|
       .form.search_form
@@ -67,7 +72,7 @@
                 = raw Rinku.auto_link(memo_description, :all, 'target="_blank"')
               .memo_trash
                 p.js-modal-open_memo-edit= link_to "" do
-                  i.fas.fa-pencil-alt
+                  i.fas.fa-edit
                 = link_to "/user_memos/#{memo.id}", :method => :delete, :remote => true, data: { confirm: "メモを削除してよろしいですか？"} do
                   i.fas.fa-trash-alt
 

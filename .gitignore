@@ -125,3 +125,6 @@ yarn-debug.log*
 
 # 画像データ
 /app/assets/images/*.jpg
+
+# ER図
+erd.pdf

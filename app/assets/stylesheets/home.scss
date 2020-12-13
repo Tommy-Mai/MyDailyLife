@@ -609,3 +609,27 @@ header {
 .policy-content a:hover {
   color: $theme-color-dark;
 }
+
+error-content {
+  font-family: "Charlie Display", -apple-system, system-ui, "Segoe UI", Roboto, "Noto Sans", Ubuntu, "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.error-content h1 {
+  font-size: 80px;
+  line-height: 100px;
+  letter-spacing: 10px;
+  font-weight: 500;
+}
+
+.error-content h3 {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.error-content h2 {
+  text-align: center;
+  font-size: 16px;
+  line-height: 30px;
+  margin: 0;
+}

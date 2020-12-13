@@ -2,8 +2,16 @@
   .container
     = render partial: 'common_show', locals: {user: @user}
 
+    #user_meal
+      #meal_pop_up
+        div
+          - if current_user.meal_tasks.exists?
+            p.arrow_box.meal_arrow_box 食事タグ一覧ページへ
+          - else
+            p.arrow_box.meal_arrow_box 食事タスク作成ページへ
+
     ul.user-tabs.search_tabs
-      li.active
+      li.active#meal_pop_trigger
         - unless @user.meal_tasks.exists?
           = link_to("食事関連", new_meal_task_path)
         - else

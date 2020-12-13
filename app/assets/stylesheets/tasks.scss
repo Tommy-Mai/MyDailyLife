@@ -9,7 +9,7 @@
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
   position: relative;
-  min-height: 100px;
+  min-height: 120px;
   z-index: 5;
 }
 
@@ -30,7 +30,7 @@
   width: 570px;
 }
 
-.task-name a {
+.task-name a, .task-name p {
   color: $word-black;
   font-weight: 500;
   font-size: 26px;
@@ -157,6 +157,8 @@
 .tasks-show-item .description {
   color: $word-black;
   min-height: 100px;
+  max-height: 200px;
+  overflow: scroll;
 }
 
 .tasks-show-item .description a{
@@ -236,12 +238,12 @@
 }
 
 .time , .who, .where{
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
-.who, .where{
-  text-align: center;
-  min-width: 100px;
+.who, .where {
+  width: 137px;
+  max-height: 27px;
   overflow: scroll;
 }
 
@@ -254,7 +256,11 @@
 }
 
 .task-menus a{
-  margin-left: 5px;
+  margin-left: 15px;
+}
+
+.task-menus a:hover {
+  color: $word-black;
 }
 
 .task-menus p {
@@ -271,11 +277,7 @@
 }
 
 .task-menus i {
-  padding-left: 5px;
-}
-
-.task-menus i:hover {
-  color: $word-black;
+  padding-left: 2px;
 }
 
 .back-index a {
@@ -345,6 +347,10 @@
   position: absolute;
   bottom: 7px;
   right: 30px;
+  display: block;
+  width: 90%;
+  text-align: right;
+    height: 27px;
 }
 
 .tag-tabs {
@@ -380,6 +386,13 @@
 
 .tag_count a:hover {
   color: $theme-color;
+}
+
+.tag_count p {
+  font-size: 16px;
+  display: block;
+  line-height: 20px;
+  text-align: right;
 }
 
 /*.search ================================ */

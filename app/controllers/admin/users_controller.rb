@@ -7,10 +7,16 @@ class Admin::UsersController < ApplicationController
     @users = User.all
   end
 
+  def histories_index
+    histories = UsageHistory.all
+    @q = histories.ransack(params[:q])
+    @histories = @q.result(distinct: true)
+  end
+
   def destroy
     @user = User.find(params[:id])
-    if @user.id == 1 || @user.id == 2
-      redirect_to admin_users_index_url, notice: "このユーザーは削除できません。"
+    if @user.protected == true
+      redirect_to admin_users_index_url, notice: "このアカウントは削除できません。"
     else
       @user.destroy
       redirect_to admin_users_index_url, notice: "ユーザー「#{@user.name}」を削除しました。"
@@ -20,6 +26,6 @@ class Admin::UsersController < ApplicationController
   private
 
   def require_admin
-    redirect_to meal_tasks_url, notice: "権限がありません。" unless current_user.admin?
+    render("errors/error404") unless current_user.admin?
   end
 end

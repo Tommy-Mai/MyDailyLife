@@ -1,23 +1,33 @@
 class TaskCommentsController < ApplicationController
   def create
     @task_comment = TaskComment.new(task_comment_params)
-    if @task_comment.save
-      comment_create
-      respond_to do |format|
-        format.html { redirect_to task_path(:id => @task_comment.task_id) }
-        format.json
-      end
+    images_count
+    if @images_count >= 5
+      render template: 'tasks/show', notice: "投稿できる画像は1ユーザーにつき5枚までです。"
     else
-      render template: 'tasks/show'
+      if @task_comment.save
+        comment_create
+        respond_to do |format|
+          format.html { redirect_to task_path(:id => @task_comment.task_id) }
+          format.json
+        end
+      else
+        render template: 'tasks/show'
+      end
     end
   end
 
   def destroy
     @task_comment = TaskComment.find_by(id: params[:id])
-    if @task_comment.image.attached?
-      @task_comment.image.purge_later
+    if @task_comment.protected == true
+      flash[:notice] = "削除できないコメントです。"
+      redirect_to task_url(@task)
+    else
+      if @task_comment.image.attached?
+        @task_comment.image.purge_later
+      end
+      @task_comment.destroy
     end
-    @task_comment.destroy
   end
 
   private

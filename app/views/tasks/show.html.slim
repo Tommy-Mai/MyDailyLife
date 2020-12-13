@@ -32,13 +32,13 @@
         .task-menus
           - if params[:date]
             = link_to "/tasks/#{@task.id}/edit?date=#{params[:date]}" do
-              i.fas.fa-pencil-alt
+              i.fas.fa-edit
           - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
             = link_to "/tasks/#{@task.id}/edit?task_tag=#{params[:task_tag]}" do
-              i.fas.fa-pencil-alt
+              i.fas.fa-edit
           - else
             = link_to edit_task_path(@task) do
-              i.fas.fa-pencil-alt
+              i.fas.fa-edit
           = link_to @task, :method => :delete, data: { confirm: "タスク「#{@task.name}」を削除します。よろしいですか？"} do
             i.fas.fa-trash-alt
 

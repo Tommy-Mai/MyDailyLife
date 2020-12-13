@@ -10,8 +10,8 @@ MealTask.seed_once(
     user_id: 1,
     with_whom: "任意で記入",
     where: "任意で記入",
-    time: Date.current,
-    date: Date.current,
+    time: "09:30:00",
+    date: "2020-12-10 00:00:00",
     protected: true
   }
 )

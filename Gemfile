@@ -130,3 +130,8 @@ gem 'kaminari'
 
 # 環境変数管理gem
 gem 'dotenv-rails'
+
+# ER図作成用gem
+group :development, :test do
+  gem 'rails-erd'
+end

@@ -13,21 +13,26 @@ $(document).on('turbolinks:load', function(){
   // ここからタグ新規作成Ajax
   function createHTML(tag) {
     let html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count="0">
-                  <div class="task-name">
-                    <a href="/tasks/new?task_tag=${tag.id}">${tag.name}</a>
-                  </div>
-                  <div class="tag_count">
-                    <a href="/task_tags/${tag.id}">タスク 0件</a>
-                  </div>
-                  <div class="task-menus tag-index-menu">
-                    <a href="">
-                      <i class="fas fa-pencil-alt"></i>
-                    </a>
-                    <a data-confirm="タグ「${tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/task_tags/${tag.id}">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                  </div>
-                </div>`
+                      <div class="task-name">
+                      <p>${tag.name}</p>
+                    </div>
+                    <div class="tag_count">
+                      <a href="/task_tags/${tag.id}">タスク一覧</a>
+                      <p>0件</p>
+                    </div>
+                    <div class="task-menus tag-index-menu">
+                      <a href="/tasks/new?task_tag=${tag.id}">タスク作成
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <p class="js-modal-open_edit">
+                        <a href="">タグ編集
+                          <i class="fas fa-edit"></i>
+                        </a>
+                      <a data-confirm="タグ「${tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/task_tags/${tag.id}">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </div>
+                  </div>`
     return html;
   };
 
@@ -89,21 +94,27 @@ $(document).on('turbolinks:load', function(){
       name: getValues.dataset.name,
       count: getValues.dataset.tagCount
     };
-
-    $('.edit_label input').var(`${values.name}`);
+    console.log(values.name);
+    
+    $('.edit_label input').val(`${values.name}`);
 
     function reBuild(tag, values) {
       var html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count=${values.count}"> 
                       <div class="task-name">
-                        <a href="/tasks/new?task_tag=${tag.id}">${tag.name}</a>
+                        <p>${tag.name}</p>
                       </div>
                       <div class="tag_count">
-                        <a href="/task_tags/${tag.id}">タスク ${values.count}件</a>
+                        <a href="/task_tags/${tag.id}">タスク一覧</a>
+                        <p>${values.count}件</p>
                       </div>
                       <div class="task-menus tag-index-menu">
-                        <a href="">
+                        <a href="/tasks/new?task_tag=${tag.id}">タスク作成
                           <i class="fas fa-pencil-alt"></i>
                         </a>
+                        <p class="js-modal-open_edit">
+                          <a href="">タグ編集
+                            <i class="fas fa-edit"></i>
+                          </a>
                         <a data-confirm="タグ「${tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/task_tags/${tag.id}">
                           <i class="fas fa-trash-alt"></i>
                         </a>
@@ -122,7 +133,7 @@ $(document).on('turbolinks:load', function(){
       let inputText = $("#task_name_edit").val();
       $.ajax({
         url: `/task_tags/${values.id}`,
-        type: "PUT",
+        type: "PATCH",
         data: {
           id: values.id,
           name: inputText

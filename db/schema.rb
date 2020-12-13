@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(version: 2020_12_11_115908) do
     t.datetime "last_login_at"
     t.datetime "last_logout_at"
     t.integer "login_count", default: 0
-    t.string "unique_session_id", limit: 20
     t.datetime "last_activity_at"
     t.boolean "logged_in", default: false
     t.index ["email"], name: "index_users_on_email", unique: true

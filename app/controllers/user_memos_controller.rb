@@ -29,7 +29,12 @@ class UserMemosController < ApplicationController
   end
 
   def destroy
-    @memo.destroy
+    if @memo.protected == true
+      flash[:notice] = "削除できないコメントです。"
+      redirect_to task_url(@task)
+    else
+      @memo.destroy
+    end
   end
 
   private
@@ -46,7 +51,7 @@ class UserMemosController < ApplicationController
       @memo = current_user.user_memos.find(params[:id])
     else
       flash[:notice] = "存在しないメモです。"
-      redirect_to user_path(current_user)
+      redirect_to "/users/#{current_user.id}/memos"
     end
   end
   

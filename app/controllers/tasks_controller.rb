@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       othertask_create
-      flash[:notice] = "「#{@task.name}」を登録"
+      flash[:notice] = "「#{@task.name}」を登録しました。"
       redirect_to task_url(@task)
     else
       render("tasks/new")
@@ -37,17 +37,22 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      flash[:notice] = "#{@task.date.strftime('%Y-%m-%d')}「#{@task.name}」の変更を保存"
-      redirect_to task_url
+      flash[:notice] = "#{@task.date.strftime('%Y-%m-%d')}「#{@task.name}」の変更を保存しました。"
+      redirect_to task_url(@task)
     else
       render("tasks/edit")
     end
   end
 
   def destroy
-    @task.destroy
-    flash[:notice] = "#{@task.date.strftime('%Y-%m-%d')}「#{@task.name}」を削除"
-    redirect_to tasks_url
+    if @task.protected == true
+      flash[:notice] = "削除できないタスクです。"
+      redirect_to task_url(@task)
+    else
+      @task.destroy
+      flash[:notice] = "#{@task.date.strftime('%Y-%m-%d')}「#{@task.name}」を削除しました。"
+      redirect_to "/users/#{current_user.id}/other_tasks"
+    end
   end
 
   private

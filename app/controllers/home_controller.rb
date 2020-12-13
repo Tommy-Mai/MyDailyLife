@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 
   def policy; end
 
-  def contact; end
+  def privacy_policy; end
 
   def faqs; end
 

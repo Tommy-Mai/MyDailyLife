@@ -113,3 +113,13 @@
 	border-width: 8px;
 	margin-left: -8px;
 }
+
+#user_meal #meal_pop_up, #user_other #other_pop_up {
+  margin: 0;
+  margin-top: -13px;
+}
+
+#user_memo #other_pop_up .other_arrow_box {
+  left: 160px;
+  margin-top: -93px;
+}

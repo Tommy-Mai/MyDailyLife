@@ -78,14 +78,20 @@
           .tasks-index-item id="tag#{tag.id}" data-id="#{tag.id}" data-name="#{tag.name}" data-tag-count="#{current_user.tasks.where(task_tag_id: tag.id).count}"
 
             .task-name
-              = link_to(tag.name, "/tasks/new?task_tag=#{tag.id}")
+              p= tag.name
 
             .tag_count
-              = link_to("タスク #{current_user.tasks.where(task_tag_id: tag.id).count}件", task_tag_path(tag))
+              = link_to("タスク一覧", task_tag_path(tag))
+
+              p #{current_user.tasks.where(task_tag_id: tag.id).count}件
 
             .task-menus.tag-index-menu
-              p.js-modal-open_edit= link_to "" do
+              = link_to "/tasks/new?task_tag=#{tag.id}" do
+                |タスク作成
                 i.fas.fa-pencil-alt
+              p.js-modal-open_edit= link_to "" do
+                | タグ編集
+                i.fas.fa-edit
               = link_to tag, :method => :delete, :remote => true, data: { confirm: "タグ「#{tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？"} do
                 i.fas.fa-trash-alt
 

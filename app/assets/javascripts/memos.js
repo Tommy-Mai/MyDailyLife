@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function(){
                     <div class="memo_trash">
                       <p class="js-modal-open_edit">
                         <a href="">
-                          <i class="fas fa-pencil-alt"></i>
+                          <i class="fas fa-edit"></i>
                         </a>
                       </p>
                       <a data-confirm="メモを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/user_memos/${memo.id}">
@@ -158,7 +158,7 @@ $(document).on('turbolinks:load', function(){
                     <div class="memo_trash">
                       <p class="js-modal-open_edit">
                         <a href="">
-                          <i class="fas fa-pencil-alt"></i>
+                          <i class="fas fa-edit"></i>
                         </a>
                       </p>
                       <a data-confirm="メモを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/user_memos/${memo.id}">

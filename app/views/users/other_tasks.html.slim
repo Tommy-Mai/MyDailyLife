@@ -2,9 +2,14 @@
   .container
     = render partial: 'common_show', locals: { user: @user}
 
+    #user_other
+      #other_pop_up
+          div
+            p.arrow_box.other_arrow_box その他タグ一覧ページへ
+
     ul.user-tabs.search_tabs
       li= link_to("食事関連", "/users/#{@user.id}")
-      li.active
+      li.active#other_pop_trigger
         - if @user.task_tags.empty? || @user.tasks.exists?
           = link_to("その他", task_tags_path)
         - else

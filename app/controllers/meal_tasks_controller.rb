@@ -22,7 +22,7 @@ class MealTasksController < ApplicationController
     @meal_task = MealTask.new(meal_task_params)
     if @meal_task.save
       mealtask_create
-      flash[:notice] = "「#{@meal_task.name}」を登録"
+      flash[:notice] = "「#{@meal_task.name}」を登録しました。"
       redirect_to meal_task_url(@meal_task)
     else
       render("meal_tasks/new")
@@ -32,18 +32,28 @@ class MealTasksController < ApplicationController
   def edit; end
 
   def update
-    if @meal_task.update(meal_task_params)
-      flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」の変更を保存"
-      redirect_to meal_task_url
+    if @meal_task.protected == true
+      flash[:notice] = "編集できないタスクです。"
+      redirect_to meal_task_url(@meal_task)
     else
-      render("meal_tasks/edit")
+      if @meal_task.update(meal_task_params)
+        flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」の変更を保存しました。"
+        redirect_to meal_task_url
+      else
+        render("meal_tasks/edit")
+      end
     end
   end
 
   def destroy
-    @meal_task.destroy
-    flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」を削除"
-    redirect_to meal_tasks_url
+    if @meal_task.protected == true
+      flash[:notice] = "削除できないタスクです。"
+      redirect_to meal_task_url(@meal_task)
+    else
+      @meal_task.destroy
+      flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」を削除しました。"
+      redirect_to user_url(current_user.id)
+    end
   end
 
   private

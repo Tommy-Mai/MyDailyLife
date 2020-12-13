@@ -12,17 +12,10 @@ Rails.application.routes.draw do
   get "users/:id/other_tasks" => "users#other_tasks"
   get "users/:id/memos" => "users#memos"
 
-  # 存在しないビューの代わりに表示するページを指定
-  get "/meal_tasks" => "users#show"
-  get "/tasks" => "users#other_tasks"
-  get "/user_memos" => "users#memos"
-  get "/user_memos/:id" => "users#memos"
-  get "/memos" => "users#memos"
-  get "/memos/:id" => "users#memos"
-  
   namespace :admin do
     get 'users/index'
     delete 'users/:id/destroy' => "users#destroy"
+    get 'users/histories_index'
   end
 
   get '/calendar/index'
@@ -47,6 +40,6 @@ Rails.application.routes.draw do
   get "/privacy_policy" => "home#privacy_policy"
   get "/faqs" => "home#faqs"
   post "/inquiry" => "home#send_inquiry"
-  
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

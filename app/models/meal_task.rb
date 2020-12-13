@@ -22,7 +22,13 @@ class MealTask < ApplicationRecord
 
   validates :description, { length: { maximum: 140 } }
 
+  
+
   def start_time
     self.date
+  end
+
+  def protected?
+    self.protected == true
   end
 end

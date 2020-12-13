@@ -1,9 +1,9 @@
 .users-index
   .container
-    h1.users-heading ユーザー一覧
+    h1.form-heading ユーザー一覧
     - @users.each do |user|
       .users-index-item
-        .user-left
         .user-right 
           p= user.name
-        = link_to '削除',"/admin/users/#{user.id}/destroy", method: :delete, data:{ confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}
+        - if user.protected == false
+          = link_to '削除',"/admin/users/#{user.id}/destroy", method: :delete, data:{ confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"}

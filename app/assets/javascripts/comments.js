@@ -167,7 +167,7 @@ $(document).on('turbolinks:load', function(){
         $(".comment-container").scrollTop($(".comment-container")[0].scrollHeight);
       })
       .fail(function(){
-        alert("エラー：コメントを登録できませんでした。\n・空白のコメントは登録できません。\n・141文字以上のタグは登録できません。");
+        alert("エラー：コメントを登録できませんでした。\n・空白のコメントは登録できません。\n・141文字以上のコメントは登録できません。");
       })
       .always(function() {
         $(".comment_form_btn input").prop('disabled', false);
@@ -206,7 +206,7 @@ $(document).on('turbolinks:load', function(){
         $(".comment-container").scrollTop($(".comment-container")[0].scrollHeight);
       })
       .fail(function(){
-        alert("エラー：画像を登録できませんでした。");
+        alert("エラー：画像を登録できませんでした。\n投稿できる画像は1ユーザーにつき5枚までです。");
       })
       .always(function() {
         $(".comment_form_btn input").prop('disabled', false);

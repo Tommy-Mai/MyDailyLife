@@ -24,15 +24,16 @@
         .time
           i.fa.fa-clock-o
           = l @meal_task.time, format: :hm
-        .who
-          i.fa.fa-user
-          = @meal_task.with_whom
+        .who_content
+          .who
+            i.fa.fa-user
+            = @meal_task.with_whom
         .where
           i.fa.fa-map-pin 
           = @meal_task.where
         .task-menus
           = link_to edit_meal_task_path(@meal_task) do
-            i.fas.fa-pencil-alt
+            i.fas.fa-edit
           = link_to @meal_task, :method => :delete, data: { confirm: "タスク「#{@meal_task.name}」を削除します。よろしいですか？"} do
             i.fas.fa-trash-alt
 

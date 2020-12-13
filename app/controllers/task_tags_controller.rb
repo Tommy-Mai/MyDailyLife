@@ -44,7 +44,12 @@ class TaskTagsController < ApplicationController
   end
 
   def destroy
-    @task_tag.destroy
+    if @task_tag.protected == true
+      flash[:notice] = "削除できないタグです。"
+      redirect_to task_tags_url
+    else
+      @task_tag.destroy
+    end
   end
 
   private
