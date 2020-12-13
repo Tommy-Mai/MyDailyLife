@@ -1,17 +1,12 @@
-| お問い合わせがありました。
+p ユーザーからお問い合わせがありました。
 
-ul
-  li
-    | 名前: 
-    = @name
-  - unless @email.nil?
-    li
-      | メールアドレス: 
-      = @email
-  - unless @user_id.nil?
-    li
-      | ユーザー ID:
-      = @user_id
-  li
-    | お問い合わせ内容
-    = simple_format(@contents)
+p ▼名前
+p= @name
+- unless @email.nil?
+  p ▼メールアドレス
+  p= @email
+- unless @user_id.nil?
+  p ▼ユーザーID
+  p= @user_id
+p お問い合わせ内容
+p= simple_format(@contents)

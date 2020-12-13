@@ -135,3 +135,6 @@ gem 'dotenv-rails'
 group :development, :test do
   gem 'rails-erd'
 end
+
+# Slack通知用gem
+gem 'slack-api'
