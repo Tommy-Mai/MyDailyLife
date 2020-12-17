@@ -145,7 +145,7 @@ class ApplicationController < ActionController::Base
 
   def test_user_reset
     if current_user
-      if current_user.id == 1
+      if current_user.id == 1 && current_user.email == 'sample@example.com'
         current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
         current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
         current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?

@@ -103,27 +103,27 @@ describe 'ユーザー管理機能', :type => :system do
       visit login_path
     end
 
-    context "emailを入力しない" do
+    context "emailを入力しないとき、" do
       before do
         fill_in 'session_password',	:with => 'password'
         click_button 'ログイン'
       end
 
       it "エラーとなる" do
-        within '.form-error' do
+        within '.flash' do
           expect(page).to have_content 'メールアドレスまたはパスワードが間違っています。'
         end
       end
     end
 
-    context "passwordを入力しない" do
+    context "passwordを入力しないとき、" do
       before do
         fill_in 'session_email',	:with => 'email@sample.com'
         click_button 'ログイン'
       end
 
       it "エラーとなる" do
-        within '.form-error' do
+        within '.flash' do
           expect(page).to have_content 'メールアドレスまたはパスワードが間違っています。'
         end
       end
