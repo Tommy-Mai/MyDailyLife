@@ -11,7 +11,7 @@ class UserMemosController < ApplicationController
         format.json
       end
     else
-      render template: 'users/memo'
+      redirect_to "users/:id/memos"
     end
   end
 
@@ -24,7 +24,7 @@ class UserMemosController < ApplicationController
         format.json
       end
     else
-      render template: 'users/memo'
+      redirect_to "users/:id/memos"
     end
   end
 

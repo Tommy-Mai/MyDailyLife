@@ -42,7 +42,6 @@ class ApplicationController < ActionController::Base
   def set_inquiry
     @inquiry = Inquiry.new
   end
-  
 
   # 以下、Activity logging
 

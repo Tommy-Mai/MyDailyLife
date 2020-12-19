@@ -45,7 +45,7 @@
           div
             p.arrow_box.other_arrow_box 検索結果をリセット
 
-    #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|
+    #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/memos" do |f|
       .form.search_form
         .search_heading メモ検索
         .form-body.search_form_body
@@ -72,9 +72,9 @@
                 = raw Rinku.auto_link(memo_description, :all, 'target="_blank"')
               .memo_trash
                 p.js-modal-open_memo-edit= link_to "" do
-                  i.fas.fa-edit
+                  i.fas.fa-edit.memo_edit-btn
                 = link_to "/user_memos/#{memo.id}", :method => :delete, :remote => true, data: { confirm: "メモを削除してよろしいですか？"} do
-                  i.fas.fa-trash-alt
+                  i.fas.fa-trash-alt.memo_trash-btn
 
   .mb-3
     #paginate_memo= paginate @memos

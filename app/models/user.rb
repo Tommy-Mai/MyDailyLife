@@ -24,7 +24,7 @@ class User < ApplicationRecord
     validates :name
   end
 
-  validates :email, { uniqueness: true }
+  validates :email, uniqueness: { message: '：すでに使用されているか、無効なメールアドレスです' }
 
   private
 

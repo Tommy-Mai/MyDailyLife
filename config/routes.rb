@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root :to => 'home#top'
+  root 'home#top'
   resources :meal_tasks, :except => :index
   resources :tasks, :except => :index
   resources :task_tags, :except => [:new, :edit]
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users, :except => :index
   get "users/:id/other_tasks" => "users#other_tasks"
   get "users/:id/memos" => "users#memos"
+  get "/users" => "users#new"
 
   namespace :admin do
     get 'users/index'

@@ -33,5 +33,19 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to have_http_status(:success)
       end
     end
+
+    context "GET #other_tasks" do
+      it "returns http success" do
+        subject { get :other_tasks, params }
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "GET #memos" do
+      it "returns http success" do
+        subject { get :memos, params }
+        expect(response).to have_http_status(:success)
+      end
+    end
   end
 end

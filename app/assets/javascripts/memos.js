@@ -61,7 +61,7 @@ $(document).on('turbolinks:load', function(){
                         </a>
                       </p>
                       <a data-confirm="メモを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/user_memos/${memo.id}">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash-alt  memo_trash-btn"></i>
                       </a>
                     </div>
                   </div>
@@ -103,7 +103,7 @@ $(document).on('turbolinks:load', function(){
       }, 4000);
     })
     .fail(function() {
-      alert("エラー：メモを登録できませんでした。\n・空白のメモは登録できません。");
+      alert("エラー：メモを登録できませんでした。\n・タイトルが空白のメモは登録できません。");
     })
     .always(function() {
       $(".tasktag_form_btn input").prop('disabled', false);
@@ -162,7 +162,7 @@ $(document).on('turbolinks:load', function(){
                         </a>
                       </p>
                       <a data-confirm="メモを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/user_memos/${memo.id}">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash-alt memo_trash-btn"></i>
                       </a>
                     </div>
                   </div>

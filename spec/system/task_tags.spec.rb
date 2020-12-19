@@ -1,61 +1,61 @@
 require 'rails_helper'
 
 describe "その他タグ管理機能", :type => :system  do
-    # ユーザーをletで定義
-    let(:user_a) { FactoryBot.find_or_create(:user, :name => 'ユーザーA', :email => 'a@example.com', :password => 'password', :admin => true) }
-    let(:user_b) { FactoryBot.find_or_create(:user, :name => 'ユーザーB', :email => 'b@example.com', :password => 'password', :admin => false) }
+  # ユーザーをletで定義
+  let(:user_a) { FactoryBot.find_or_create(:user, :name => 'ユーザーA', :email => 'a@example.com', :password => 'password', :admin => true) }
+  let(:user_b) { FactoryBot.find_or_create(:user, :name => 'ユーザーB', :email => 'b@example.com', :password => 'password', :admin => false) }
 
-    before do
-      # その他タグの作成
-      FactoryBot.find_or_create(:task_tag, :id => 1, :name => "映画", :user_id => user_a.id)
-      FactoryBot.find_or_create(:task_tag, :id => 2, :name => "ドラマ", :user_id => user_b.id)
-    end
+  before do
+    # その他タグの作成
+    FactoryBot.find_or_create(:task_tag, :id => 1, :name => "映画", :user_id => user_a.id)
+    FactoryBot.find_or_create(:task_tag, :id => 2, :name => "ドラマ", :user_id => user_b.id)
+  end
 
-      # 作成者がユーザーAであるその他タスクを作成する
+  # 作成者がユーザーAであるその他タスクを作成する
   let!(:task_a) { FactoryBot.find_or_create(:task, :id => 1, :name => '最初のその他タスク', :description => 'その他タスクテスト投稿', :user => user_a, :task_tag_id => 1, :date => Time.zone.now) }
 
-    before do
-      # letで定義したユーザーでログインする
-      visit login_path
-      fill_in 'session_email',	:with => login_user.email
-      fill_in 'session_password',	:with => login_user.password
-      click_button 'ログイン'
+  before do
+    # letで定義したユーザーでログインする
+    visit login_path
+    fill_in 'session_email',	:with => login_user.email
+    fill_in 'session_password',	:with => login_user.password
+    click_button 'ログイン'
+  end
+
+  describe "その他タグ表示機能" do
+    context "ユーザーAがログインしているとき" do
+      let(:login_user) { user_a }
+
+      it 'ユーザーAが作成したその他タグが表示される' do
+        # ユーザーAが作成したその他タグ「映画」のページに移動
+        visit task_tag_path(id: 1)
+        expect(page).to have_content '「映画」一覧'
+        expect(page).to have_content '最初のその他タスク'
+
+        # ユーザーAが作成したその他タグ一覧ページに移動
+        visit task_tags_path
+        expect(page).to have_content '映画'
+      end
     end
 
-    describe "その他タグ表示機能" do
-      context "ユーザーAがログインしているとき" do
-        let(:login_user) { user_a }
+    context "ユーザーBがログインしているとき" do
+      let(:login_user) { user_b }
 
-        it 'ユーザーAが作成したその他タグが表示される' do
-          # ユーザーAが作成したその他タグ「映画」のページに移動
-          visit task_tag_path(id: 1)
-          expect(page).to have_content '「映画」一覧'
-          expect(page).to have_content '最初のその他タスク'
-
-          # ユーザーAが作成したその他タグ一覧ページに移動
-          visit task_tags_path
-          expect(page).to have_content '映画'
+      it 'ユーザーAが作成したその他タグが表示されない' do
+        # ユーザーAが作成したその他タグ「映画」のページに移動
+        visit task_tag_path(id: 1)
+        within '.flash' do
+          expect(page).to have_content '存在しないタグです。'
         end
+
+        # ユーザーbが作成したその他タグ一覧ページに移動
+        visit task_tags_path
+        expect(page).to have_content 'ドラマ'
+        expect(page).not_to have_content '映画'
       end
-
-      context "ユーザーBがログインしているとき" do
-        let(:login_user) { user_b }
-
-        it 'ユーザーAが作成したその他タグが表示されない' do
-          # ユーザーAが作成したその他タグ「映画」のページに移動
-          visit task_tag_path(id: 1)
-          within '.flash' do
-            expect(page).to have_content '存在しないタグです。'
-          end
-
-          # ユーザーbが作成したその他タグ一覧ページに移動
-          visit task_tags_path
-          expect(page).to have_content 'ドラマ'
-          expect(page).not_to have_content '映画'
-        end
-      end
-      
     end
     
+  end
+  
 end
 
