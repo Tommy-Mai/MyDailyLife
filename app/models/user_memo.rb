@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class UserMemo < ApplicationRecord
   belongs_to :user
 
   scope :recent, -> { order(created_at: :desc) }
 
-  with_options presence: :true do
+  with_options presence: true do
     validates :name
     validates :user_id
   end

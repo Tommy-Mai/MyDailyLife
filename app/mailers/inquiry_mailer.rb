@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InquiryMailer < ApplicationMailer
   def creation_inquiry
     @name = params[:name]

@@ -40,21 +40,21 @@ class HomeController < ApplicationController
   end
 
   def notify_to_slack
-    text = <<-"EOC"
-    -----------------------------
-    [MyDailyLife] 新しいご意見が届きました。
-
-    ▼名前
-    #{@inquiry.name}
-
-    ▼ユーザーID
-    #{@inquiry.user_id}
-
-    ▼メールアドレス
-    #{@inquiry.email}
-    
-    ▼内容
-    #{@inquiry.contents}
+    text = <<~"EOC"
+                -----------------------------
+                [MyDailyLife] 新しいご意見が届きました。
+      #{'      '}
+                ▼名前
+                #{@inquiry.name}
+      #{'      '}
+                ▼ユーザーID
+                #{@inquiry.user_id}
+      #{'      '}
+                ▼メールアドレス
+                #{@inquiry.email}
+            #{'    '}
+                ▼内容
+                #{@inquiry.contents}
     EOC
 
     Slack.chat_postMessage text: text, channel: "#inquery"

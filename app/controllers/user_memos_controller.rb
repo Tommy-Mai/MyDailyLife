@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserMemosController < ApplicationController
   before_action :set_memo, only: [:update, :destroy]
 
@@ -54,5 +56,4 @@ class UserMemosController < ApplicationController
       redirect_to "/users/#{current_user.id}/memos"
     end
   end
-  
 end

@@ -36,15 +36,13 @@ class TaskTagsController < ApplicationController
     if @task_tag.protected == true
       flash[:notice] = "編集できないタグです。"
       redirect_to task_tags_url
-    else
-      if @task_tag.update(task_tag_params)
-        respond_to do |format|
-          format.html { redirect_to task_tags_path }
-          format.json
-        end
-      else
-        redirect_to task_tags_path
+    elsif @task_tag.update(task_tag_params)
+      respond_to do |format|
+        format.html { redirect_to task_tags_path }
+        format.json
       end
+    else
+      redirect_to task_tags_path
     end
   end
 

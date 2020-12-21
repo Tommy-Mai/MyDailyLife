@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TaskComment < ApplicationRecord
   has_one :user
   has_one :task

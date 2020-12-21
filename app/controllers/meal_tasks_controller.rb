@@ -35,13 +35,11 @@ class MealTasksController < ApplicationController
     if @meal_task.protected == true
       flash[:notice] = "編集できないタスクです。"
       redirect_to meal_task_url(@meal_task)
+    elsif @meal_task.update(meal_task_params)
+      flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」の変更を保存しました。"
+      redirect_to meal_task_url
     else
-      if @meal_task.update(meal_task_params)
-        flash[:notice] = "#{@meal_task.date.strftime('%Y-%m-%d')}「#{@meal_task.name}」の変更を保存しました。"
-        redirect_to meal_task_url
-      else
-        render("meal_tasks/edit")
-      end
+      render("meal_tasks/edit")
     end
   end
 

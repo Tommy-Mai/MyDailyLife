@@ -79,46 +79,40 @@ class ApplicationController < ActionController::Base
   end
 
   def user_loggedin_false
-    if current_user
-      current_user.update(
-        last_activity_at: Time.current,
-        logged_in: false
-      )
-    end
+    current_user&.update(
+      last_activity_at: Time.current,
+      logged_in: false
+    )
   end
 
   def user_loggedin_true
-    if current_user
-      current_user.update(
-        last_activity_at: Time.current,
-        logged_in: true
-      )
-    end
+    current_user&.update(
+      last_activity_at: Time.current,
+      logged_in: true
+    )
   end
 
   def time_out
-    if current_user
-      if session[:last_activity_at].to_time.since(180.minutes) > Time.current
-        session_last_activity_at if current_user
-        # アクセス履歴のアクション回数とその日時を更新
-        usage_histories.update(
-          action_count: usage_histories.action_count + 1,
-          last_activity_at: Time.current
-        )
-        current_user.update(
-          last_activity_at: Time.current
-        )
-      else
-        user_last_logout_at
-        usage_histories.update(
-          timeout: true,
-          timeout_time: Time.current
-        )
-        test_user_reset
-        reset_session
-        flash[:notice] = "一定時間操作がなかったため、ログアウトしました。"
-        redirect_to :login
-      end
+    if current_user && session[:last_activity_at].to_time.since(1.minutes) > Time.current
+      session_last_activity_at if current_user
+      # アクセス履歴のアクション回数とその日時を更新
+      usage_histories.update(
+        action_count: usage_histories.action_count + 1,
+        last_activity_at: Time.current
+      )
+      current_user.update(
+        last_activity_at: Time.current
+      )
+    elsif current_user
+      user_last_logout_at
+      usage_histories.update(
+        timeout: true,
+        timeout_time: Time.current
+      )
+      test_user_reset
+      reset_session
+      flash[:notice] = "一定時間操作がなかったため、ログアウトしました。"
+      redirect_to :login
     end
   end
 
@@ -143,12 +137,10 @@ class ApplicationController < ActionController::Base
   end
 
   def test_user_reset
-    if current_user
-      if current_user.id == 1 && current_user.email == 'sample@example.com'
-        current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
-        current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
-        current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
-      end
+    if current_user && current_user.id == 1 && current_user.email == 'sample@example.com'
+      current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
+      current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
+      current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
     end
   end
 

@@ -28,7 +28,8 @@ $(document).on('turbolinks:load', function(){
       $(`#memo${showID}`).slideDown();
       $(this).children("i").removeClass('fas fa-bars');
       $(this).children("i").addClass('fas fa-minus');
-    } else {
+    }
+    else {
       $(`#memo${showID}`).slideUp();
       $(this).children("i").removeClass('fas fa-minus');
       $(this).children("i").addClass('fas fa-bars');
@@ -126,9 +127,7 @@ $(document).on('turbolinks:load', function(){
   $(document).on("click", '.js-modal-open_memo-edit', function() {
     $(this).parents(".memo_container").addClass('InlineEdit-active');
     let memoID = $(this).parents(".memo_container").data('id');
-    console.log(memoID)
     const getValues = document.getElementById(`memoItem${memoID}`);
-    console.log(getValues)
     var values = {
       id: getValues.dataset.id,
       name: getValues.dataset.name,

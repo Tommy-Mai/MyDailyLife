@@ -60,11 +60,9 @@ class UsersController < ApplicationController
     user_last_logout_at
     @user = current_user
     if @user.protected == true
-      redirect_to logout_path, :method => :delete
+      redirect_to logout_path, method: :delete
     else
-      if @user.image_name.attached?
-        @user.image_name.purge
-      end
+      @user.image_name.purge if @user.image_name.attached?
       @user.destroy
       reset_session
       redirect_to root_path, notice: "ユーザー「#{@user.name}」を削除しました。"
@@ -85,9 +83,7 @@ class UsersController < ApplicationController
 
   def user_params_update
     if params[:user][:image_name]
-      if @user.image_name.attached?
-        @user.image_name.purge
-      end
+      @user.image_name.purge if @user.image_name.attached?
       params[:image_exist] = true
     elsif @user.image_name.attached?
       params[:image_exist] = true
@@ -105,6 +101,7 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     return unless current_user.id != params[:id].to_i
+
     render("errors/error404")
   end
 end

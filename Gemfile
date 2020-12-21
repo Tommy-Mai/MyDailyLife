@@ -107,8 +107,8 @@ gem 'rack-dev-mark'
 gem 'font-awesome-sass'
 
 # デバック用gem
-gem 'pry-rails'
 gem 'pry-byebug'
+gem 'pry-rails'
 
 # カレンダー作成gem
 gem 'simple_calendar', '~> 2.0'
