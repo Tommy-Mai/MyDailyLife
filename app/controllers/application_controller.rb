@@ -10,9 +10,17 @@ class ApplicationController < ActionController::Base
   helper_method :mealtask_create, :othertask_create, :tag_create, :comment_create, :memo_create
   # 現在記録中のアクセス履歴呼び出しメソッド
   helper_method :usage_histories
+  # テストユーザーがログアウトする時にデフォルトのタグ・投稿以外を削除するメソッド
+  helper_method :test_user_reset
+  # 多重ログイン防止用真偽値の変更用メソッド
+  helper_method :user_loggedin_false
+  helper_method :user_loggedin_true
+  # ユーザーがアップロードできるファイル数を制限するためのメソッド
+  helper_method :images_count
 
   before_action :login_required
   before_action :time_out
+  before_action :set_inquiry
 
   private
 
@@ -29,6 +37,10 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "すでにログインしています"
       redirect_to user_path(session[:user_id])
     end
+  end
+
+  def set_inquiry
+    @inquiry = Inquiry.new
   end
 
   # 以下、Activity logging
@@ -66,20 +78,38 @@ class ApplicationController < ActionController::Base
     session[:last_activity_at] = Time.current
   end
 
+  def user_loggedin_false
+    current_user&.update(
+      last_activity_at: Time.current,
+      logged_in: false
+    )
+  end
+
+  def user_loggedin_true
+    current_user&.update(
+      last_activity_at: Time.current,
+      logged_in: true
+    )
+  end
+
   def time_out
-    if session[:last_activity_at].to_time.since(30.minutes) > Time.current
+    if current_user && session[:last_activity_at].to_time.since(1.minutes) > Time.current
       session_last_activity_at if current_user
       # アクセス履歴のアクション回数とその日時を更新
       usage_histories.update(
         action_count: usage_histories.action_count + 1,
         last_activity_at: Time.current
       )
-    else
+      current_user.update(
+        last_activity_at: Time.current
+      )
+    elsif current_user
       user_last_logout_at
       usage_histories.update(
         timeout: true,
         timeout_time: Time.current
       )
+      test_user_reset
       reset_session
       flash[:notice] = "一定時間操作がなかったため、ログアウトしました。"
       redirect_to :login
@@ -104,5 +134,17 @@ class ApplicationController < ActionController::Base
 
   def memo_create
     usage_histories.update(memo_create_count: usage_histories.memo_create_count + 1)
+  end
+
+  def test_user_reset
+    if current_user && current_user.id == 1 && current_user.email == 'sample@example.com'
+      current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
+      current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
+      current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
+    end
+  end
+
+  def images_count
+    @images_count = TaskComment.where(user_id: current_user.id, image_exist: true).count + MealComment.where(user_id: current_user.id, image_exist: true).count
   end
 end

@@ -1,4 +1,4 @@
-.main.tasks-index
+.tasks-index
   #pop_up
     div
       p.arrow_box 新規タグ作成ページへ
@@ -16,11 +16,18 @@
     ul#mealtag_tabs.user-tabs.search_tabs
       li.active= link_to("食事関連", "/meal_tags")
       li= link_to("その他", task_tags_path)
-      li= link_to("メモ", "/")
 
     - @tags.each do |tag|
       .tasks-index-item
         .task-name
-          = link_to(tag.name, "/meal_tasks/new?meal_tag=#{tag.id}")
+          p= tag.name
+
         .tag_count
-          = link_to("タスク #{current_user.meal_tasks.where(meal_tag_id: tag.id).count}件", "/meal_tags/#{tag.id}")
+          = link_to("タスク一覧", "/meal_tags/#{tag.id}")
+
+          p #{current_user.meal_tasks.where(meal_tag_id: tag.id).count}件
+
+        .task-menus.tag-index-menu
+          = link_to"/meal_tasks/new?meal_tag=#{tag.id}" do
+            |タスク作成
+            i.fas.fa-pencil-alt

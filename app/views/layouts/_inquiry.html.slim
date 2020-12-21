@@ -1,0 +1,39 @@
+div
+  #contact_btn
+    span.fa.fa-envelope-o
+      | ご意見・ご感想
+
+
+div
+  .modal.js-modal_inquiry
+    .modal__bg.js-modal-close_inquiry
+    .modal__content
+      #modal_close_btn.back-task-show.js-modal-close_inquiry
+        = link_to("×","")
+      .contact_h1
+        h1 お問い合わせフォーム
+      .inquiry_information
+        p
+          span
+            | MyDailyLifeをご利用頂きありがとうございます。
+            br>/
+            | ご不明点やご意見がございましたら、フォームよりご連絡ください。
+            br>/
+            | ※ 返信・サポートが必要な場合はメールアドレスをご記入の上、お問い合わせください。
+            br>/
+            | いただきましたご意見にはメールにて順次返信いたします。
+            br>/
+            | 返信には時間を要する場合がございますので何卒ご了承ください。
+        p
+          span
+            br>/
+            a href="/faqs" target="_blank" ヘルプページ
+            | にサービスに関するご質問への回答を記載しておりますので、合わせてご確認ください。
+      .inquiry_form
+        = form_with model: @inquiry, url: "/inquiry" do |f|
+          .form
+            = f.text_field :name, id: 'inquiry_name', placeholder: "名前(必須)"
+            = f.email_field :email, id: 'inquiry_email', placeholder: "メールアドレス(任意)"
+            = f.text_area :contents, id: 'inquiry_contents', placeholder: "メッセージ(必須)"
+            = f.hidden_field :user_id, value: current_user.id unless current_user.nil?
+            .inquiry_form_btn= f.submit "送信"

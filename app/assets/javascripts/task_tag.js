@@ -1,17 +1,4 @@
 $(document).on('turbolinks:load', function(){
-  // ここから検索窓トグル
-  $('#searchtoggle_button').on("click",function() {
-    $('#searchtoggle_menu').slideToggle();
-    if($(this).hasClass('fas fa-search-plus')){
-      $(this).removeClass('fas fa-search-plus')
-      $(this).addClass('fas fa-search-minus')
-    } else {
-      $(this).removeClass('fas fa-search-minus')
-      $(this).addClass('fas fa-search-plus')
-    };
-  });
-  // ここまで検索窓トグル
-
   // ここからタグ新規作成モーダル
   $('.js-modal-open_new').on('click',function(){
     $('.js-modal_new').fadeIn();
@@ -26,27 +13,32 @@ $(document).on('turbolinks:load', function(){
   // ここからタグ新規作成Ajax
   function createHTML(tag) {
     let html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count="0">
-                  <div class="task-name">
-                    <a href="/tasks/new?task_tag=${tag.id}">${tag.name}</a>
-                  </div>
-                  <div class="tag_count">
-                    <a href="/task_tags/${tag.id}">タスク 0件</a>
-                  </div>
-                  <div class="task-menus tag-index-menu">
-                    <a href="">
-                      <i class="fas fa-pencil-alt"></i>
-                    </a>
-                    <a data-confirm="タグ「${tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/task_tags/${tag.id}">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                  </div>
-                </div>`
+                      <div class="task-name">
+                      <p>${tag.name}</p>
+                    </div>
+                    <div class="tag_count">
+                      <a href="/task_tags/${tag.id}">タスク一覧</a>
+                      <p>0件</p>
+                    </div>
+                    <div class="task-menus tag-index-menu">
+                      <a href="/tasks/new?task_tag=${tag.id}">タスク作成
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <p class="js-modal-open_edit">
+                        <a href="">タグ編集
+                          <i class="fas fa-edit"></i>
+                        </a>
+                      <a data-confirm="タグ「${tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/task_tags/${tag.id}">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </div>
+                  </div>`
     return html;
   };
 
   function buildHTML(tag) {
-    let html2 =`<div class="flash tag_created"> 新規タグ「${tag.name}」を登録しました。</div>`
-    return html2;
+    let flash =`<div class="flash tag_created"> 新規タグ「${tag.name}」を登録しました。</div>`
+    return flash;
   };
 
   $("#tasktag_input").on("submit", function(e) {
@@ -62,9 +54,9 @@ $(document).on('turbolinks:load', function(){
       $("#task_name").val("");
       $('.js-modal_new').fadeOut();
       let html = createHTML(data);
-      let html2 = buildHTML(data);
+      let flash = buildHTML(data);
       $(".task_tags_index").prepend(html);
-      $(".tag_changed").append(html2);
+      $(".tag_changed").append(flash);
       setTimeout(function(){
         $('.tag_created').fadeOut('slow')
       } ,2000);
@@ -94,40 +86,45 @@ $(document).on('turbolinks:load', function(){
 
   // ここからタグ編集Ajax
   $('.js-modal-open_edit').on("click", function() {
-    $(this).parents(".tasks-index-item").addClass('InlineEdit-active')
+    $(this).parents(".tasks-index-item").addClass('InlineEdit-active');
     let tagId = $(this).parents(".tasks-index-item").data('id');
     const getValues = document.getElementById(`tag${tagId}`);
     var values = {
       id:  getValues.dataset.id,
       name: getValues.dataset.name,
       count: getValues.dataset.tagCount
-    }
+    };
 
-    $('.edit_label input').attr('placeholder', `${values.name}`)
+    $('.edit_label input').val(`${values.name}`);
 
     function reBuild(tag, values) {
       var html = `<div class="tasks-index-item" id="tag${tag.id}" data-id="${tag.id}" data-name="#${tag.name}" data-tag-count=${values.count}"> 
                       <div class="task-name">
-                        <a href="/tasks/new?task_tag=${tag.id}">${tag.name}</a>
+                        <p>${tag.name}</p>
                       </div>
                       <div class="tag_count">
-                        <a href="/task_tags/${tag.id}">タスク ${values.count}件</a>
+                        <a href="/task_tags/${tag.id}">タスク一覧</a>
+                        <p>${values.count}件</p>
                       </div>
                       <div class="task-menus tag-index-menu">
-                        <a href="">
+                        <a href="/tasks/new?task_tag=${tag.id}">タスク作成
                           <i class="fas fa-pencil-alt"></i>
                         </a>
+                        <p class="js-modal-open_edit">
+                          <a href="">タグ編集
+                            <i class="fas fa-edit"></i>
+                          </a>
                         <a data-confirm="タグ「${tag.name}」を削除します。\nタグを削除すると関連するタスクも削除されます。\nタグを削除してよろしいですか？" data-remote="true" rel="nofollow" data-method="delete" href="/task_tags/${tag.id}">
                           <i class="fas fa-trash-alt"></i>
                         </a>
                       </div>
                     </div>`
       return html
-    }
+    };
 
     function updateHTML(tag) {
-      let html2 =`<div class="flash tag_created"> タグ「${tag.name}」を更新しました。</div>`
-      return html2;
+      let flash =`<div class="flash tag_created"> タグ「${tag.name}」に更新しました。</div>`
+      return flash;
     };
 
     $("#tasktag_input_edit").on("submit", function(e) {
@@ -135,10 +132,10 @@ $(document).on('turbolinks:load', function(){
       let inputText = $("#task_name_edit").val();
       $.ajax({
         url: `/task_tags/${values.id}`,
-        type: "PUT",
-        data:{
+        type: "PATCH",
+        data: {
           id: values.id,
-          name: inputText,
+          name: inputText
         },
         dataType: "json"
       })
@@ -146,14 +143,14 @@ $(document).on('turbolinks:load', function(){
         $("#task_name_edit").val("");
         $('.js-modal_edit').fadeOut();
         let html = reBuild(data, values);
-        let html2 = updateHTML(data);
+        let flash = updateHTML(data);
         $('.InlineEdit-active').parent('.edit_point').addClass('mark');
         $('.mark').empty();
         $('.mark').prepend(html);
         $(".edit_point").removeClass('mark');
 
         // タグ更新のflash表示
-        $(".tag_changed").append(html2);
+        $(".tag_changed").append(flash);
         setTimeout(function(){
           $('.tag_created').fadeOut('slow')
         } ,2000);

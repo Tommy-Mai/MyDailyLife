@@ -6,6 +6,11 @@
       p= user.email
       .task-menus
         = link_to edit_user_path(user) do
-          i.fas.fa-pencil-alt
-        = link_to user, :method => :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"} do
-          i.fas.fa-trash-alt
+          i.fas.fa-edit
+
+        - if user.id == 1
+          = link_to logout_path, :method => :delete, data: { confirm: "テストユーザーは削除できません。代わりにログアウトします。よろしいですか？"} do
+            i.fas.fa-trash-alt
+        - else
+          = link_to user, :method => :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。\nよろしいですか？"} do
+            i.fas.fa-trash-alt
