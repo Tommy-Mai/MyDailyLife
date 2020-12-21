@@ -40,7 +40,7 @@ describe 'ユーザー管理機能', :type => :system do
 
       context "メールアドレスが既存のアカウントと重複している時" do
         before do
-          FactoryBot.find_or_create(:user, :name => 'ユーザーA', :email => 'a@example.com', :password => 'password', :admin => true)
+          FactoryBot.create(:user, :name => 'ユーザーA', :email => 'a@example.com', :password => 'password', :admin => true)
           fill_in "user[name]", :with => 'ユーザー'
           fill_in "user[email]", :with => 'a@example.com'
           fill_in "user[password]", :with => 'password'
@@ -74,7 +74,7 @@ describe 'ユーザー管理機能', :type => :system do
 
     describe "テストユーザーとしてログインボタンを押したら" do
       before do
-        FactoryBot.find_or_create(:user, :name => 'テストユーザー', :email => 'sample@example.com', :password => 'test', :password_confirmation => 'test', :admin => false)
+        FactoryBot.create(:user, :name => 'テストユーザー', :email => 'sample@example.com', :password => 'test', :password_confirmation => 'test', :admin => false)
       end
 
       it 'テストユーザーの詳細ページへ遷移する' do

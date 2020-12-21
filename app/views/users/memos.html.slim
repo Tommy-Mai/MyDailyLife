@@ -73,7 +73,7 @@
               .memo_trash
                 p.js-modal-open_memo-edit= link_to "" do
                   i.fas.fa-edit.memo_edit-btn
-                = link_to "/user_memos/#{memo.id}", :method => :delete, :remote => true, data: { confirm: "メモを削除してよろしいですか？"} do
+                = link_to "/user_memos/#{memo.id}", :method => :delete, :remote => true, data: { confirm: "メモを削除してよろしいですか？", id: 'modal_wrapper_id'} do
                   i.fas.fa-trash-alt.memo_trash-btn
 
   .mb-3

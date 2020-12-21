@@ -94,8 +94,7 @@ $(document).on('turbolinks:load', function(){
       name: getValues.dataset.name,
       count: getValues.dataset.tagCount
     };
-    console.log(values.name);
-    
+
     $('.edit_label input').val(`${values.name}`);
 
     function reBuild(tag, values) {
@@ -124,7 +123,7 @@ $(document).on('turbolinks:load', function(){
     };
 
     function updateHTML(tag) {
-      let flash =`<div class="flash tag_created"> タグ「${tag.name}」を更新しました。</div>`
+      let flash =`<div class="flash tag_created"> タグ「${tag.name}」に更新しました。</div>`
       return flash;
     };
 

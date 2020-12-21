@@ -28,7 +28,7 @@ class TaskTagsController < ApplicationController
         format.json
       end
     else
-      render("/task_tags/new")
+      redirect_to task_tags_path
     end
   end
 
@@ -43,7 +43,7 @@ class TaskTagsController < ApplicationController
           format.json
         end
       else
-        render("/task_tags/edit")
+        redirect_to task_tags_path
       end
     end
   end

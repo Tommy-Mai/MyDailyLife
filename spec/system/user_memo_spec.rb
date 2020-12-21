@@ -6,8 +6,8 @@ describe "メモ管理機能テスト", :type => :system  do
   let(:user_b) { FactoryBot.find_or_create(:user, :name => 'ユーザーB', :email => 'b@example.com', :password => 'password', :admin => false) }
 
   # メモを用意する
-  let!(:memo_a) { FactoryBot.find_or_create(:user_memo,:name => '最初のメモ（ユーザーA）', :description => 'メモテスト投稿', :user => user_a) }
-  let!(:memo_b) { FactoryBot.find_or_create(:user_memo,:name => 'ユーザーBのメモ', :description => 'ユーザーB', :user => user_b) }
+  let!(:memo_a) { FactoryBot.create(:user_memo,:name => '最初のメモ（ユーザーA）', :description => 'メモテスト投稿', :user => user_a) }
+  let!(:memo_b) { FactoryBot.create(:user_memo,:name => 'ユーザーBのメモ', :description => 'ユーザーB', :user => user_b) }
 
   before do
     # letで定義したユーザーでログインする
@@ -40,12 +40,14 @@ describe "メモ管理機能テスト", :type => :system  do
         find(:css, 'i.fas.fa-bars').click
         find(:css, 'i.fas.fa-trash-alt.memo_trash-btn').click
         expect{
-          expect(page.accept_confirm).to have_content "メモを削除してよろしいですか？"
+          wait = Selenium::WebDriver::Wait.new ignore: Selenium::WebDriver::Error::NoAlertPresentError
+          wait.until { page.accept_confirm }
           within '.flash' do
             expect(page).to have_content 'メモを削除しました。'
           end
-          expect(page).not_to have_content '最初のメモ（ユーザーA）'
         }.to change(user_a.user_memos, :count).by(-1)
+        visit "/users/#{user_a.id}/memos"
+        expect(page).not_to have_content '最初のメモ（ユーザーA）'
       end
     end
 
@@ -61,7 +63,7 @@ describe "メモ管理機能テスト", :type => :system  do
           click_button '保存する'
         end
 
-        it 'メモ作成成功のflashが表示される' do
+        it '新規メモ作成成功のflashが表示される' do
           within '.flash' do
             expect(page).to have_content "新規メモ「メモ新規作成テスト」を登録しました。"
           end
@@ -99,15 +101,12 @@ describe "メモ管理機能テスト", :type => :system  do
           click_button '更新する'
         end
 
-        it 'メモ編集成功のflashが表示される' do
+        it 'メモ編集成功のflashが表示され、編集したメモが表示される' do
+          expect(page).to have_content "メモ編集テスト"
+          expect(page).to have_content "メモ編集完了"
           within '.flash' do
             expect(page).to have_content "メモ「メモ編集テスト」を更新しました。"
           end
-        end
-        
-        it '編集したメモが表示される' do
-          expect(page).to have_content "メモ編集テスト"
-          expect(page).to have_content "メモ編集完了"
         end
       end
 
@@ -158,7 +157,7 @@ describe "メモ管理機能テスト", :type => :system  do
           end
         end
         
-        context "詳細を入れて検索して成功する" do
+        context "詳細を入れて検索して" do
           before do
             fill_in name="q[description_cont]",	:with => "ダミー"
             click_button '検索'

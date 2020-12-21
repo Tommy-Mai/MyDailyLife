@@ -6,11 +6,11 @@ describe "食事コメント管理機能テスト", :type => :system  do
 
   before do
     # 食関連タグの作成
-    FactoryBot.find_or_create(:meal_tag)
+    FactoryBot.create(:meal_tag)
   end
 
   # 作成者がユーザーAである食関連タスクを作成する
-  let!(:task_a) { FactoryBot.find_or_create(:meal_task, :id => 1, :name => '最初の食事タスク', :description => '食事タスクテスト投稿', :user => user_a, :meal_tag_id => 1, :date => Time.zone.now) }
+  let!(:task_a) { FactoryBot.create(:meal_task, :id => 1, :name => '最初の食事タスク', :description => '食事タスクテスト投稿', :user => user_a, :meal_tag_id => 1, :date => Time.zone.now) }
 
   before do
     # letで定義したユーザーでログインする
@@ -22,7 +22,7 @@ describe "食事コメント管理機能テスト", :type => :system  do
 
   describe "食事タスクのコメント表示機能" do
     # ユーザーAがtask_aのコメントを作成
-    let!(:comment_a) { FactoryBot.find_or_create(:meal_comment, :comment => 'ユーザーAの食事タスクのコメント', :user_id => user_a.id, :task_id => task_a.id) }
+    let!(:comment_a) { FactoryBot.create(:meal_comment, :comment => 'ユーザーAの食事タスクのコメント', :user_id => user_a.id, :task_id => task_a.id) }
 
     context "ユーザーAがログインしているとき" do
       let(:login_user) { user_a }

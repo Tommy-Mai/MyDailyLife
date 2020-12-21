@@ -6,11 +6,11 @@ describe "その他コメント管理機能テスト", :type => :system  do
 
   before do
     # その他タグの作成
-    FactoryBot.find_or_create(:task_tag, :id => 1, :name => "映画", :user_id => user_a.id)
+    FactoryBot.create(:task_tag, :id => 1, :name => "映画", :user_id => user_a.id)
   end
 
   # 作成者がユーザーAであるその他タスクを作成する
-  let!(:task_a) { FactoryBot.find_or_create(:task, :id => 1, :name => '最初のその他タスク', :description => 'その他タスクテスト投稿', :user => user_a, :task_tag_id => 1, :date => Time.zone.now) }
+  let!(:task_a) { FactoryBot.create(:task, :id => 1, :name => '最初のその他タスク', :description => 'その他タスクテスト投稿', :user => user_a, :task_tag_id => 1, :date => Time.zone.now) }
 
   before do
     # letで定義したユーザーでログインする
@@ -22,7 +22,7 @@ describe "その他コメント管理機能テスト", :type => :system  do
 
   describe "その他タスクのコメント表示機能" do
     # ユーザーAがtask_aのコメントを作成
-    let!(:comment_a) { FactoryBot.find_or_create(:task_comment, :comment => 'ユーザーAのその他タスクのコメント', :user_id => user_a.id, :task_id => task_a.id) }
+    let!(:comment_a) { FactoryBot.create(:task_comment, :comment => 'ユーザーAのその他タスクのコメント', :user_id => user_a.id, :task_id => task_a.id) }
 
     context "ユーザーAがログインしているとき" do
       let(:login_user) { user_a }
