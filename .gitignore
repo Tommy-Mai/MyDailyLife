@@ -123,8 +123,5 @@ yarn-debug.log*
 # 本番用初期データ
 /db/fixtures/production
 
-# 画像データ
-/app/assets/images/*.jpg
-
 # ER図
 erd.pdf
