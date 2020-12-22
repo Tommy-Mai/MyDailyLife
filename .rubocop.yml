@@ -12,8 +12,18 @@ AllCops:
 Metrics/AbcSize:
   Max: 40
 
+Metrics/BlockLength:
+  Max: 40
+
+Metrics/ClassLength:
+  Max: 150
+
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
+
+Naming/HeredocDelimiterNaming:
+  Exclude:
+    - 'app/controllers/home_controller.rb'
 
 Style/AsciiComments:
   Enabled: false
@@ -37,6 +47,9 @@ Style/FrozenStringLiteralComment:
 Style/GuardClause:
   Exclude:
     - 'app/controllers/application_controller.rb'
+    - 'app/controllers/meal_tasks_controller.rb'
+    - 'app/controllers/tasks_controller.rb'
+
 
 Style/HashSyntax:
   EnforcedStyle: ruby19

@@ -1,0 +1,12 @@
+p ユーザーからお問い合わせがありました。
+
+p ▼名前
+p= @name
+- unless @email.nil?
+  p ▼メールアドレス
+  p= @email
+- unless @user_id.nil?
+  p ▼ユーザーID
+  p= @user_id
+p お問い合わせ内容
+p= simple_format(@contents)

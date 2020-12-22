@@ -1,4 +1,17 @@
 $(document).on('turbolinks:load', function(){
+  // ここから検索窓トグル
+  $('#searchtoggle_button').on("click",function() {
+    $('#searchtoggle_menu').slideToggle();
+    if($(this).hasClass('fas fa-search-plus')){
+      $(this).removeClass('fas fa-search-plus');
+      $(this).addClass('fas fa-search-minus');
+    } else {
+      $(this).removeClass('fas fa-search-minus');
+      $(this).addClass('fas fa-search-plus');
+    };
+  });
+  // ここまで検索窓トグル
+
   // ここからリンク先案内吹き出し
   $('#pop_up').hide();
   

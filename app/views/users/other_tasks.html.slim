@@ -1,15 +1,27 @@
-.main.user-show
+.user-show
   .container
     = render partial: 'common_show', locals: { user: @user}
 
+    #user_other
+      #other_pop_up
+          div
+            - if @user.task_tags.empty?
+              p.arrow_box.other_arrow_box その他タグ一覧ページへ
+            - elsif  @user.tasks.empty?
+              p.arrow_box.other_arrow_box その他タスク作成ページへ
+            - else
+              p.arrow_box.other_arrow_box 検索結果をリセット
+
     ul.user-tabs.search_tabs
       li= link_to("食事関連", "/users/#{@user.id}")
-      li.active
-        - if @user.task_tags.empty? || @user.tasks.exists?
+      li.active#other_pop_trigger
+        - if @user.task_tags.empty?
           = link_to("その他", task_tags_path)
-        - else
+        - elsif  @user.tasks.empty?
           = link_to("その他", new_task_path)
-      li= link_to("メモ", "/")
+        - else
+          = link_to("その他", "/users/#{@user.id}/other_tasks")
+      li= link_to("メモ", "/users/#{@user.id}/memos")
       i.fas.fa-search-plus#searchtoggle_button
 
     #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|
@@ -22,15 +34,15 @@
               default: false,
               include_blank: true,
               use_month_numbers: true,
-              start_year: 2000,
+              start_year: 2020,
               end_year: (Time.now.year+10),
               date_separator:'%s'),
               '年','月')+'日から'
-            = raw sprintf(f.date_select(:date_lteq,
+            = raw sprintf(f.date_select(:date_lteq_end_of_day,
               default: false,
               include_blank: true,
               use_month_numbers: true,
-              start_year: 2000,
+              start_year: 2020,
               end_year: (Time.now.year+10),
               date_separator:'%s'),
               '年','月')+'まで'

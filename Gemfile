@@ -106,6 +106,10 @@ gem 'rack-dev-mark'
 # font-awesome
 gem 'font-awesome-sass'
 
+# デバック用gem
+gem 'pry-byebug'
+gem 'pry-rails'
+
 # カレンダー作成gem
 gem 'simple_calendar', '~> 2.0'
 
@@ -123,3 +127,14 @@ gem 'ransack'
 
 # ページネーションのためのgem
 gem 'kaminari'
+
+# 環境変数管理gem
+gem 'dotenv-rails'
+
+# ER図作成用gem
+group :development, :test do
+  gem 'rails-erd'
+end
+
+# Slack通知用gem
+gem 'slack-api'

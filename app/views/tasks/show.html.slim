@@ -1,4 +1,4 @@
-.main.tasks-show
+.tasks-show
   .container
     .back-task-show.task_show_margin
       - if params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
@@ -32,12 +32,59 @@
         .task-menus
           - if params[:date]
             = link_to "/tasks/#{@task.id}/edit?date=#{params[:date]}" do
-              i.fas.fa-pencil-alt
+              i.fas.fa-edit
           - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
             = link_to "/tasks/#{@task.id}/edit?task_tag=#{params[:task_tag]}" do
-              i.fas.fa-pencil-alt
+              i.fas.fa-edit
           - else
             = link_to edit_task_path(@task) do
-              i.fas.fa-pencil-alt
+              i.fas.fa-edit
           = link_to @task, :method => :delete, data: { confirm: "タスク「#{@task.name}」を削除します。よろしいですか？"} do
             i.fas.fa-trash-alt
+
+
+    .comment-container
+      - unless @date_x.nil?
+        .comment_date id="comment_date#{@date_x}"= @date_x
+      - @task_comments.each do |content|
+        - unless content.created_at.to_date == @date_x
+          - @date_x = content.created_at.to_date
+          .comment_date id="comment_date#{@date_x}"= @date_x
+
+        - if content.comment
+          .right_block_parent
+            .right_block id="comment#{content.id}"
+              .right_comment_block
+                .right_balloon.balloon_comment
+                  - content_comment = safe_join(content.comment.split("\n"),tag(:br))
+                  = raw Rinku.auto_link(content_comment, :all, 'target="_blank"')
+              .right_item_block
+                .comment_destroy_right
+                  = link_to "/task_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "コメントを削除します。"} do
+                    i.fas.fa-trash-alt
+                .comment_time_right
+                  = l content.created_at, format: :hm
+
+        - if content.image.attached?
+          .right_block_parent
+            .right_block id="comment#{content.id}"
+              .right_balloon#image_ballon
+                = image_tag content.image if content.image.attached?
+              .right_item_block
+                  .comment_destroy_right
+                    = link_to "/task_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "画像を削除します。"} do
+                      i.fas.fa-trash-alt
+                  .comment_time_right
+                    = l content.created_at, format: :hm
+
+    .comment_new-container
+      = form_with model: @task_comment, local: true, enctype: "multipart/form-data", id: "comment-form" do |f|
+        .comment_image_form
+          i.fas.fa-image
+          = f.file_field :image, id: 'comment_image'
+            .comment_hidden= f.file_field :image
+        = f.text_area :comment, id: 'comment_text', placeholder: 'Aa', maxlength: 140
+        .comment_form_btn= f.button :type => "submit" do
+          i.fas.fa-paper-plane
+
+        = f.text_field :task_id, name: "current_user_name", type:"hidden", value: @task.id, id: 'current_task_id'

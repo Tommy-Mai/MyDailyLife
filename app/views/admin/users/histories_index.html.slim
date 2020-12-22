@@ -1,0 +1,45 @@
+.admin_usage-histories
+
+  h1.form-heading
+    | ユーザー利用履歴
+    i.fas.fa-search-plus#searchtoggle_button
+  #searchtoggle_menu= search_form_for @q, url: "/admin/users/histories_index" do |f|
+    .form.search_form
+      .search_heading 利用履歴検索
+      .form-body.search_form_body
+        = f.label :user_id_eq, 'ユーザーID(完全一致)'
+        = f.search_field :user_id_eq
+        = f.label :timeout_eq, 'タイムアウト(true/flase)'
+        = f.search_field :timeout_eq
+        = f.submit
+  table
+    tr
+      th ユーザーID
+      td ログイン時刻
+      td ログアウト時刻
+      td 利用時間
+      td 最後の行動時間
+      td タイムアウト
+      td タイムアウト時刻
+      td アクション回数
+      td 食事タスク作成回数
+      td その他タスク作成回数
+      td その他タグ作成回数
+      td コメント作成回数
+      td メモ作成回数
+    - unless @histories.nil?
+      - @histories.each do |history|
+        tr
+          th= history.user_id
+          td= history.login_at
+          td= history.logout_at
+          td= history.utilization_time
+          td= history.last_activity_at
+          td= history.timeout
+          td= history.timeout_time
+          td= history.action_count
+          td= history.mealtask_create_count
+          td= history.othertask_create_count
+          td= history.tag_create_count
+          td= history.comment_create_count
+          td= history.memo_create_count

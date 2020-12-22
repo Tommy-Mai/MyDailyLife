@@ -1,0 +1,106 @@
+@import "color_folder";
+
+#new_memo_trigger a {
+  margin-left: 1px;
+  color: white;
+  font-weight: 500;
+  background-color: $theme-color;
+  border-radius: 2px;
+  border-bottom: 2px solid $theme-color;
+}
+
+#new_memo_trigger a:hover {
+  color: white;
+  background-color: $theme-color-dark;
+  border-bottom: 2px solid $theme-color-dark;
+}
+
+// 新規作成・編集モーダル
+.memo_parent {
+  text-align: left;
+}
+
+#memo_description, #memo_description_edit {
+  min-height: 200px;
+}
+
+// メモ一覧
+.memo-index-item {
+  padding: 5px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  position: relative;
+  min-height: 80px;
+  z-index: 5;
+  text-align: left;
+}
+
+.memo-name {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 80px;
+}
+
+// 詳細表示
+.memo_description-trigger {
+  font-size: 24px;
+  line-height: 80px;
+  float: right;
+  color: $word-gray;
+}
+
+.memo_description-trigger i:hover {
+  color: $word-black;
+}
+
+.memo-description-item {
+  padding: 20px 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  position: relative;
+  height: 265px;
+  overflow: hidden;
+  z-index: 5;
+  text-align: left;
+}
+
+.memo-description {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.memo_trash {
+  position: absolute;
+  width: 95%;
+  bottom: 20px;
+  left: 0;
+  text-align: right;
+  float: right;
+}
+
+.memo_trash p {
+  display: inline-block;
+}
+
+.memo_trash a {
+  display: inline-block;
+  width: 15px;
+  margin-left: 10px;
+  display: inline-block;
+  color: $word-gray;
+}
+
+.memo_trash a:hover {
+  color: $word-black;
+}
+
+// ページネーション
+#paginate_memo .pagination{
+  margin-bottom: 0 ;
+}
+
+.total_memos {
+  margin-bottom: 20px;
+}

@@ -1,18 +1,22 @@
 Rails.application.routes.draw do
 
-  root :to => 'home#top'
+  root 'home#top'
   resources :meal_tasks, :except => :index
   resources :tasks, :except => :index
   resources :task_tags, :except => [:new, :edit]
+  resources :meal_comments, :only => [:create, :destroy]
+  resources :task_comments, :only => [:create, :destroy]
+  resources :user_memos, :only => [:create, :update, :destroy]
 
   resources :users, :except => :index
   get "users/:id/other_tasks" => "users#other_tasks"
-  get "/meal_tasks" => "users#show"
-  get "/tasks" => "users#other_tasks"
+  get "users/:id/memos" => "users#memos"
+  get "/users" => "users#new"
 
   namespace :admin do
     get 'users/index'
     delete 'users/:id/destroy' => "users#destroy"
+    get 'users/histories_index'
   end
 
   get '/calendar/index'
@@ -34,7 +38,9 @@ Rails.application.routes.draw do
 
   get "/about" => "home#about"
   get "/policy" => "home#policy"
-  get "/contact" => "home#contact"
+  get "/privacy_policy" => "home#privacy_policy"
   get "/faqs" => "home#faqs"
+  post "/inquiry" => "home#send_inquiry"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

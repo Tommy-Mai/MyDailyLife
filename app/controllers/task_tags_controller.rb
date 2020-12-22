@@ -28,25 +28,31 @@ class TaskTagsController < ApplicationController
         format.json
       end
     else
-      flash[:notice] = "エラー：タグを更新できませんでした。\n・空白のタグは作成できません。\n・同じ名前のタグは登録できません。"
-      render("/task_tags/new")
+      redirect_to task_tags_path
     end
   end
 
   def update
-    if @task_tag.update(task_tag_params)
+    if @task_tag.protected == true
+      flash[:notice] = "編集できないタグです。"
+      redirect_to task_tags_url
+    elsif @task_tag.update(task_tag_params)
       respond_to do |format|
         format.html { redirect_to task_tags_path }
         format.json
       end
     else
-      flash[:notice] = "エラー：タグを更新できませんでした。\n・空白のタグは作成できません。\n・同じ名前のタグは登録できません。"
-      render("/task_tags/edit")
+      redirect_to task_tags_path
     end
   end
 
   def destroy
-    @task_tag.destroy
+    if @task_tag.protected == true
+      flash[:notice] = "削除できないタグです。"
+      redirect_to task_tags_url
+    else
+      @task_tag.destroy
+    end
   end
 
   private

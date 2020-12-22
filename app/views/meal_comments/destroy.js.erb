@@ -1,0 +1,12 @@
+document.querySelector('#comment<%= @meal_comment.id %>').style.display = 'none';
+
+var message = document.createElement('div');
+message.className = 'flash tag_created';
+message.innerText = '削除しました。'
+document.querySelector('.tag_changed').insertAdjacentElement('afterbegin', message);
+setTimeout(function(){
+  $('.tag_created').fadeOut('slow')
+} ,2000);
+setTimeout(function(){
+  $(".tag_created").remove();
+}, 4000);

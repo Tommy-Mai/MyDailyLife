@@ -10,10 +10,10 @@
         = f.text_field :name
         = f.label :email
         = f.email_field :email
-        = f.label :image_name
-        = f.file_field :image_name
-        = f.label :password
+        = f.label :password, 'パスワード(英数字6文字以上推奨)'
         = f.password_field :password
         = f.label :password_confirmation
         = f.password_field :password_confirmation
+        = f.label :image_name
+        = f.file_field :image_name
     = f.submit nil
