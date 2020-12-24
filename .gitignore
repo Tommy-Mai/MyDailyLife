@@ -28,7 +28,7 @@
 
 # 以下、手動で追加
 # original
-config/database.yml
+/config/database_replica.yml
 
 # テストの必要のないモデル
 meal_tag_test.rb
@@ -111,7 +111,7 @@ node_modules/
 
 # Ignore yarn files
 /yarn-error.log
-yarn-debug.log*
+yarn-debug.log*'
 .yarn-integrity
 
 # Ignore uploaded files in development
@@ -119,9 +119,6 @@ yarn-debug.log*
 !/storage/.keep
 
 # End of https://www.toptal.com/developers/gitignore/api/rails
-
-# 本番用初期データ
-/db/fixtures/production
 
 # ER図
 erd.pdf
