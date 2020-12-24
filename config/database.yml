@@ -14,8 +14,14 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: ENV['MYDAILYLIFE_DATABASE_PASSWORD]
   socket: /tmp/mysql.sock
+  # timeout: 5000
+  # username: root
+  # password: password
+  # socket: /tmp/mysql.sock
+  # host: db 
+
 
 development:
   <<: *default
@@ -49,6 +55,9 @@ test:
 #
 production:
   <<: *default
-  database: MyDailyLife_production
-  username: MyDailyLife
-  password: <%= ENV['MYDAILYLIFE_DATABASE_PASSWORD'] %>
+  # database: MyDailyLife_production
+  # username: MyDailyLife
+  # password: <%= ENV['MYDAILYLIFE_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
