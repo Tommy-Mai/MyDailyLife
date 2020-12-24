@@ -48,6 +48,12 @@ group :development, :test do
 
   # Use mysql as the database for Active Record
   gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+
+  # ER図作成用gem
+  gem 'rails-erd'
+
+  # 環境変数管理gem
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -128,14 +134,6 @@ gem 'ransack'
 
 # ページネーションのためのgem
 gem 'kaminari'
-
-# 環境変数管理gem
-gem 'dotenv-rails'
-
-# ER図作成用gem
-group :development, :test do
-  gem 'rails-erd'
-end
 
 # Slack通知用gem
 gem 'slack-api'

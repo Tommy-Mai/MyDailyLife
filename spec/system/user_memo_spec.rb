@@ -40,7 +40,7 @@ describe "メモ管理機能テスト", :type => :system  do
         find(:css, 'i.fas.fa-bars').click
         find(:css, 'i.fas.fa-trash-alt.memo_trash-btn').click
         expect{
-          wait = Selenium::WebDriver::Wait.new ignore: Selenium::WebDriver::Error::NoAlertPresentError
+          wait = Selenium::WebDriver::Wait.new(timeout: 60)
           wait.until { page.accept_confirm }
           within '.flash' do
             expect(page).to have_content 'メモを削除しました。'
