@@ -66,8 +66,10 @@ describe "その他タグ管理機能", :type => :system do
     describe "タグ削除ボタンを押して" do
       it '確認画面で削除に同意を選ぶと「映画」タグが削除される' do
         find(:css, 'i.fas.fa-trash-alt').click
+        timeout = Selenium::WebDriver::Wait.new(timeout: 60)
+        timeout
         expect{
-          wait = Selenium::WebDriver::Wait.new(timeout: 60)
+          wait = Selenium::WebDriver::Wait.new ignore: Selenium::WebDriver::Error::NoAlertPresentError
           wait.until { page.accept_confirm }
           within '.flash' do
             expect(page).to have_content 'タグ「映画」を削除しました。'

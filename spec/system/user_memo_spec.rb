@@ -39,8 +39,10 @@ describe "メモ管理機能テスト", :type => :system  do
       it 'ユーザーAが作成した最初のメモが削除される' do
         find(:css, 'i.fas.fa-bars').click
         find(:css, 'i.fas.fa-trash-alt.memo_trash-btn').click
+        timeout = Selenium::WebDriver::Wait.new(timeout: 60)
+        timeout
         expect{
-          wait = Selenium::WebDriver::Wait.new(timeout: 60)
+          wait = Selenium::WebDriver::Wait.new ignore: Selenium::WebDriver::Error::NoAlertPresentError
           wait.until { page.accept_confirm }
           within '.flash' do
             expect(page).to have_content 'メモを削除しました。'
