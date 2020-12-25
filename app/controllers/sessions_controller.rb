@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       if user.logged_in == false
         user_login
-      elsif user.logged_in == true && user.last_activity_at.to_time.since(2.minutes) < Time.current
+      elsif user.logged_in == true && user.last_activity_at.to_time.since(31.minutes) < Time.current
         test_user_reset
         user_login
       else
