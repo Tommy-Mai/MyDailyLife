@@ -9,12 +9,3 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 SeedFu.seed
-
-p ActiveJob::Base.queue_adapter
-
-test_user = User.find(1)
-test_user.image_name.purge
-test_user.image_name.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'icon_penguin.jpg')), filename: 'icon_penguin.jpg', content_type: 'image/jpg')
-admin_user = User.find(2)
-admin_user.image_name.purge
-admin_user.image_name.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'icon_penguin.jpg')), filename: 'icon_penguin.jpg', content_type: 'image/jpg')
