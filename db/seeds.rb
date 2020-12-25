@@ -9,3 +9,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 SeedFu.seed
+
+test_user = User.find(1)
+test_user.image_name.attach(io: File.open('app/assets/images/icon_penguin.jpg'), filename: 'test.jpg', content_type: 'image/jpg')
+admin_user = User.find(2)
+admin_user.image_name.attach(io: File.open('app/assets/images/icon_penguin.jpg'), filename: 'test.jpg', content_type: 'image/jpg')
