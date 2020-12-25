@@ -42,7 +42,7 @@ describe "メモ管理機能テスト", :type => :system  do
         find(:css, 'i.fas.fa-bars').click
         find(:css, 'i.fas.fa-trash-alt.memo_trash-btn').click
         expect{
-          $wait.until { page.accept_confirm }
+          $wait.until { page.accept_alert 'メモを削除してよろしいですか？' }
           within '.flash' do
             expect(page).to have_content 'メモを削除しました。'
           end
