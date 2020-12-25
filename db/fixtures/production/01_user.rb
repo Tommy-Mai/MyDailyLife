@@ -14,10 +14,10 @@ User.seed_once(
   {
     id: 2,
     name: "管理者",
-    email: ENV[PRODUCTION_SEED_ADMIN_EMAIL],
+    email: ENV['PRODUCTION_SEED_ADMIN_EMAIL'],
     admin: true,
-    password: ENV[PRODUCTION_SEED_ADMIN_PASSWORD],
-    password_confirmation: ENV[PRODUCTION_SEED_ADMIN_PASSWORD],
+    password: ENV['PRODUCTION_SEED_ADMIN_PASSWORD'],
+    password_confirmation: ENV['PRODUCTION_SEED_ADMIN_PASSWORD'],
     protected: true
   }
 )
