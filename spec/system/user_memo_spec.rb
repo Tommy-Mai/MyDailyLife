@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe "メモ管理機能テスト", :type => :system  do
+  $wait = Selenium::WebDriver::Wait.new(:timeout => 120)
+
   # ユーザーをletで定義
   let(:user_a) { FactoryBot.find_or_create(:user, :name => 'ユーザーA', :email => 'a@example.com', :password => 'password', :admin => true) }
   let(:user_b) { FactoryBot.find_or_create(:user, :name => 'ユーザーB', :email => 'b@example.com', :password => 'password', :admin => false) }
@@ -40,8 +42,7 @@ describe "メモ管理機能テスト", :type => :system  do
         find(:css, 'i.fas.fa-bars').click
         find(:css, 'i.fas.fa-trash-alt.memo_trash-btn').click
         expect{
-          wait = Selenium::WebDriver::Wait.new(timeout: 60)
-          wait.until { page.accept_confirm }
+          $wait.until { page.accept_alert 'メモを削除してよろしいですか？' }
           within '.flash' do
             expect(page).to have_content 'メモを削除しました。'
           end

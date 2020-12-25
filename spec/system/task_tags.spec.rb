@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe "その他タグ管理機能", :type => :system do
+  $wait = Selenium::WebDriver::Wait.new(:timeout => 120)
+
   # ユーザーをletで定義
   let(:user_a) { FactoryBot.find_or_create(:user, :name => 'ユーザーA', :email => 'a@example.com', :password => 'password', :admin => true) }
   let(:user_b) { FactoryBot.find_or_create(:user, :name => 'ユーザーB', :email => 'b@example.com', :password => 'password', :admin => false) }
@@ -67,8 +69,7 @@ describe "その他タグ管理機能", :type => :system do
       it '確認画面で削除に同意を選ぶと「映画」タグが削除される' do
         find(:css, 'i.fas.fa-trash-alt').click
         expect{
-          wait = Selenium::WebDriver::Wait.new(timeout: 60)
-          wait.until { page.accept_confirm }
+          $wait.until { page.accept_alert }
           within '.flash' do
             expect(page).to have_content 'タグ「映画」を削除しました。'
           end
