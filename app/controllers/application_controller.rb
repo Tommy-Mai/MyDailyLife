@@ -93,7 +93,7 @@ class ApplicationController < ActionController::Base
   end
 
   def time_out
-    if current_user && session[:last_activity_at].to_time.since(1.minutes) > Time.current
+    if current_user && session[:last_activity_at].to_time.since(30.minutes) > Time.current
       session_last_activity_at if current_user
       # アクセス履歴のアクション回数とその日時を更新
       usage_histories.update(
