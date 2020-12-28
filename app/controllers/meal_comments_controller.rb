@@ -4,7 +4,7 @@ class MealCommentsController < ApplicationController
   def create
     @meal_comment = MealComment.new(meal_comment_params)
     images_count
-    if @images_count >= 5
+    if @images_count >= 5 && params[:image]
       render template: 'tasks/show', notice: "投稿できる画像は1ユーザーにつき5枚までです。"
     elsif @meal_comment.save
       comment_create
