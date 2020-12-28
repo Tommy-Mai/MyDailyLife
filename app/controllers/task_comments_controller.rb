@@ -4,7 +4,7 @@ class TaskCommentsController < ApplicationController
   def create
     @task_comment = TaskComment.new(task_comment_params)
     images_count
-    if @images_count >= 5
+    if @images_count >= 5 && params[:image]
       render template: 'tasks/show', notice: "投稿できる画像は1ユーザーにつき5枚までです。"
     elsif @task_comment.save
       comment_create

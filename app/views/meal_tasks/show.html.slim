@@ -63,7 +63,7 @@
           .right_block_parent
             .right_block id="comment#{content.id}"
               .right_balloon#image_ballon
-                = image_tag content.image if content.image.attached?
+                = link_to image_tag(content.image), content.image, :rel => "lightbox" if content.image.attached?
               .right_item_block
                   .comment_destroy_right
                     = link_to "/meal_comments/#{content.id}", :method => :delete, :remote => true, data: { confirm: "画像を削除します。"} do

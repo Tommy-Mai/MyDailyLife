@@ -240,6 +240,7 @@
   background: none;
   padding: 0;
   box-shadow: 0 2px 6px #c1ced7;
+  vertical-align: bottom;
 }
 
 #image_ballon:after,
@@ -249,6 +250,18 @@
 
 #image_ballon:after, #image_ballon:before {
   display: none;
+}
+
+#image_ballon a{
+  display: block;
+  width: 250px;
+  height: 200px;
+  position: relative;
+  border: none;
+  border-radius: 15px;
+  clear: both;
+  float: right;
+  background: none;
 }
 
 // .left_item_block {

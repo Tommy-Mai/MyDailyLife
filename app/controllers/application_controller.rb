@@ -141,6 +141,8 @@ class ApplicationController < ActionController::Base
       current_user.task_tags.where(protected: false).destroy_all if current_user.task_tags.exists?
       current_user.meal_tasks.where(protected: false).destroy_all if current_user.meal_tasks.exists?
       current_user.user_memos.where(protected: false).destroy_all if current_user.user_memos.exists?
+      current_user.task_comments.where(protected: false).destroy_all if current_user.task_comments.exists?
+      current_user.meal_comments.where(protected: false).destroy_all if current_user.meal_comments.exists?
     end
   end
 

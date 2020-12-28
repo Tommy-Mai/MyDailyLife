@@ -59,7 +59,9 @@ $(document).on('turbolinks:load', function(){
 
     let imageSrc = `<div class="right_block" id="comment${content.id}">
                       <div class="right_balloon" id="image_ballon">
-                        <img src="${content.image}">
+                        <a rel="lightbox" href="${content.image}">
+                          <img src="${content.image}">
+                        </a>
                       </div>
                       <div class="right_item_block">
                         <div class="comment_destroy_right">
