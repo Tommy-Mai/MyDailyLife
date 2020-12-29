@@ -196,6 +196,8 @@ describe '食関連タスク管理機能', :type => :system do
       # タスク作成後にユーザー詳細の食事関連タブにリダイレクト
       visit "/users/#{user_a.id}"
       find(:css, 'i.fas.fa-search-plus').click
+      expect(page).to have_content '日付選択検索正解タスク'
+      expect(page).to have_content '複数条件絞り込み'
     end
 
     context "日付を指定して検索して" do

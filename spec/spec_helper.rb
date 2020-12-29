@@ -15,6 +15,9 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'capybara/rspec'
+require 'selenium-webdriver'
+
+driver =Selenium::WebDriver.for :chrome
 
 RSpec.configure do |config|
   config.include Capybara::DSL

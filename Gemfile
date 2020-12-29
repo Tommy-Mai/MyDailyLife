@@ -141,3 +141,6 @@ gem 'slack-api'
 group :production do
   gem 'pg'
 end
+
+# AWSのS3に画像を保存できるようにするgem
+gem "aws-sdk-s3"
