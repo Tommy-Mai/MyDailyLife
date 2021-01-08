@@ -85,7 +85,7 @@
 
               p #{current_user.tasks.where(task_tag_id: tag.id).count}件
 
-            .task-menus.tag-index-menu
+            .task-menus.tag-index-menu.phone-size_task-menus
               = link_to "/tasks/new?task_tag=#{tag.id}" do
                 |タスク作成
                 i.fas.fa-pencil-alt

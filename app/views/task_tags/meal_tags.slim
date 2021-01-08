@@ -27,7 +27,7 @@
 
           p #{current_user.meal_tasks.where(meal_tag_id: tag.id).count}件
 
-        .task-menus.tag-index-menu
+        .task-menus.tag-index-menu.phone-size_task-menus
           = link_to"/meal_tasks/new?meal_tag=#{tag.id}" do
             |タスク作成
             i.fas.fa-pencil-alt

@@ -16,7 +16,7 @@
         = "全#{@tasks.total_count}件"
     
     - @tasks.each do |task|
-      .tasks-index-item
+      .tasks-index-item.phone-size_tasks-index-item
 
         .task-name
           = link_to(task.name, "/tasks/#{task.id}?task_tag=#{task.task_tag_id}")

@@ -81,8 +81,8 @@
       = form_with model: @task_comment, local: true, enctype: "multipart/form-data", id: "comment-form" do |f|
         .comment_image_form
           i.fas.fa-image
-          = f.file_field :image, id: 'comment_image'
-            .comment_hidden= f.file_field :image
+          = f.file_field :image, id: 'comment_image', accept:"image/*"
+            .comment_hidden= f.file_field :image, accept:"image/*"
         = f.text_area :comment, id: 'comment_text', placeholder: 'Aa', maxlength: 140
         .comment_form_btn= f.button :type => "submit" do
           i.fas.fa-paper-plane

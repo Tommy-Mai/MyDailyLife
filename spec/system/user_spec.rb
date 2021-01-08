@@ -115,7 +115,6 @@ describe 'ユーザー管理機能', :type => :system do
 
         it "表示されるべきヘッダーが表示されている" do
           within '.header-menus' do
-            expect(page).to have_content user_a.name
             expect(page).to have_content '今日のタスク'
             expect(page).to have_content 'タグ一覧'
             expect(page).to have_content 'ログアウト'
@@ -141,7 +140,6 @@ describe 'ユーザー管理機能', :type => :system do
 
         it "表示されるべきヘッダーが表示されている" do
           within '.header-menus' do
-            expect(page).to have_content user_b.name
             expect(page).to have_content '今日のタスク'
             expect(page).to have_content 'タグ一覧'
             expect(page).to have_content 'ログアウト'

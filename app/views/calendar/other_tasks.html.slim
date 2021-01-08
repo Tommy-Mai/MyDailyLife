@@ -33,7 +33,7 @@
       li.active#other_pop_trigger= link_to("その他", "/task_tags?start_date=#{@date.strftime('%Y-%m-%d')}")
 
     - @tasks.each do |task|
-      .tasks-index-item
+      .tasks-index-item.phone-size_tasks-index-item
         .task-name
           = link_to(task.name, task_path(task))
 

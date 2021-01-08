@@ -1,4 +1,21 @@
 $(document).on('turbolinks:load', function(){
+  // ここからヘッダーのハンバーガーメニュー
+  $('.responsive-header_content').hide();
+  $('.responsive-header_icon').children("i").on('click',function(){
+    if($(this).hasClass('opened')) {
+      $(this).removeClass('opened');
+      $(this).removeClass('fas fa-minus');
+      $(this).addClass('fas fa-bars');
+      $('.responsive-header_content').fadeOut(500);
+    } else {
+      $(this).addClass('opened');
+      $(this).removeClass('fas fa-bars');
+      $(this).addClass('fas fa-minus');
+      $('.responsive-header_content').fadeIn(500);
+    };
+  });
+  // ここまでヘッダーのハンバーガーメニュー
+  
   // ここから検索窓トグル
   $('#searchtoggle_button').on("click",function() {
     $('#searchtoggle_menu').slideToggle();

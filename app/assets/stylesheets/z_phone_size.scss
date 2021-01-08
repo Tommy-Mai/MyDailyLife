@@ -1,0 +1,272 @@
+@import "color_folder";
+@media screen and (min-width: 481px) {
+  .phone-size {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  // 全ページ共通
+  .pc-size {
+    display: none;
+  }
+
+  // モーダル
+  .modal__content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  #modal_close_btn, #modal_close_btn_edit, #modal_close_btn_memo-new, #modal_close_btn_memo-edit {
+    left: 0;
+    right: 20px;
+    top: 25px;
+  }
+
+  .modal__content h1 {
+    font-size: 18px;
+  }
+
+  // ヘッダー
+  header {
+    z-index: auto;
+  }
+
+  .responsive-header_icon {
+    display: inline-block;
+    position: absolute;
+    height: 64px;
+    top: 0px;
+    right: 20px;
+    line-height: 64px;
+    color: white;
+    float: right;
+  }
+
+  .responsive-header_icon p {
+    font-size: 14px;
+    display: inline-block;
+    padding-right: 20px;
+  }
+
+  .responsive-header_icon a {
+    color: white;
+  }
+
+  .responsive-header_icon i {
+    font-size: 26px;
+    transform: translateY(15%);
+    -webkit-transform: translateY(15%);
+  }
+
+  .responsive-header_content {
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 19;
+    position: relative;
+  }
+
+  .responsive-header_content a {
+    z-index: 19;
+  }
+
+  .header-logo {
+    width: 100%;
+  }
+
+  .header-menus {
+    padding: 0;
+  }
+
+  .header-menus li {
+    display: inline-block;
+    width: 100%;
+    background-color: $theme-color-dark;
+    border-bottom: 3px solid $theme-color-dark-shadow;
+  }
+
+  .header-menus a {
+    float: right;
+    padding-right: 20px;
+  }
+
+  i.fas.fa-user-circle {
+    line-height: 1;
+  }
+
+  // フッター
+  .main {
+    padding-bottom: 260px;
+    z-index: auto;
+  }
+
+  #footer {
+    padding-bottom: 30px;
+    height: 230px;
+  }
+
+  .footer-block {
+    margin-left: 20px;
+  }
+
+  // "home"
+  .top-about_MDL, .test-user_login {
+    padding: 40px 10px;
+  }
+
+  // お問い合わせフォーム
+  .js-modal_inquiry .modal__content {
+    margin-top: 450px;
+  }
+
+  .js-modal_inquiry #modal_close_btn {
+    left: 300px;
+  }
+
+  // ログインフォーム
+  #phone-size_submit-btn input[type="submit"] {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+  }
+  #phone-size_test-login-btn {
+    margin: 0;
+  }
+  #phone-size_test-login-btn .test-user_form input[type="submit"] {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+  }
+
+  #phone-size_test-login-btn .add_margin-bottom input[type="submit"] {
+    margin-bottom: 60px;
+  }
+
+  // aboutページ
+  .about-header h1 {
+    font-size: 40px;
+  }
+
+  .about-container h2{
+    font-size: 25px;
+  }
+
+  .about-content-block p {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .about-test-login#phone-size_test-login-btn input[type="submit"] {
+    width: 100%;
+  }
+
+  // form
+  input[type="file"] {
+    font-size: 10px;
+  }
+
+  // タスク表示
+  .tasks-index-item {
+    padding: 20px 30px 30px;
+  }
+
+  .task-index-tag, .task-index-tag div a {
+    width: 100%;
+  }
+
+  .user-tabs a {
+    padding: 16px;
+    font-size: 12px;
+    line-height: 26px;
+  }
+
+  .user-tabs li.active {
+    border-bottom: 2px solid $theme-color-dark;
+  }
+
+  .tag-tabs {
+    border-bottom: 3px solid $theme-color-dark;
+  }
+
+  // タスク詳細
+  .tasks-show-item p {
+    font-size: 20px;
+  }
+
+  .tasks-show-item .description {
+    font-size: 14px;
+  }
+
+  .comment_new-container {
+    padding: 10px 5px;
+  }
+
+  .comment_new-container {
+    width: 100%;
+  }
+
+  .comment_new-container textarea {
+    width: 74%;
+  }
+
+  .comment_new-container i {
+    margin-left: 10px;
+    font-size: 18px;
+  }
+
+  .task-footer {
+    margin-top: 15px;
+  }
+
+  .who, .where, .task-menus {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 5px;
+  }
+
+  .task-menus {
+    padding-left: 77%;
+  }
+
+  .task-menus a {
+    margin-left: 5px;
+  }
+
+  .date a, .time {
+    font-size: 14px;
+  }
+
+  .who, .where {
+    font-size: 12px;
+  }
+
+  // コメント {
+  .right_balloon {
+    font-size: 14px;
+  }
+
+  // 戻るリンク
+  .back-task-show a {
+    width: 100%;
+  }
+
+  // 月別カレンダーページ
+  .container-calendar {
+    max-width: 100%;
+  }
+
+  // ユーザーページ
+  .phone-size_tasks-index-item {
+    padding: 60px 30px 30px;
+  }
+
+  .phone-size_task-menus {
+    padding-left: 0;
+  }
+
+  .search_tabs i {
+    padding: 16px 9px;
+  }
+}

@@ -39,7 +39,7 @@
       p ＊他のユーザーがテストユーザーでログイン中はテストユーザーとしてログインする事ができません。時間をおいて再度お試しいただくか、ユーザー登録してご利用ください。
       p ＊テストユーザーの編集・削除はできません。
 
-      .about-test-login
+      .about-test-login#phone-size_test-login-btn
         #test-login_btn= form_with url: login_path, scope: :session, local:true do |f|
           .form.test-user_form
             = f.hidden_field :email, value: 'sample@example.com'

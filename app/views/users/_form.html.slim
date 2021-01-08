@@ -15,5 +15,5 @@
         = f.label :password_confirmation
         = f.password_field :password_confirmation
         = f.label :image_name
-        = f.file_field :image_name
-    = f.submit nil
+        = f.file_field :image_name, accept:"image/*"
+    #phone-size_submit-btn= f.submit nil

@@ -62,7 +62,7 @@
           = f.submit
 
     - @tasks.each do |task|
-      .tasks-index-item
+      .tasks-index-item.phone-size_tasks-index-item
 
         .task-name
           = link_to(task.name, "/tasks/#{task.id}?user=#{task.user_id}")

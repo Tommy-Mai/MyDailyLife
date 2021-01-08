@@ -23,7 +23,7 @@
       li= link_to("その他", "/calendar/show/other_tasks?start_date=#{@date.strftime('%Y-%m-%d')}")
 
     - @meal_tasks.each do |task|
-      .tasks-index-item
+      .tasks-index-item.phone-size_tasks-index-item
         .task-name
           = link_to(task.name, meal_task_path(task))
 

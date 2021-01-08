@@ -6,6 +6,8 @@
     = date.day
     .task-count
       = link_to "/calendar/show?start_date=#{date.strftime('%Y-%m-%d')}" do
-        p 食事タスク #{meal_tasks.count}件
+        p.pc-size 食事タスク #{meal_tasks.count}件
+        p.phone-size 食 #{meal_tasks.count}
       = link_to "/calendar/show/other_tasks?start_date=#{date.strftime('%Y-%m-%d')}" do
-        p その他 #{@tasks.where(date: date.all_day).count}件
+        p.pc-size その他 #{@tasks.where(date: date.all_day).count}件
+        p.phone-size 他 #{@tasks.where(date: date.all_day).count}
