@@ -11,8 +11,7 @@ class TaskTagsController < ApplicationController
   end
 
   def meal_tags
-    @q = MealTag.ransack(params[:q])
-    @tags = @q.result(distinct: true)
+    @tags = MealTag.all.number
   end
 
   def show
