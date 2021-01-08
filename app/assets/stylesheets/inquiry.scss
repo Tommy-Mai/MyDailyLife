@@ -38,3 +38,21 @@
 .inquiry_information a:hover{
   color: $theme-color;
 }
+
+.js-modal_inquiry, .js-modal_new {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.modal__bg {
+  min-height: 825px;
+}
+
+body > div.js-modal-close_inquiry {
+  height: auto;
+}
+
+.js-modal_inquiry .modal__content #modal_close_btn {
+  min-height: 16px;
+}

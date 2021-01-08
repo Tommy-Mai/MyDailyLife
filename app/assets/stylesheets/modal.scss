@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 20;
+  z-index: 30;
 }
 
 .modal__bg{
@@ -16,6 +16,7 @@
   position: absolute;
   width: 100%;
 }
+
 .modal__content{
   background: white;
   left: 50%;
@@ -26,6 +27,11 @@
   width: 570px;
   border-radius: 4px;
 }
+
+#modal__content-high {
+  margin-top: 250px;
+}
+
 .modal__content .form {
   box-shadow: none;
 }
@@ -55,4 +61,5 @@
   font-size: 30px;
   float: right;
   padding: 0;
+  width: 16px;
 }

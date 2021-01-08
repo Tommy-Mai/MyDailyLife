@@ -15,9 +15,9 @@
             .form-group
               = f.label 'パスワード'
               = f.password_field :password, id: 'session_password'
-        = f.submit 'ログイン'
+        #phone-size_submit-btn= f.submit 'ログイン'
 
-    .test-user-login_btn
+    .test-user-login_btn#phone-size_test-login-btn 
       = form_with url: login_path, scope: :session, local:true do |f|
         .test-user_form
           = f.hidden_field :email, value: 'sample@example.com'

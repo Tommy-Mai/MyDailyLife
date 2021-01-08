@@ -138,6 +138,11 @@ header {
   font-size: 13px;
 }
 
+i.fas.fa-user-circle {
+  font-size: 26px;
+  line-height: 64px;
+}
+
 /* top ================================ */
 .swiper-container {
   text-align: center;
@@ -196,7 +201,7 @@ header {
 }
 
 .swiper-container img {
-  background-position:center center;
+  background-position: center center;
   background-size: cover;
   display: flex;
   align-items: center;

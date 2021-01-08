@@ -25,9 +25,33 @@ html
         - else
           a href="/" MyDailyLife
 
-      ul.header-menus
+      .phone-size
+        .responsive-header_icon
+          - if current_user
+            p= link_to user_path(current_user) do
+              i.fas.fa-user-circle
+          - else
+            p= link_to 'ログイン', login_path
+          i.fas.fa-bars
+        ul.header-menus.responsive-header_content
+          - if current_user
+            li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+            li= link_to "タグ一覧", "/meal_tags"
+            - if current_user.admin == true
+              li= link_to "ユーザー管理", admin_users_index_path
+              li= link_to "利用履歴", admin_users_histories_index_path
+            li= link_to 'ログアウト', logout_path, method: :delete
+          - else
+            li= link_to 'MyDailyLifeとは', "/about"
+            li= link_to '新規登録', new_user_path
+            li= link_to 'よくある質問', "/faqs"
+            li= link_to '利用規約', "/policy"
+            li= link_to 'プライバシーポリシー', "/privacy_policy"
+
+      ul.header-menus.pc-size
         - if current_user
-          li= link_to current_user.name, user_path(current_user)
+          li= link_to user_path(current_user) do
+              i.fas.fa-user-circle
           li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
           li= link_to "タグ一覧", "/meal_tags"
           - if current_user.admin == true
@@ -37,7 +61,7 @@ html
         - else
           li= link_to 'MyDailyLifeとは', "/about"
           li= link_to '新規登録', new_user_path
-          li= link_to 'ログイン', login_path
+          li.header-login= link_to 'ログイン', login_path
 
     - if flash[:notice]
       .flash.time-limit
