@@ -16,6 +16,7 @@
   position: absolute;
   width: 100%;
 }
+
 .modal__content{
   background: white;
   left: 50%;
@@ -26,6 +27,11 @@
   width: 570px;
   border-radius: 4px;
 }
+
+#modal__content-high {
+  margin-top: 250px;
+}
+
 .modal__content .form {
   box-shadow: none;
 }

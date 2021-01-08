@@ -1,11 +1,12 @@
 @import "color_folder";
-@media screen and (min-width: 481px) {
+
+@media screen and (min-width: 557px) {
   .phone-size {
     display: none;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 556px) {
   // 全ページ共通
   .pc-size {
     display: none;
