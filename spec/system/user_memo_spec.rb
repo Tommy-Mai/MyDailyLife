@@ -59,6 +59,7 @@ describe "メモ管理機能テスト", :type => :system  do
 
       context "正しく入力したとき" do
         before do
+          expect(page).to have_content "新規メモを作成する"
           fill_in name="name", :with => "メモ新規作成テスト"
           fill_in name="description",	:with => "新しくメモをつくる"
           click_button '保存する'
@@ -83,6 +84,7 @@ describe "メモ管理機能テスト", :type => :system  do
           click_link "新規メモ作成 +"
         end
         it 'エラー文が表示される' do
+          expect(page).to have_content "新規メモを作成する"
           click_button '保存する'
           expect(page.accept_confirm).to eq "エラー：メモを登録できませんでした。\n・タイトルが空白のメモは登録できません。"
         end
@@ -97,6 +99,7 @@ describe "メモ管理機能テスト", :type => :system  do
 
       context "正しく入力したとき" do
         before do
+          expect(page).to have_content "メモを編集する"
           fill_in name="name", :with => "メモ編集テスト"
           fill_in name="description",	:with => "メモ編集完了"
           click_button '更新する'
@@ -119,6 +122,7 @@ describe "メモ管理機能テスト", :type => :system  do
         end
         
         it 'エラー文が表示される' do
+          expect(page).to have_content "メモを編集する"
           fill_in name="name", :with => ""
           click_button '更新する'
           expect(page.accept_confirm).to eq "エラー：メモを更新できませんでした。\n・空白のメモは登録できません。"
