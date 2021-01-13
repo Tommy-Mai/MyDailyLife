@@ -1,19 +1,19 @@
 @import "color_folder";
 
-#new_memo_trigger a {
-  margin-left: 1px;
-  color: white;
-  font-weight: 500;
-  background-color: $theme-color;
-  border-radius: 2px;
-  border-bottom: 2px solid $theme-color;
-}
+// #new_memo_trigger a {
+//   margin-left: 1px;
+//   color: white;
+//   font-weight: 500;
+//   background-color: $theme-color;
+//   border-radius: 2px;
+//   border-bottom: 2px solid $theme-color;
+// }
 
-#new_memo_trigger a:hover {
-  color: white;
-  background-color: $theme-color-dark;
-  border-bottom: 2px solid $theme-color-dark;
-}
+// #new_memo_trigger a:hover {
+//   color: white;
+//   background-color: $theme-color-dark;
+//   border-bottom: 2px solid $theme-color-dark;
+// }
 
 // 新規作成・編集モーダル
 .memo_parent {

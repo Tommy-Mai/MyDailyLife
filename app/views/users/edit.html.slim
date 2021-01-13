@@ -2,3 +2,11 @@
   .container
     .form-heading アカウント編集
     = render partial: 'form', locals: { user: @user}
+
+    #account_edit
+      - if @user.id == 1
+        = link_to logout_path, :method => :delete, data: { confirm: "テストユーザーは削除できません。代わりにログアウトします。よろしいですか？"} do
+          i.fas.fa-trash-alt
+      - else
+        = link_to user, :method => :delete, data: { confirm: "ユーザー「#{@user.name}」を削除します。\nよろしいですか？"} do
+          i.fas.fa-trash-alt

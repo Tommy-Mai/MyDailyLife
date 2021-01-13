@@ -37,7 +37,6 @@
       li= link_to("食事関連", "/users/#{@user.id}")
       li= link_to("その他", "/users/#{@user.id}/other_tasks")
       li.active#other_pop_trigger= link_to("メモ", "/users/#{@user.id}/memos")
-      li#new_memo_trigger= link_to("新規メモ +", "")
       i.fas.fa-search-plus#searchtoggle_button
 
     #user_memo 
@@ -55,6 +54,8 @@
           = f.search_field :description_cont
           = f.submit
 
+    #new-task_tab.tasks-index-item.phone-size_tasks-index-item
+      #new_memo_trigger= link_to("新規メモ作成 +", new_meal_task_path)
     .memo_append-point
       - @memos.each do |memo|
         .edit_point

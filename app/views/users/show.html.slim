@@ -57,6 +57,8 @@
               = f.search_field :where_cont
           = f.submit
 
+    #new-task_tab.tasks-index-item.phone-size_tasks-index-item
+      = link_to("新規食事タスク作成 +", "/meal_tasks/new?user=#{@user.id}")
     - @meal_tasks.each do |task|
       .tasks-index-item.phone-size_tasks-index-item
 

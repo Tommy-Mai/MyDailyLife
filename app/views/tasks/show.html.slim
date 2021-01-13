@@ -6,7 +6,7 @@
       - elsif params[:user]
         = link_to("← ユーザーページに戻る","/users/#{@task.user_id}")
       - else
-        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{@task.date.strftime('%Y-%m-%d')}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show/other_tasks?start_date=#{@task.date.strftime('%Y-%m-%d')}")
     .tasks-show-item
       .task-right
         .task-tag

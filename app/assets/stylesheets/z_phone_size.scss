@@ -263,11 +263,20 @@
     padding: 60px 30px 30px;
   }
 
+  #new-task_tab {
+    min-height: 0;
+    padding: 10px 30px;
+  }
+
+  #new-task_tab a {
+    font-size: 18px;
+  }
+
   .phone-size_task-menus {
     padding-left: 0;
   }
 
-  .search_tabs i {
-    padding: 16px 9px;
-  }
+  // .search_tabs i {
+  //   padding: 16px 9px;
+  // }
 }
