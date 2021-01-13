@@ -18,10 +18,7 @@ html
     header
       .header-logo
         - if current_user
-          #header_pop
-            div
-              p.arrow_box_buttom 月別カレンダーへ移動
-          a#header_pop_trigger href="/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}" MyDailyLife
+          p MyDailyLife
         - else
           a href="/" MyDailyLife
 
@@ -35,8 +32,7 @@ html
           i.fas.fa-bars
         ul.header-menus.responsive-header_content
           - if current_user
-            li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
-            li= link_to "タグ一覧", "/meal_tags"
+            li= link_to 'MyDailyLifeとは', "/about"
             - if current_user.admin == true
               li= link_to "ユーザー管理", admin_users_index_path
               li= link_to "利用履歴", admin_users_histories_index_path
@@ -52,8 +48,7 @@ html
         - if current_user
           li= link_to user_path(current_user) do
               i.fas.fa-user-circle
-          li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
-          li= link_to "タグ一覧", "/meal_tags"
+          li= link_to 'MyDailyLifeとは', "/about"
           - if current_user.admin == true
             li= link_to "ユーザー管理", admin_users_index_path
             li= link_to "利用履歴", admin_users_histories_index_path
@@ -63,11 +58,33 @@ html
           li= link_to '新規登録', new_user_path
           li.header-login= link_to 'ログイン', login_path
 
-    - if flash[:notice]
-      .flash.time-limit
-        = flash[:notice]
-    .tag_changed
+    - if current_user
+      #sub-header
+        .sub-header_container
+          ul
+            li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+            li= link_to 'カレンダー', "/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+            li= link_to "タグ一覧", "/meal_tags"
 
+    - if current_user
+      .logged-in_header
+        - if flash[:notice]
+          .flash.time-limit
+            = flash[:notice]
+        .tag_changed
+    - else
+      - if flash[:notice]
+        .flash.time-limit
+          = flash[:notice]
+      .tag_changed
+
+  - if current_user
+    .logged-in_header
+      .main
+        = yield
+        = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
+        script src="https://unpkg.com/swiper/swiper-bundle.min.js"
+  - else
     .main
       = yield
       = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
@@ -78,7 +95,8 @@ html
       #footer
         .footer-container
           .footer-block
-            h3 ご利用ガイド 
+            h3 ご利用ガイド
+            a href="/about" MyDailyLifeとは
             a href="/faqs" よくある質問
           .footer-block
             h3 サイト情報

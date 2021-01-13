@@ -55,6 +55,10 @@ body {
   padding-bottom: 160px;
 }
 
+.logged-in_header .main {
+  top: 104px;
+}
+
 .container {
   max-width: 600px;
   margin: 10px auto 60px;
@@ -77,6 +81,22 @@ img {
   cursor: pointer;
 }
 
+#new-task_tab {
+  min-height: 0;
+  text-align: center;
+  background-color: $theme-color-light;
+}
+
+#new-task_tab a {
+  font-size: 26px;
+  font-weight: 500;
+  color: $word-gray;
+}
+
+#new-task_tab a:hover {
+  color: $word-black;
+}
+
 /* ヘッダー ================================ */
 header {
   height: 64px;
@@ -93,7 +113,7 @@ header {
   line-height: 64px;
 }
 
-.header-logo a{
+.header-logo a, .header-logo p{
   color: white;
   font-size: 22px;
 }
@@ -141,6 +161,39 @@ header {
 i.fas.fa-user-circle {
   font-size: 26px;
   line-height: 64px;
+}
+
+/* sub-header ================================ */
+#sub-header {
+  height: 40px;
+  position: absolute;
+  top: 64px;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  background-color: $calendar-gray;
+  // border-bottom: 2px solid $calendar-gray;
+}
+
+.sub-header_container {
+  min-width: 400px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+#sub-header li {
+  float: left;
+  line-height: 40px;
+  font-size: 13px;
+  padding-left: 30px;
+}
+
+#sub-header a {
+  color:$word-gray;
+}
+
+#sub-header a:hover {
+  color: $word-black;
 }
 
 /* top ================================ */
@@ -520,6 +573,10 @@ i.fas.fa-user-circle {
   width: 100%;
   border-radius: 0 0 2px 2px;
   font-size: 14px;
+}
+
+.logged-in_header .flash {
+  top: 104px;
 }
 
 // フッター

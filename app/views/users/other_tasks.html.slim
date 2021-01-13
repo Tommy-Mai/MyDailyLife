@@ -24,6 +24,11 @@
       li= link_to("メモ", "/users/#{@user.id}/memos")
       i.fas.fa-search-plus#searchtoggle_button
 
+    #new-task_tab.tasks-index-item.phone-size_tasks-index-item
+      - if @user.task_tags.empty?
+        = link_to("その他タグ一覧(新規タグ作成)へ", task_tags_path)
+      - elsif  @user.tasks.empty?
+        = link_to("新規その他タスク作成+", "/tasks/new?user=#{@user.id}")
     #searchtoggle_menu= search_form_for @q, url: "/users/#{@user.id}/other_tasks" do |f|
       .form.search_form
         .search_heading その他タスク検索

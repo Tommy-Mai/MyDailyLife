@@ -3,7 +3,10 @@
     .icon
       = link_to t('simple_calendar.previous', default: '<'), calendar.url_for_previous_view
     span.calendar-title
-      = @date
+      - if @date.to_s == Date.current.strftime('%Y-%m-%d')
+        = "今日"
+      - else
+        = @date
     .icon
       = link_to t('simple_calendar.next', default: '>'), calendar.url_for_next_view
 

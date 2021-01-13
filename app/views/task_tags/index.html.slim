@@ -51,12 +51,12 @@
     .back-task-show.task_tag_back
 
       - if params[:start_date]
-        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{params[:start_date]}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show/other_tasks?start_date=#{params[:start_date]}")
       - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
         - tag_name = current_user.task_tags.find(params[:task_tag])
         = link_to("← 「#{tag_name.name}」一覧に戻る", task_tag_path(params[:task_tag]))
       - else
-        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
 
     ul#index_tabs.user-tabs.search_tabs
       li= link_to("食事関連", "/meal_tags")

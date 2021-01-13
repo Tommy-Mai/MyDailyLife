@@ -6,12 +6,12 @@
   .container
     #mealtag_back.back-task-show.task_tag_back
       - if params[:start_date]
-        = link_to("← 日別一覧に戻る", "/calendar/show?start_date=#{params[:start_date]}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show?start_date=#{params[:start_date]}")
       - elsif params[:meal_tag]
         - tag_name = MealTag.find(params[:meal_tag])
         = link_to("← 「#{tag_name.name}」一覧に戻る","/meal_tags/#{tag_name.id}")
       - else
-        = link_to("← 日別一覧に戻る", "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}")
 
     ul#mealtag_tabs.user-tabs.search_tabs
       li.active= link_to("食事関連", "/meal_tags")

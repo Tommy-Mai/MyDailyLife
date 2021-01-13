@@ -54,7 +54,7 @@ describe "メモ管理機能テスト", :type => :system  do
 
     describe "メモ新規作成で" do
       before do
-        click_link "新規メモ +"
+        click_link "新規メモ作成 +"
       end
 
       context "正しく入力したとき" do
@@ -80,7 +80,7 @@ describe "メモ管理機能テスト", :type => :system  do
       context "正しく入力しなかったとき" do
         before do
           visit "/users/#{user_a.id}/memos"
-          click_link "新規メモ +"
+          click_link "新規メモ作成 +"
         end
         it 'エラー文が表示される' do
           click_button '保存する'

@@ -115,14 +115,14 @@ describe 'ユーザー管理機能', :type => :system do
 
         it "表示されるべきヘッダーが表示されている" do
           within '.header-menus' do
-            expect(page).to have_content '今日のタスク'
-            expect(page).to have_content 'タグ一覧'
             expect(page).to have_content 'ログアウト'
           end
+          expect(page).to have_content '今日のタスク'
+          expect(page).to have_content 'カレンダー'
+          expect(page).to have_content 'タグ一覧'
         end
         it "不要なヘッダーが表示されない" do
           within '.header-menus' do
-            expect(page).not_to have_content 'MyDailyLifeとは'
             expect(page).not_to have_content '新規登録'
             expect(page).not_to have_content 'ログイン'
           end
@@ -140,14 +140,14 @@ describe 'ユーザー管理機能', :type => :system do
 
         it "表示されるべきヘッダーが表示されている" do
           within '.header-menus' do
-            expect(page).to have_content '今日のタスク'
-            expect(page).to have_content 'タグ一覧'
             expect(page).to have_content 'ログアウト'
           end
+          expect(page).to have_content '今日のタスク'
+          expect(page).to have_content 'カレンダー'
+          expect(page).to have_content 'タグ一覧'
         end
         it "不要なヘッダーが表示されない" do
           within '.header-menus' do
-            expect(page).not_to have_content 'MyDailyLifeとは'
             expect(page).not_to have_content '新規登録'
             expect(page).not_to have_content 'ログイン'
           end
@@ -174,11 +174,12 @@ describe 'ユーザー管理機能', :type => :system do
       end
       it "ログイン時以外不要なヘッダーが表示されない" do
         within '.header-menus' do
-          expect(page).not_to have_content '今日のタスク'
-          expect(page).not_to have_content 'タグ一覧'
           expect(page).not_to have_content "ユーザー管理"
           expect(page).not_to have_content 'ログアウト'
         end
+        expect(page).not_to have_content '今日のタスク'
+        expect(page).not_to have_content 'カレンダー'
+        expect(page).not_to have_content 'タグ一覧'
       end
     end
 

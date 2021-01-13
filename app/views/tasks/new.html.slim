@@ -5,9 +5,11 @@
 
     .back-task-show
       - if params[:date]
-        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{@date}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show/other_tasks?start_date=#{@date}")
       - elsif params[:task_tag] && current_user.task_tags.find_by(id: params[:task_tag])
         - tag_name = current_user.task_tags.find(params[:task_tag])
         = link_to("← 「#{tag_name.name}」一覧に戻る", task_tag_path(params[:task_tag]))
+      - elsif params[:user]
+        = link_to("← ユーザーページに戻る", "/users/#{params[:user]}/other_tasks")
       - else
-        = link_to("← 日別一覧に戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
+        = link_to("← 今日のタスクに戻る", "/calendar/show/other_tasks?start_date=#{Date.current.strftime('%Y-%m-%d')}")
