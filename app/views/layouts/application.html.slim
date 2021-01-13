@@ -78,27 +78,27 @@ html
           = flash[:notice]
       .tag_changed
 
-  - if current_user
-    .logged-in_header
+    - if current_user
+      .logged-in_header
+        .main
+          = yield
+          = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
+          script src="https://unpkg.com/swiper/swiper-bundle.min.js"
+    - else
       .main
         = yield
         = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
         script src="https://unpkg.com/swiper/swiper-bundle.min.js"
-  - else
-    .main
-      = yield
-      = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
-      script src="https://unpkg.com/swiper/swiper-bundle.min.js"
 
-      #page-top_btn.fas.fa-arrow-circle-up
+        #page-top_btn.fas.fa-arrow-circle-up
 
-      #footer
-        .footer-container
-          .footer-block
-            h3 ご利用ガイド
-            a href="/about" MyDailyLifeとは
-            a href="/faqs" よくある質問
-          .footer-block
-            h3 サイト情報
-            a href="/policy" 利用規約
-            a href="/privacy_policy" プライバシーポリシー
+    #footer
+      .footer-container
+        .footer-block
+          h3 ご利用ガイド
+          a href="/about" MyDailyLifeとは
+          a href="/faqs" よくある質問
+        .footer-block
+          h3 サイト情報
+          a href="/policy" 利用規約
+          a href="/privacy_policy" プライバシーポリシー
