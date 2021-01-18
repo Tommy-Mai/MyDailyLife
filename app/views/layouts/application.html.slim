@@ -59,19 +59,21 @@ html
           li.header-login= link_to 'ログイン', login_path
 
     - if current_user
-      #sub-header
-        .sub-header_container
-          ul
-            li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
-            li= link_to 'カレンダー', "/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}"
-            li= link_to "タグ一覧", "/meal_tags"
+      - unless request.path.in?(["/about", "/faqs", "/policy", "/privacy_policy"])
+        #sub-header
+          .sub-header_container
+            ul
+              - if request.path != "/users/#{current_user.id}"
+                li= link_to 'ホーム', "/users/#{current_user.id}"
+              li= link_to '今日のタスク', "/calendar/show?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+              li= link_to 'カレンダー', "/calendar/index?start_date=#{Date.current.strftime('%Y-%m-%d')}"
+              li= link_to "タグ一覧", "/meal_tags"
 
-    - if current_user
-      .logged-in_header
-        - if flash[:notice]
-          .flash.time-limit
-            = flash[:notice]
-        .tag_changed
+        .logged-in_header
+          - if flash[:notice]
+            .flash.time-limit
+              = flash[:notice]
+          .tag_changed
     - else
       - if flash[:notice]
         .flash.time-limit
@@ -79,7 +81,26 @@ html
       .tag_changed
 
     - if current_user
-      .logged-in_header
+      - unless request.path.in?(["/about", "/faqs", "/policy", "/privacy_policy"])
+        .logged-in_header
+          .main
+            = yield
+            = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
+            script src="https://unpkg.com/swiper/swiper-bundle.min.js"
+
+            #page-top_btn.fas.fa-arrow-circle-up
+
+            #footer
+              .footer-container
+                .footer-block
+                  h3 ご利用ガイド
+                  a href="/about" MyDailyLifeとは
+                  a href="/faqs" よくある質問
+                .footer-block
+                  h3 サイト情報
+                  a href="/policy" 利用規約
+                  a href="/privacy_policy" プライバシーポリシー
+      - else
         .main
           = yield
           = render partial: 'layouts/inquiry', locals: { inquiry: @inquiry}
@@ -97,6 +118,7 @@ html
                 h3 サイト情報
                 a href="/policy" 利用規約
                 a href="/privacy_policy" プライバシーポリシー
+
     - else
       .main
         = yield
