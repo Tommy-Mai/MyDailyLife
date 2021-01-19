@@ -148,10 +148,10 @@ gem "aws-sdk-s3"
 
 # AWSに自動デプロイできるようにするためのgem
 group :development do
-  gem 'capistrano'
-  gem 'ed25519'
   gem 'bcrypt_pbkdf'
-  gem 'capistrano-rbenv'
+  gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'ed25519'
 end
