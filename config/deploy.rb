@@ -26,8 +26,6 @@ set :deploy_to, "/var/www/rails/MyDailyLife"
 append :linked_files, "config/master.key"
 append :linked_files, "config/storage.yml"
 append :linked_files, "config/database.yml"
-# set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
-# set :linked_files, fetch(:linked_files, []).push('config/credentials.yml.enc')
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
