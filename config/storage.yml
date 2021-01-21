@@ -12,7 +12,7 @@ amazon:
   access_key_id: <%= ENV['ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['SECRET_ACCESS_KEY'] %>
   region: ap-northeast-1
-  bucket: mydailylife-heroku-bucket
+  bucket: mydailylife-aws-bucket
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

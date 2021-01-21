@@ -66,3 +66,4 @@ production:
   database: MyDailyLife_production
   username: root
   password: <%= ENV['MYDAILYLIFE_DATABASE_PASSWORD'] %>
+  
