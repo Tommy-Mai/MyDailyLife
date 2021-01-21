@@ -10,7 +10,7 @@ set :branch, 'main'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/rails/MyDailyLife"
-set :puma_conf, "/var/www/rails/MyDailyLife/config/puma.rb"
+# set :puma_conf, "/var/www/rails/MyDailyLife/config/puma.rb"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -33,7 +33,7 @@ append :linked_files, "config/database.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH" }
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
@@ -50,9 +50,10 @@ set :rbenv_path, '/home/AWSmydailylife/.rbenv'
 
 set :log_level, :debug
 
+set :pty, true
+
 append :linked_dirs, '.bundle'
 set :bundle_jobs, 2
-
 
 namespace :deploy do
   desc 'Create database'
