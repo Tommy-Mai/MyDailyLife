@@ -10,6 +10,7 @@ set :branch, 'main'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/rails/MyDailyLife"
+set :puma_conf, "/var/www/rails/MyDailyLife/config/puma.rb"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -23,8 +24,10 @@ set :deploy_to, "/var/www/rails/MyDailyLife"
 
 # Default value for :linked_files is []
 append :linked_files, "config/master.key"
+append :linked_files, "config/storage.yml"
+append :linked_files, "config/database.yml"
 # set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
-set :linked_files, fetch(:linked_files, []).push('config/credentials.yml.enc')
+# set :linked_files, fetch(:linked_files, []).push('config/credentials.yml.enc')
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -49,3 +52,24 @@ set :log_level, :debug
 
 append :linked_dirs, '.bundle'
 set :bundle_jobs, 2
+
+
+namespace :deploy do
+  desc 'Create database'
+  task :db_create do
+    on roles(:db) do |host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:create'
+        end
+      end
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    end
+  end
+end

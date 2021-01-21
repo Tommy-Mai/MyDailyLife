@@ -37,6 +37,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Use mysql as the database for Active Record
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -46,9 +49,6 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.11'
 
   gem 'database_cleaner'
-
-  # Use mysql as the database for Active Record
-  gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 
   # ER図作成用gem
   gem 'rails-erd'
@@ -150,6 +150,7 @@ gem "aws-sdk-s3"
 group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano'
+  gem 'capistrano3-puma'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
