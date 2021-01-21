@@ -60,6 +60,6 @@ production:
   # database: MyDailyLife_production
   # username: MyDailyLife
   # password: <%= ENV['MYDAILYLIFE_DATABASE_PASSWORD'] %>
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  # adapter: postgresql
+  # encoding: unicode
+  # pool: 5
