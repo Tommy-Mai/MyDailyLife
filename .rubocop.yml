@@ -8,6 +8,7 @@ AllCops:
     - vendor/**/*
     - config/*
     - spec/**/*
+    - README.md
 
 Metrics/AbcSize:
   Max: 50
