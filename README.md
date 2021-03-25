@@ -6,7 +6,7 @@
 # :link:App URL  
   
 ### Heroku(git:mainブランチ)　**https://my-daily-life.herokuapp.com/**  
-### AWS(git:masterブランチ)　**http://ec2-54-168-75-205.ap-northeast-1.compute.amazonaws.com/**  (※NOT!https)
+### AWS(git:masterブランチ)　停止済み
 　
   
 # :pencil:サービス概要
